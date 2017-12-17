@@ -1,5 +1,15 @@
 package com.rdemir.donemprojesi.interfaces.services;
 
-public interface IUserService {
-//    boolean save(T t)
+import com.rdemir.donemprojesi.entities.UserImp;
+
+import java.util.List;
+
+public interface IUserService<T> {
+    UserImp getUserById(Long id);
+
+    List<UserImp> getAllUsers();
+
+    UserImp save(T t);
+
+    void delete(Long id);
 }

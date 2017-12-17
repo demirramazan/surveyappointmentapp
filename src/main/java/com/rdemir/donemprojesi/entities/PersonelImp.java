@@ -32,7 +32,7 @@ public class PersonelImp extends BaseEntity {
     @Column(name = "ADRES", length = 500)
     private String adres;
 
-    @Enumerated(EnumType.ORDINAL)
+//    @Enumerated(EnumType.ORDINAL)
     @Column(name = "CINSIYET", nullable = false)
     private Integer cinsyet;
 

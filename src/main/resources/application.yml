@@ -1,5 +1,10 @@
 server:
   port: 8081
+#  servlet-path: /rest/*
+  tomcat:
+    uri-encoding: UTF-8
+
+
 spring:
   datasource:
     url: jdbc:oracle:thin:@localhost:1521:hbys
@@ -12,6 +17,10 @@ spring:
         current_session_context_class: org.springframework.orm.hibernate4.SpringSessionContext
         dialect: org.hibernate.dialect.Oracle10gDialect
     hibernate:
-      ddl-auto: update
+#      ddl-auto: update
       naming:
         strategy: org.hibernate.cfg.ImprovedNamingStrategy
+banner:
+  charset:
+
+
