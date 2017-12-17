@@ -14,7 +14,7 @@ public class UserController {
     @Autowired
     private IUserService userService;
 
-    public UserImp userImp;
+    public UserImp userImp = new UserImp();
 
 
     public UserImp findById(Long id) {

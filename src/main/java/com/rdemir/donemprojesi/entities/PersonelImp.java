@@ -1,11 +1,11 @@
 package com.rdemir.donemprojesi.entities;
 
-import com.rdemir.donemprojesi.util.EnumUtil;
 import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Size;
+import java.math.BigInteger;
 
 @Entity
 @Table(name = "PERSONEL")
@@ -26,17 +26,26 @@ public class PersonelImp extends BaseEntity {
     private String email;
 
     @Column(name = "TELEFON_NO")
-    @Max(10)
-    private Integer telefonNo;
+    @Size(max = 10)
+    private String telefonNo;
 
     @Column(name = "ADRES", length = 500)
     private String adres;
 
-//    @Enumerated(EnumType.ORDINAL)
+    //    @Enumerated(EnumType.ORDINAL)
     @Column(name = "CINSIYET", nullable = false)
     private Integer cinsyet;
 
-    public PersonelImp(String personelAdi, String personelSoyadi, String kimlikNo, String email, Integer telefonNo, String adres) {
+    @Column(name = "AKTIF")
+    private Integer aktif;
+
+    @ManyToOne
+    @JoinColumn(name = "BIRIM_ID",
+            foreignKey = @ForeignKey(name = "FK_PERSONEL_BIRIM"))
+    private BirimImp birim;
+
+    public PersonelImp(String personelAdi, String personelSoyadi, String kimlikNo,
+                       String email, String telefonNo, String adres) {
         this.personelAdi = personelAdi;
         this.personelSoyadi = personelSoyadi;
         this.kimlikNo = kimlikNo;
@@ -77,11 +86,11 @@ public class PersonelImp extends BaseEntity {
         this.email = email;
     }
 
-    public Integer getTelefonNo() {
+    public String getTelefonNo() {
         return telefonNo;
     }
 
-    public void setTelefonNo(Integer telefonNo) {
+    public void setTelefonNo(String telefonNo) {
         this.telefonNo = telefonNo;
     }
 

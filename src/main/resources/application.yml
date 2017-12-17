@@ -17,7 +17,7 @@ spring:
         current_session_context_class: org.springframework.orm.hibernate4.SpringSessionContext
         dialect: org.hibernate.dialect.Oracle10gDialect
     hibernate:
-#      ddl-auto: update
+      ddl-auto: update
       naming:
         strategy: org.hibernate.cfg.ImprovedNamingStrategy
 banner:

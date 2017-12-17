@@ -5,7 +5,7 @@ import com.rdemir.donemprojesi.interfaces.entities.IUser;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "HBYS_USER", uniqueConstraints = @UniqueConstraint(name = "UNQ_USERNAME",columnNames = {"username"}))
+@Table(name = "HBYS_USER", uniqueConstraints = @UniqueConstraint(name = "UNQ_USERNAME", columnNames = {"username"}))
 public class UserImp extends BaseEntity implements IUser {
 
     @Column(name = "USERNAME")
@@ -17,7 +17,7 @@ public class UserImp extends BaseEntity implements IUser {
     @Column(name = "SURNAME")
     private String surname;
 
-    @Column(name = "PASSWORD")
+    @Column(name = "PASSWORD",nullable = false)
     private String password;
 
     @Column(name = "ENABLED")
@@ -28,6 +28,13 @@ public class UserImp extends BaseEntity implements IUser {
             joinColumns = {@JoinColumn(name = "USER_ID", referencedColumnName = "ID")},
             inverseJoinColumns = {@JoinColumn(name = "ROLE_ID", referencedColumnName = "ID")})
     private RoleImp role;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "PERSONEL_ID", foreignKey = @ForeignKey(name = "FK_USER_PERSONEL"))
+    private PersonelImp personel;
+
+    public UserImp() {
+    }
 
     public UserImp(String username, String name, String surname, String password, Boolean enabled, RoleImp role) {
         this.username = username;
@@ -70,6 +77,15 @@ public class UserImp extends BaseEntity implements IUser {
     @Override
     public String getSurname() {
         return null;
+    }
+
+    @Override
+    public PersonelImp getPersonel() {
+        return personel;
+    }
+
+    public void setPersonel(PersonelImp personel) {
+        this.personel = personel;
     }
 
     @Override
