@@ -45,7 +45,46 @@ public class UserImp extends BaseEntity implements IUser {
         this.role = role;
     }
 
-    @Override
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
+
     public RoleImp getRole() {
         return role;
     }
@@ -54,48 +93,11 @@ public class UserImp extends BaseEntity implements IUser {
         this.role = role;
     }
 
-    @Override
-    public String getUsername() {
-        return null;
-    }
-
-    @Override
-    public String getPassword() {
-        return null;
-    }
-
-    @Override
-    public Boolean getEnabled() {
-        return null;
-    }
-
-    @Override
-    public String getName() {
-        return null;
-    }
-
-    @Override
-    public String getSurname() {
-        return null;
-    }
-
-    @Override
     public PersonelImp getPersonel() {
         return personel;
     }
 
     public void setPersonel(PersonelImp personel) {
         this.personel = personel;
-    }
-
-    @Override
-    public String toString() {
-        return "UserImp{" +
-                "username='" + username + '\'' +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", password='" + password + '\'' +
-                ", enabled=" + enabled +
-                '}';
     }
 }

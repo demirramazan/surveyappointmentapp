@@ -3,6 +3,7 @@ package com.rdemir.donemprojesi.controllers;
 import com.rdemir.donemprojesi.entities.UserImp;
 import com.rdemir.donemprojesi.interfaces.services.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -14,8 +15,15 @@ public class UserController {
     @Autowired
     private IUserService userService;
 
-    public UserImp userImp = new UserImp();
+    private String deneme="RAMAZANN";
 
+    public UserImp userImp ;
+
+    public UserController() {
+        this.userImp  = new UserImp();
+        userImp.setSurname("ramazan");
+        userImp.setUsername("demir");
+    }
 
     public UserImp findById(Long id) {
         return userService.getUserById(id);
@@ -31,5 +39,13 @@ public class UserController {
 
     public void setUserImp(UserImp userImp) {
         this.userImp = userImp;
+    }
+
+    public String getDeneme() {
+        return deneme;
+    }
+
+    public void setDeneme(String deneme) {
+        this.deneme = deneme;
     }
 }
