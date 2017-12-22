@@ -1,12 +1,10 @@
 package com.rdemir.donemprojesi.entities;
 
-import com.rdemir.donemprojesi.interfaces.entities.IBirim;
-
 import javax.persistence.*;
 
 @Entity
 @Table(name = "BIRIM")
-public class BirimImp extends BaseEntity implements IBirim {
+public class BirimImp extends BaseEntity {
 
 
     @Column(name = "BIRIM_KODU")
@@ -40,7 +38,6 @@ public class BirimImp extends BaseEntity implements IBirim {
         this.salon = salon;
     }
 
-    @Override
     public String getBirimKodu() {
         return birimKodu;
     }
@@ -49,7 +46,6 @@ public class BirimImp extends BaseEntity implements IBirim {
         this.birimKodu = birimKodu;
     }
 
-    @Override
     public String getBirimAdi() {
         return birimAdi;
     }
@@ -58,7 +54,6 @@ public class BirimImp extends BaseEntity implements IBirim {
         this.birimAdi = birimAdi;
     }
 
-    @Override
     public String getUzunAdi() {
         return uzunAdi;
     }
@@ -67,7 +62,6 @@ public class BirimImp extends BaseEntity implements IBirim {
         this.uzunAdi = uzunAdi;
     }
 
-    @Override
     public Integer getAktifMi() {
         return aktifMi;
     }
@@ -76,7 +70,6 @@ public class BirimImp extends BaseEntity implements IBirim {
         this.aktifMi = aktifMi;
     }
 
-    @Override
     public SalonImp getSalon() {
         return salon;
     }

@@ -1,13 +1,14 @@
 package com.rdemir.donemprojesi.entities;
 
-import com.rdemir.donemprojesi.interfaces.entities.ISalon;
-
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.util.List;
 
 @Entity
 @Table(name = "SALON_TANIM")
-public class SalonImp extends BaseEntity implements ISalon {
+public class SalonImp extends BaseEntity {
 
     @Column(name = "SALON_KODU")
     private String salonKodu;
@@ -27,7 +28,6 @@ public class SalonImp extends BaseEntity implements ISalon {
         this.cihaz = cihaz;
     }
 
-    @Override
     public String getSalonKodu() {
         return salonKodu;
     }
@@ -36,7 +36,6 @@ public class SalonImp extends BaseEntity implements ISalon {
         this.salonKodu = salonKodu;
     }
 
-    @Override
     public String getSalonAdi() {
         return salonAdi;
     }
@@ -45,7 +44,6 @@ public class SalonImp extends BaseEntity implements ISalon {
         this.salonAdi = salonAdi;
     }
 
-    @Override
     public List<CihazImp> getCihaz() {
         return cihaz;
     }

@@ -1,12 +1,10 @@
 package com.rdemir.donemprojesi.entities;
 
-import com.rdemir.donemprojesi.interfaces.entities.IUser;
-
 import javax.persistence.*;
 
 @Entity
 @Table(name = "HBYS_USER", uniqueConstraints = @UniqueConstraint(name = "UNQ_USERNAME", columnNames = {"username"}))
-public class UserImp extends BaseEntity implements IUser {
+public class UserImp extends BaseEntity {
 
     @Column(name = "USERNAME")
     private String username;
@@ -17,7 +15,7 @@ public class UserImp extends BaseEntity implements IUser {
     @Column(name = "SURNAME")
     private String surname;
 
-    @Column(name = "PASSWORD",nullable = false)
+    @Column(name = "PASSWORD", nullable = false)
     private String password;
 
     @Column(name = "ENABLED")

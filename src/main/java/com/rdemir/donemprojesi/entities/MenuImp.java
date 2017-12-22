@@ -1,13 +1,11 @@
 package com.rdemir.donemprojesi.entities;
 
-import com.rdemir.donemprojesi.interfaces.entities.IMenu;
-
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table(name = "MENU")
-public class MenuImp extends BaseEntity implements IMenu {
+public class MenuImp extends BaseEntity {
     @Column(length = 50, nullable = false)
     private String menuAdi;
 
@@ -38,7 +36,6 @@ public class MenuImp extends BaseEntity implements IMenu {
         this.icon = icon;
     }
 
-    @Override
     public String getMenuAdi() {
         return menuAdi;
     }
@@ -55,13 +52,6 @@ public class MenuImp extends BaseEntity implements IMenu {
         this.menuIndex = menuIndex;
     }
 
-
-    @Override
-    public String getModule() {
-        return module;
-    }
-
-    @Override
     public MenuImp getParent() {
         return parent;
     }
@@ -70,11 +60,14 @@ public class MenuImp extends BaseEntity implements IMenu {
         this.parent = parent;
     }
 
+    public String getModule() {
+        return module;
+    }
+
     public void setModule(String module) {
         this.module = module;
     }
 
-    @Override
     public String getIcon() {
         return icon;
     }

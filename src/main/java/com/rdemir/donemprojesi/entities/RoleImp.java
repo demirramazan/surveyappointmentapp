@@ -1,12 +1,12 @@
 package com.rdemir.donemprojesi.entities;
 
-import com.rdemir.donemprojesi.interfaces.entities.IRole;
-
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "HBYS_ROLE")
-public class RoleImp extends BaseEntity implements IRole {
+public class RoleImp extends BaseEntity {
 
     @Column(name = "CODE")
     private String code;
@@ -27,7 +27,6 @@ public class RoleImp extends BaseEntity implements IRole {
     }
 
 
-    @Override
     public String getCode() {
         return code;
     }
@@ -36,7 +35,6 @@ public class RoleImp extends BaseEntity implements IRole {
         this.code = code;
     }
 
-    @Override
     public String getName() {
         return name;
     }

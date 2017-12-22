@@ -1,12 +1,10 @@
 package com.rdemir.donemprojesi.entities;
 
-import com.rdemir.donemprojesi.interfaces.entities.ICihaz;
-
 import javax.persistence.*;
 
 @Entity
 @Table(name = "CIHAZ_TANIM")
-public class CihazImp extends BaseEntity implements ICihaz {
+public class CihazImp extends BaseEntity {
 
     @Column(name = "KODU", nullable = false)
     String kodu;
@@ -32,7 +30,6 @@ public class CihazImp extends BaseEntity implements ICihaz {
         this.salon = salon;
     }
 
-    @Override
     public String getKodu() {
         return kodu;
     }
@@ -41,7 +38,6 @@ public class CihazImp extends BaseEntity implements ICihaz {
         this.kodu = kodu;
     }
 
-    @Override
     public String getAdi() {
         return adi;
     }
@@ -58,7 +54,6 @@ public class CihazImp extends BaseEntity implements ICihaz {
         this.aktifMi = aktifMi;
     }
 
-    @Override
     public SalonImp getSalon() {
         return salon;
     }
@@ -66,5 +61,4 @@ public class CihazImp extends BaseEntity implements ICihaz {
     public void setSalon(SalonImp salon) {
         this.salon = salon;
     }
-
 }
