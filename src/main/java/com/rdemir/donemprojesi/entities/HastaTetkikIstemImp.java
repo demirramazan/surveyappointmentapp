@@ -1,4 +1,9 @@
 package com.rdemir.donemprojesi.entities;
 
-public class HastaTetkikIstemImp {
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "HASTA_TETKIK_ISTEM")
+public class HastaTetkikIstemImp extends BaseEntity {
 }

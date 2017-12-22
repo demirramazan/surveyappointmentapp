@@ -1,4 +1,9 @@
 package com.rdemir.donemprojesi.entities;
 
-public class RandevuSeansImp {
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "RANDEVU_SEANS")
+public class RandevuSeansImp extends BaseEntity{
 }

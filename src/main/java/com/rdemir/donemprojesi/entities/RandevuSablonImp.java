@@ -1,4 +1,9 @@
 package com.rdemir.donemprojesi.entities;
 
-public class RandevuSablonImp {
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "RANDEVU_SABLON")
+public class RandevuSablonImp extends BaseEntity {
 }

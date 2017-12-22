@@ -1,4 +1,9 @@
 package com.rdemir.donemprojesi.entities;
 
-public class HastaIslemImp {
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "HASTA_ISLEM")
+public class HastaIslemImp extends BaseEntity{
 }
