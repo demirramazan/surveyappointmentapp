@@ -23,7 +23,7 @@ public class UserImp extends BaseEntity implements IUser {
     @Column(name = "ENABLED")
     private Boolean enabled;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "USER_ROLES",
             joinColumns = {@JoinColumn(name = "USER_ID", referencedColumnName = "ID")},
             inverseJoinColumns = {@JoinColumn(name = "ROLE_ID", referencedColumnName = "ID")})
