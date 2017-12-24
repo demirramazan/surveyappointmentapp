@@ -16,7 +16,7 @@ public class BaseEntity {
 
     @Version
     @Column(name = "VERSION", nullable = false, columnDefinition = "int default 0")
-    private Long version;
+    private Integer version;
 
     @CreatedDate
     private Date createDate;
@@ -33,11 +33,11 @@ public class BaseEntity {
         this.id = id;
     }
 
-    public Long getVersion() {
+    public Integer getVersion() {
         return version;
     }
 
-    public void setVersion(Long version) {
+    public void setVersion(Integer version) {
         this.version = version;
     }
 

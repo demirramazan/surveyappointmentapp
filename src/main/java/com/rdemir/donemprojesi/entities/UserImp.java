@@ -1,6 +1,7 @@
 package com.rdemir.donemprojesi.entities;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "HBYS_USER", uniqueConstraints = @UniqueConstraint(name = "UNQ_USERNAME", columnNames = {"username"}))
@@ -25,7 +26,7 @@ public class UserImp extends BaseEntity {
     @JoinTable(name = "USER_ROLES",
             joinColumns = {@JoinColumn(name = "USER_ID", referencedColumnName = "ID")},
             inverseJoinColumns = {@JoinColumn(name = "ROLE_ID", referencedColumnName = "ID")})
-    private RoleImp role;
+    private List<RoleImp> role;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "PERSONEL_ID", foreignKey = @ForeignKey(name = "FK_USER_PERSONEL"))
@@ -34,7 +35,7 @@ public class UserImp extends BaseEntity {
     public UserImp() {
     }
 
-    public UserImp(String username, String name, String surname, String password, Boolean enabled, RoleImp role) {
+    public UserImp(String username, String name, String surname, String password, Boolean enabled, List<RoleImp> role) {
         this.username = username;
         this.name = name;
         this.surname = surname;
@@ -83,11 +84,11 @@ public class UserImp extends BaseEntity {
         this.enabled = enabled;
     }
 
-    public RoleImp getRole() {
+    public List<RoleImp> getRole() {
         return role;
     }
 
-    public void setRole(RoleImp role) {
+    public void setRole(List<RoleImp> role) {
         this.role = role;
     }
 

@@ -27,7 +27,7 @@ public class PersonelImp extends BaseEntity {
 
     @Column(name = "TELEFON_NO")
     @Size(max = 10)
-    private String telefonNo;
+    private Integer telefonNo;
 
     @Column(name = "ADRES", length = 500)
     private String adres;
@@ -44,14 +44,19 @@ public class PersonelImp extends BaseEntity {
             foreignKey = @ForeignKey(name = "FK_PERSONEL_BIRIM"))
     private BirimImp birim;
 
-    public PersonelImp(String personelAdi, String personelSoyadi, String kimlikNo,
-                       String email, String telefonNo, String adres) {
+    public PersonelImp() {
+    }
+
+    public PersonelImp(String personelAdi, String personelSoyadi, String kimlikNo, String email, Integer telefonNo, String adres, Integer cinsyet, Integer aktif, BirimImp birim) {
         this.personelAdi = personelAdi;
         this.personelSoyadi = personelSoyadi;
         this.kimlikNo = kimlikNo;
         this.email = email;
         this.telefonNo = telefonNo;
         this.adres = adres;
+        this.cinsyet = cinsyet;
+        this.aktif = aktif;
+        this.birim = birim;
     }
 
     public String getPersonelAdi() {
@@ -86,11 +91,11 @@ public class PersonelImp extends BaseEntity {
         this.email = email;
     }
 
-    public String getTelefonNo() {
+    public Integer getTelefonNo() {
         return telefonNo;
     }
 
-    public void setTelefonNo(String telefonNo) {
+    public void setTelefonNo(Integer telefonNo) {
         this.telefonNo = telefonNo;
     }
 
