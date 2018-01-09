@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+//@Component("userController")
+//@Scope("session")
 @ManagedBean
 @SessionScoped
 public class UserController {
@@ -14,12 +16,12 @@ public class UserController {
     @Autowired
     private IUserService userService;
 
-    private String deneme="RAMAZANN";
+    private String deneme = "RAMAZANN";
 
-    public UserImp userImp ;
+    public UserImp userImp;
 
     public UserController() {
-        this.userImp  = new UserImp();
+        this.userImp = new UserImp();
         userImp.setSurname("ramazan");
         userImp.setUsername("demir");
     }

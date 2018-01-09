@@ -12,7 +12,6 @@ public class TetkikImp extends BaseEntity {
     @Column(name = "TETKIK_ADI")
     private String tetkikAdi;
 
-    @Column(name = "TETKIK_SALON")
     @ManyToOne
     @JoinColumn(name = "SALON_ID", foreignKey = @ForeignKey(name = "FK_TETKIK_SALON_ID"))
     private SalonImp salon;
