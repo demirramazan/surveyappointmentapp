@@ -7,7 +7,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "HASTA")
-public class HastaImp extends BaseEntity {
+public class Hasta extends BaseEntity {
 
     @Column(name = "HASTA_ADI")
     private String hastaAdi;
@@ -40,10 +40,10 @@ public class HastaImp extends BaseEntity {
     @Column(name = "ADRES")
     private String adres;
 
-    public HastaImp() {
+    public Hasta() {
     }
 
-    public HastaImp(String hastaAdi, String hastaSoyadi, EnumUtil.Cinsiyet cinsiyet, Date dogumTarihi, String anneAdi, String babaAdi, String telefonNo, String hastaYakiniTelefon, String hastaYakinlikDerecesi, String adres) {
+    public Hasta(String hastaAdi, String hastaSoyadi, EnumUtil.Cinsiyet cinsiyet, Date dogumTarihi, String anneAdi, String babaAdi, String telefonNo, String hastaYakiniTelefon, String hastaYakinlikDerecesi, String adres) {
         this.hastaAdi = hastaAdi;
         this.hastaSoyadi = hastaSoyadi;
         this.cinsiyet = cinsiyet;

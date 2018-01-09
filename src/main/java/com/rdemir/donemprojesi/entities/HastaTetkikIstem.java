@@ -4,6 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "HASTA_ISLEM")
-public class HastaIslemImp extends BaseEntity{
+@Table(name = "HASTA_TETKIK_ISTEM")
+public class HastaTetkikIstem extends BaseEntity {
 }

@@ -1,6 +1,7 @@
 package com.rdemir.donemprojesi;
 
 import com.rdemir.donemprojesi.config.ViewConfig;
+import com.rdemir.donemprojesi.util.ScopeUtil;
 import com.sun.faces.config.ConfigureListener;
 import org.springframework.beans.factory.config.CustomScopeConfigurer;
 import org.springframework.boot.SpringApplication;
@@ -49,7 +50,7 @@ public class DonemprojesiApplication extends SpringBootServletInitializer {
     }
     @Bean
     public ServletListenerRegistrationBean<ConfigureListener> jsfConfigureListener() {
-        return new ServletListenerRegistrationBean<ConfigureListener>(
+        return new ServletListenerRegistrationBean<>(
                 new ConfigureListener());
     }
 
@@ -57,7 +58,7 @@ public class DonemprojesiApplication extends SpringBootServletInitializer {
     public static CustomScopeConfigurer customScopeConfigurer() {
         CustomScopeConfigurer configurer = new CustomScopeConfigurer();
         Map<String, Object> scopes = new HashMap<String, Object>();
-        scopes.put("view", new ViewConfig());
+        scopes.put(ScopeUtil.VIEW.getScopeName(), new ViewConfig());
         scopes.put("session", new ViewConfig());
         configurer.setScopes(scopes);
         return configurer;

@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "BIRIM")
-public class BirimImp extends BaseEntity {
+public class Birim extends BaseEntity {
 
 
     @Column(name = "BIRIM_KODU")
@@ -25,12 +25,12 @@ public class BirimImp extends BaseEntity {
             foreignKey = @ForeignKey(
                     name = "FK_BIRIM_SALON",
                     foreignKeyDefinition = "Birim Rad Salonu"))
-    private SalonImp salon;
+    private Salon salon;
 
-    public BirimImp() {
+    public Birim() {
     }
 
-    public BirimImp(String birimKodu, String birimAdi, String uzunAdi, Integer aktifMi, SalonImp salon) {
+    public Birim(String birimKodu, String birimAdi, String uzunAdi, Integer aktifMi, Salon salon) {
         this.birimKodu = birimKodu;
         this.birimAdi = birimAdi;
         this.uzunAdi = uzunAdi;
@@ -70,11 +70,11 @@ public class BirimImp extends BaseEntity {
         this.aktifMi = aktifMi;
     }
 
-    public SalonImp getSalon() {
+    public Salon getSalon() {
         return salon;
     }
 
-    public void setSalon(SalonImp salon) {
+    public void setSalon(Salon salon) {
         this.salon = salon;
     }
 }

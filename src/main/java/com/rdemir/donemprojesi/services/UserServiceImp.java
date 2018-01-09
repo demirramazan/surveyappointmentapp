@@ -1,6 +1,6 @@
 package com.rdemir.donemprojesi.services;
 
-import com.rdemir.donemprojesi.entities.UserImp;
+import com.rdemir.donemprojesi.entities.User;
 import com.rdemir.donemprojesi.interfaces.services.IUserService;
 import com.rdemir.donemprojesi.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,23 +9,23 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class UserServiceImp implements IUserService<UserImp> {
+public class UserServiceImp implements IUserService<User> {
 
     @Autowired
     private UserRepository userRepository;
 
     @Override
-    public UserImp getUserById(Long id) {
+    public User getUserById(Long id) {
         return userRepository.getOne(id);
     }
 
     @Override
-    public List<UserImp> getAllUsers() {
+    public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 
     @Override
-    public UserImp save(UserImp userImp) {
+    public User save(User userImp) {
         return userRepository.save(userImp);
     }
 

@@ -1,0 +1,64 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+</h:head>
+
+<h:body>
+
+	<h:form prependId="false" id="userFormId">
+		<h:panelGrid columns="2">
+
+			<h:outputLabel value="Deneme Ad: " />
+			<p:inputText value="#{userController.userImp.username}" />
+
+			<h:outputLabel value="Deneme ad2 : " />
+			<p:inputText value="#{userController.deneme}" />
+
+			<h:outputLabel value="Deneme ad3 : " />
+			<p:inputText value="asd" placeholder="lutfen ad girinz" title="asd"/>
+
+			<!--<h:outputLabel value="Year: " />-->
+			<!--<p:inputText value="#{carBean.car.year}" />-->
+
+			<!--<h:outputLabel value="Color: " />-->
+			<!--<p:inputText value="#{carBean.car.color}" />-->
+
+			<!--<h:outputLabel value="Price: " />-->
+			<!--<p:inputText value="#{carBean.car.price}" />-->
+
+			<!--<p:commandButton value="Save" action="#{carBean.save}"-->
+				<!--partialSubmit="true" process="carInputForm"-->
+				<!--update="carInputForm,carList" />-->
+		</h:panelGrid>
+
+
+		<!--<p:dataTable id="carList" var="car" value="#{carBean.cars}">-->
+			<!--<p:column headerText="Id">-->
+				<!--<h:outputText value="#{car.id}" />-->
+			<!--</p:column>-->
+
+			<!--<p:column headerText="Year">-->
+				<!--<h:outputText value="#{car.year}" />-->
+			<!--</p:column>-->
+
+			<!--<p:column headerText="Brand">-->
+				<!--<h:outputText value="#{car.brand}" />-->
+			<!--</p:column>-->
+
+			<!--<p:column headerText="Color">-->
+				<!--<h:outputText value="#{car.color}" />-->
+			<!--</p:column>-->
+
+			<!--<p:column headerText="Price">-->
+				<!--<h:outputText value="#{car.price}" />-->
+			<!--</p:column>-->
+		<!--</p:dataTable>-->
+
+	</h:form>
+</h:body>
+</html>
+

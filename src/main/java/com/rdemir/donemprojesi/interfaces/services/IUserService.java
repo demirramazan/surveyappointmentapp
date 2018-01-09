@@ -1,15 +1,15 @@
 package com.rdemir.donemprojesi.interfaces.services;
 
-import com.rdemir.donemprojesi.entities.UserImp;
+import com.rdemir.donemprojesi.entities.User;
 
 import java.util.List;
 
 public interface IUserService<T> {
-    UserImp getUserById(Long id);
+    User getUserById(Long id);
 
-    List<UserImp> getAllUsers();
+    List<User> getAllUsers();
 
-    UserImp save(T t);
+    User save(T t);
 
     void delete(Long id);
 }

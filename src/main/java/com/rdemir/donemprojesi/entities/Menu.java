@@ -1,20 +1,19 @@
 package com.rdemir.donemprojesi.entities;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
-@Table(name = "MENU")
-public class MenuImp extends BaseEntity {
+@Table(name = "MENU_TANIM")
+public class Menu extends BaseEntity {
     @Column(length = 50, nullable = false)
     private String menuAdi;
 
     @Column(name = "MENU_INDEX")
     private int menuIndex;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "PARENT_ID")
-    private MenuImp parent;
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "PARENT_ID", foreignKey = @ForeignKey(name = "FK_PARENT_MENU_ID"))
+    private Menu parentMenu;
 
     @Column(length = 50)
     private String module;
@@ -22,16 +21,14 @@ public class MenuImp extends BaseEntity {
     @Column(length = 30)
     private String icon;
 
-    @Transient
-    private List<MenuImp> items;
 
-    public MenuImp() {
+    public Menu() {
     }
 
-    public MenuImp(String menuAdi, int menuIndex, MenuImp parent, String module, String icon) {
+    public Menu(String menuAdi, int menuIndex, Menu parentMenu, String module, String icon) {
         this.menuAdi = menuAdi;
         this.menuIndex = menuIndex;
-        this.parent = parent;
+        this.parentMenu = parentMenu;
         this.module = module;
         this.icon = icon;
     }
@@ -52,12 +49,12 @@ public class MenuImp extends BaseEntity {
         this.menuIndex = menuIndex;
     }
 
-    public MenuImp getParent() {
-        return parent;
+    public Menu getParentMenu() {
+        return parentMenu;
     }
 
-    public void setParent(MenuImp parent) {
-        this.parent = parent;
+    public void setParentMenu(Menu parentMenu) {
+        this.parentMenu = parentMenu;
     }
 
     public String getModule() {
@@ -76,11 +73,4 @@ public class MenuImp extends BaseEntity {
         this.icon = icon;
     }
 
-    public List<MenuImp> getItems() {
-        return items;
-    }
-
-    public void setItems(List<MenuImp> items) {
-        this.items = items;
-    }
 }
