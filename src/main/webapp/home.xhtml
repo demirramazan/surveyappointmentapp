@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:form>
+    <p:menubar>
+        <p:submenu label="Mail">
+            <p:menuitem value="Gmail" url="http://www.google.com" />
+            <p:menuitem value="Hotmail" url="http://www.hotmail.com" />
+            <p:menuitem value="Yahoo Mail" url="http://mail.yahoo.com" />
+        </p:submenu>
+        <p:submenu label="Videos">
+            <p:menuitem value="Youtube" url="http://www.youtube.com" />
+            <p:menuitem value="Break" url="http://www.break.com" />
+        </p:submenu>
+    </p:menubar>
+
+</h:form>
+<f:view>
+    <h:outputLabel value="Hello, world"/>
+    <p:inputText value="#{userController.deneme}"></p:inputText>
+</f:view>
+</html>

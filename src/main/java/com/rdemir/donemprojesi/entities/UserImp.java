@@ -1,6 +1,8 @@
 package com.rdemir.donemprojesi.entities;
 
+
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "HBYS_USER", uniqueConstraints = @UniqueConstraint(name = "UNQ_USERNAME", columnNames = {"username"}))
@@ -25,7 +27,7 @@ public class UserImp extends BaseEntity {
     @JoinTable(name = "USER_ROLES",
             joinColumns = {@JoinColumn(name = "USER_ID", referencedColumnName = "ID")},
             inverseJoinColumns = {@JoinColumn(name = "ROLE_ID", referencedColumnName = "ID")})
-    private RoleImp role;
+    private Set<RoleImp> role;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "PERSONEL_ID", foreignKey = @ForeignKey(name = "FK_USER_PERSONEL"))
@@ -34,13 +36,14 @@ public class UserImp extends BaseEntity {
     public UserImp() {
     }
 
-    public UserImp(String username, String name, String surname, String password, Boolean enabled, RoleImp role) {
+    public UserImp(String username, String name, String surname, String password, Boolean enabled, Set<RoleImp> role, PersonelImp personel) {
         this.username = username;
         this.name = name;
         this.surname = surname;
         this.password = password;
         this.enabled = enabled;
         this.role = role;
+        this.personel = personel;
     }
 
     public String getUsername() {
@@ -83,11 +86,11 @@ public class UserImp extends BaseEntity {
         this.enabled = enabled;
     }
 
-    public RoleImp getRole() {
+    public Set<RoleImp> getRole() {
         return role;
     }
 
-    public void setRole(RoleImp role) {
+    public void setRole(Set<RoleImp> role) {
         this.role = role;
     }
 
