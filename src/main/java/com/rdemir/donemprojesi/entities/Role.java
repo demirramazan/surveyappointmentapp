@@ -5,8 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "HBYS_ROLE")
-public class RoleImp extends BaseEntity {
+@Table(name = "ROLE")
+public class Role extends BaseEntity {
 
     @Column(name = "CODE")
     private String code;
@@ -20,7 +20,7 @@ public class RoleImp extends BaseEntity {
     @Column(name = "DESCRIPTION", length = 1000)
     private String description;
 
-    public RoleImp(String code, String name, String description) {
+    public Role(String code, String name, String description) {
         this.code = code;
         this.name = name;
         this.description = description;

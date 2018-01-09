@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "PERMISSION", schema = "hbystetkik")
-public class PermissionImp extends BaseEntity {
+public class Permission extends BaseEntity {
     @Column(name = "PERMISSION_ADI")
     private String permissionAdi;
 
@@ -14,22 +14,22 @@ public class PermissionImp extends BaseEntity {
     @OneToOne
     @JoinColumn(name = "ROLE_ID",
             foreignKey = @ForeignKey(name = "FK_PERMISSION_ROLE"))
-    private RoleImp role;
+    private Role role;
 
     @OneToOne
     @JoinColumn(name = "MENU_ID",
             foreignKey = @ForeignKey(name = "FK_PERMISSION_MENU"))
-    private MenuImp menu;
+    private Menu menu;
 
     @OneToOne
     @JoinColumn(name = "USER_ID",
             foreignKey = @ForeignKey(name = "FK_PERMISSION_USER"))
-    private UserImp user;
+    private User user;
 
-    public PermissionImp() {
+    public Permission() {
     }
 
-    public PermissionImp(String permissionAdi, String path, RoleImp role, MenuImp menu, UserImp user) {
+    public Permission(String permissionAdi, String path, Role role, Menu menu, User user) {
         this.permissionAdi = permissionAdi;
         this.path = path;
         this.role = role;
@@ -46,29 +46,30 @@ public class PermissionImp extends BaseEntity {
         this.permissionAdi = permissionAdi;
     }
 
-    public RoleImp getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(RoleImp role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 
-    public MenuImp getMenu() {
-        return menu;
-    }
-
-    public void setMenu(MenuImp menu) {
-        this.menu = menu;
-    }
-
-    public UserImp getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(UserImp user) {
+    public void setUser(User user) {
         this.user = user;
     }
+
+    public Menu getMenu() {
+        return menu;
+    }
+
+    public void setMenu(Menu menu) {
+        this.menu = menu;
+    }
+
 
     public String getPath() {
         return path;

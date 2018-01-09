@@ -3,13 +3,11 @@ package com.rdemir.donemprojesi.entities;
 import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
 import javax.validation.constraints.Size;
-import java.math.BigInteger;
 
 @Entity
 @Table(name = "PERSONEL")
-public class PersonelImp extends BaseEntity {
+public class Personel extends BaseEntity {
 
     @Column(name = "PERSONEL_ADI", nullable = false, length = 50)
     private String personelAdi;
@@ -42,10 +40,10 @@ public class PersonelImp extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "BIRIM_ID",
             foreignKey = @ForeignKey(name = "FK_PERSONEL_BIRIM"))
-    private BirimImp birim;
+    private Birim birim;
 
-    public PersonelImp(String personelAdi, String personelSoyadi, String kimlikNo,
-                       String email, String telefonNo, String adres) {
+    public Personel(String personelAdi, String personelSoyadi, String kimlikNo,
+                    String email, String telefonNo, String adres) {
         this.personelAdi = personelAdi;
         this.personelSoyadi = personelSoyadi;
         this.kimlikNo = kimlikNo;

@@ -8,7 +8,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "SALON_TANIM")
-public class SalonImp extends BaseEntity {
+public class Salon extends BaseEntity {
 
     @Column(name = "SALON_KODU")
     private String salonKodu;
@@ -17,12 +17,12 @@ public class SalonImp extends BaseEntity {
     private String salonAdi;
 
     @OneToMany(mappedBy = "salon")
-    private List<CihazImp> cihaz;
+    private List<Cihaz> cihaz;
 
-    public SalonImp() {
+    public Salon() {
     }
 
-    public SalonImp(String salonKodu, String salonAdi, List<CihazImp> cihaz) {
+    public Salon(String salonKodu, String salonAdi, List<Cihaz> cihaz) {
         this.salonKodu = salonKodu;
         this.salonAdi = salonAdi;
         this.cihaz = cihaz;
@@ -44,11 +44,11 @@ public class SalonImp extends BaseEntity {
         this.salonAdi = salonAdi;
     }
 
-    public List<CihazImp> getCihaz() {
+    public List<Cihaz> getCihaz() {
         return cihaz;
     }
 
-    public void setCihaz(List<CihazImp> cihaz) {
+    public void setCihaz(List<Cihaz> cihaz) {
         this.cihaz = cihaz;
     }
 }

@@ -5,5 +5,5 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "RANDEVU_SEANS")
-public class RandevuSeansImp extends BaseEntity{
+public class RandevuSeans extends BaseEntity{
 }

@@ -2,11 +2,10 @@ package com.rdemir.donemprojesi.entities;
 
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
-@Table(name = "HBYS_USER", uniqueConstraints = @UniqueConstraint(name = "UNQ_USERNAME", columnNames = {"username"}))
-public class UserImp extends BaseEntity {
+@Table(name = "USER", uniqueConstraints = @UniqueConstraint(name = "UNQ_USERNAME", columnNames = {"username"}))
+public class User extends BaseEntity {
 
     @Column(name = "USERNAME")
     private String username;
@@ -23,20 +22,21 @@ public class UserImp extends BaseEntity {
     @Column(name = "ENABLED")
     private Boolean enabled;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "USER_ROLES",
-            joinColumns = {@JoinColumn(name = "USER_ID", referencedColumnName = "ID")},
-            inverseJoinColumns = {@JoinColumn(name = "ROLE_ID", referencedColumnName = "ID")})
-    private Set<RoleImp> role;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "USER_ROLE_ID", foreignKey = @ForeignKey(name = "FK_USER_ROLE_ID"))
+//    @JoinTable(name = "USER_ROLES",
+//            joinColumns = {@JoinColumn(name = "USER_ID", referencedColumnName = "ID")},
+//            inverseJoinColumns = {@JoinColumn(name = "ROLE_ID", referencedColumnName = "ID")})
+    private Role role;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "PERSONEL_ID", foreignKey = @ForeignKey(name = "FK_USER_PERSONEL"))
-    private PersonelImp personel;
+    private Personel personel;
 
-    public UserImp() {
+    public User() {
     }
 
-    public UserImp(String username, String name, String surname, String password, Boolean enabled, Set<RoleImp> role, PersonelImp personel) {
+    public User(String username, String name, String surname, String password, Boolean enabled, Role role, Personel personel) {
         this.username = username;
         this.name = name;
         this.surname = surname;
@@ -86,19 +86,19 @@ public class UserImp extends BaseEntity {
         this.enabled = enabled;
     }
 
-    public Set<RoleImp> getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(Set<RoleImp> role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 
-    public PersonelImp getPersonel() {
+    public Personel getPersonel() {
         return personel;
     }
 
-    public void setPersonel(PersonelImp personel) {
+    public void setPersonel(Personel personel) {
         this.personel = personel;
     }
 }
