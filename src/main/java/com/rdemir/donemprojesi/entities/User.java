@@ -3,6 +3,8 @@ package com.rdemir.donemprojesi.entities;
 
 import javax.persistence.*;
 
+import static javax.persistence.CascadeType.*;
+
 @Entity
 @Table(name = "USER", uniqueConstraints = @UniqueConstraint(name = "UNQ_USERNAME", columnNames = {"username"}))
 public class User extends BaseEntity {
@@ -22,14 +24,11 @@ public class User extends BaseEntity {
     @Column(name = "ENABLED")
     private Boolean enabled;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = MERGE)
     @JoinColumn(name = "USER_ROLE_ID", foreignKey = @ForeignKey(name = "FK_USER_ROLE_ID"))
-//    @JoinTable(name = "USER_ROLES",
-//            joinColumns = {@JoinColumn(name = "USER_ID", referencedColumnName = "ID")},
-//            inverseJoinColumns = {@JoinColumn(name = "ROLE_ID", referencedColumnName = "ID")})
     private Role role;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "PERSONEL_ID", foreignKey = @ForeignKey(name = "FK_USER_PERSONEL"))
     private Personel personel;
 

@@ -11,7 +11,7 @@ public class Menu extends BaseEntity {
     @Column(name = "MENU_INDEX")
     private int menuIndex;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "PARENT_ID", foreignKey = @ForeignKey(name = "FK_PARENT_MENU_ID"))
     private Menu parentMenu;
 

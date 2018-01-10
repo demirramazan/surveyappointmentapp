@@ -1,5 +1,6 @@
 package com.rdemir.donemprojesi.entities;
 
+import com.rdemir.donemprojesi.util.EnumUtil;
 import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
@@ -30,9 +31,9 @@ public class Personel extends BaseEntity {
     @Column(name = "ADRES", length = 500)
     private String adres;
 
-    //    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.ORDINAL)
     @Column(name = "CINSIYET", nullable = false)
-    private Integer cinsyet;
+    private EnumUtil.Cinsiyet cinsyet;
 
     @Column(name = "AKTIF")
     private Integer aktif;
@@ -42,14 +43,19 @@ public class Personel extends BaseEntity {
             foreignKey = @ForeignKey(name = "FK_PERSONEL_BIRIM"))
     private Birim birim;
 
-    public Personel(String personelAdi, String personelSoyadi, String kimlikNo,
-                    String email, String telefonNo, String adres) {
+    public Personel() {
+    }
+
+    public Personel(String personelAdi, String personelSoyadi, String kimlikNo, String email, String telefonNo, String adres, EnumUtil.Cinsiyet cinsyet, Integer aktif, Birim birim) {
         this.personelAdi = personelAdi;
         this.personelSoyadi = personelSoyadi;
         this.kimlikNo = kimlikNo;
         this.email = email;
         this.telefonNo = telefonNo;
         this.adres = adres;
+        this.cinsyet = cinsyet;
+        this.aktif = aktif;
+        this.birim = birim;
     }
 
     public String getPersonelAdi() {
@@ -100,11 +106,27 @@ public class Personel extends BaseEntity {
         this.adres = adres;
     }
 
-    public Integer getCinsyet() {
-        return 0;
+    public EnumUtil.Cinsiyet getCinsyet() {
+        return cinsyet;
     }
 
-    public void setCinsyet(Integer cinsyet) {
+    public void setCinsyet(EnumUtil.Cinsiyet cinsyet) {
         this.cinsyet = cinsyet;
+    }
+
+    public Integer getAktif() {
+        return aktif;
+    }
+
+    public void setAktif(Integer aktif) {
+        this.aktif = aktif;
+    }
+
+    public Birim getBirim() {
+        return birim;
+    }
+
+    public void setBirim(Birim birim) {
+        this.birim = birim;
     }
 }
