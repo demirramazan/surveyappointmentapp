@@ -1,19 +1,9 @@
 package com.rdemir.donemprojesi.util;
 
-public enum ScopeUtil {
-    VIEW("view"), SESSION("session"), APPLICATION("application");
+public interface ScopeUtil {
 
-    private String scopeName;
+    String VIEW = "view";
+    String SESSION = "session";
+    String APPLICATION = "application";
 
-    ScopeUtil(String scopeName) {
-        this.scopeName = scopeName;
-    }
-
-    public String getScopeName() {
-        return scopeName;
-    }
-
-    public void setScopeName(String scopeName) {
-        this.scopeName = scopeName;
-    }
 }

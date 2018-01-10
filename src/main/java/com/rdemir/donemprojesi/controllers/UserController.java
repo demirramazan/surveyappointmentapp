@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
-@ManagedBean
+@ManagedBean(name = "userBean")
 @SessionScoped
 public class UserController {
 
@@ -19,17 +19,15 @@ public class UserController {
     public User user;
 
     public UserController() {
-        this.user = new User();
-        user.setSurname("ramazan");
-        user.setUsername("demir");
+
     }
 
     public User findById(Long id) {
         return userService.getUserById(id);
     }
 
-    public User save(User userImp) {
-        return userService.save(userImp);
+    public User save() {
+        return userService.save(user);
     }
 
     public User getUser() {

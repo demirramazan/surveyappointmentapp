@@ -29,30 +29,38 @@ public class InitializeCommand implements CommandLineRunner {
     private PermissionRepository permissionRepository;
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
 
-        Role role = new Role();
-        role.setCode(RoleType.ADMIN.name());
-        role.setName("Admin");
-        role.setDescription("Admin Rolü");
-        roleReporsitory.saveAndFlush(role);
+        Role role = roleReporsitory.findByCode(RoleType.ADMIN.name());
+        if (role == null) {
+            role = new Role();
+            role.setCode(RoleType.ADMIN.name());
+            role.setName("Admin");
+            role.setDescription("Admin Rolü");
+            roleReporsitory.saveAndFlush(role);
+        }
+        User user = userRepository.findByUsername("rdemir");
+        if (user == null) {
+            user = new User();
+            user.setName("Ramazan");
+            user.setSurname("Demir");
+            user.setUsername("rdemir");
+            user.setPassword("123123");
+            user.setEnabled(true);
+            user.setRole(role);
+            userRepository.saveAndFlush(user);
+        }
 
-        User user = new User();
-        user.setName("Ramazan");
-        user.setSurname("Demir");
-        user.setUsername("rdemir");
-        user.setPassword("123123");
-        user.setEnabled(true);
-        user.setRole(role);
-        userRepository.saveAndFlush(user);
-
-        Menu menu = new Menu();
-        menu.setMenuAdi("Tanımlar");
-        menu.setMenuIndex(1);
-        menu.setIcon("");
-        menu.setModule("tanimlar");
-        menu.setParentMenu(null);
-        menuRepository.save(menu);
+        Menu menu = menuRepository.findByMenuAdi("Tanımlar");
+        if (menu == null) {
+            menu = new Menu();
+            menu.setMenuAdi("Tanımlar");
+            menu.setMenuIndex(1);
+            menu.setIcon("");
+            menu.setModule("tanimlar");
+            menu.setParentMenu(null);
+            menuRepository.save(menu);
+        }
 
         Menu menuUser = new Menu();
         menuUser.setMenuAdi("Kullanıcı Tanım");

@@ -48,6 +48,7 @@ public class DonemprojesiApplication extends SpringBootServletInitializer {
             servletContext.setInitParameter("primefaces.UPLOADER", "commons");
         };
     }
+
     @Bean
     public ServletListenerRegistrationBean<ConfigureListener> jsfConfigureListener() {
         return new ServletListenerRegistrationBean<>(
@@ -58,9 +59,9 @@ public class DonemprojesiApplication extends SpringBootServletInitializer {
     public static CustomScopeConfigurer customScopeConfigurer() {
         CustomScopeConfigurer configurer = new CustomScopeConfigurer();
         Map<String, Object> scopes = new HashMap<String, Object>();
-        scopes.put(ScopeUtil.VIEW.getScopeName(), new ViewConfig());
-        scopes.put(ScopeUtil.SESSION.getScopeName(), new ViewConfig());
-        scopes.put(ScopeUtil.APPLICATION.getScopeName(), new ViewConfig());
+        scopes.put(ScopeUtil.VIEW, new ViewConfig());
+        scopes.put(ScopeUtil.SESSION, new ViewConfig());
+        scopes.put(ScopeUtil.APPLICATION, new ViewConfig());
         configurer.setScopes(scopes);
         return configurer;
     }
