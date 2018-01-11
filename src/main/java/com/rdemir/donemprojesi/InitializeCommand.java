@@ -62,44 +62,73 @@ public class InitializeCommand implements CommandLineRunner {
             menuRepository.save(menu);
         }
 
-        Menu menuUser = new Menu();
-        menuUser.setMenuAdi("Kullanıcı Tanım");
-        menuUser.setMenuIndex(1);
-        menuUser.setIcon("");
-        menuUser.setModule("tanimlar");
-        menu.setParentMenu(menu);
-        menuRepository.save(menuUser);
+        Menu menuUser = menuRepository.findByMenuAdi("Kullanıcı Tanım");
+        if (menuUser == null) {
+            menuUser = new Menu();
+            menuUser.setMenuAdi("Kullanıcı Tanım");
+            menuUser.setMenuIndex(1);
+            menuUser.setIcon("");
+            menuUser.setModule("tanimlar");
+            menu.setParentMenu(menu);
+            menuRepository.save(menuUser);
+        }
 
-        Menu menuRole = new Menu();
-        menuRole.setMenuAdi("Rol Tanım");
-        menuRole.setMenuIndex(2);
-        menuRole.setIcon("");
-        menuRole.setModule("tanimlar");
-        menu.setParentMenu(menu);
-        menuRepository.save(menuRole);
+        Menu menuRole = menuRepository.findByMenuAdi("Rol Tanım");
+        if (menuRole == null) {
+            menuRole = new Menu();
+            menuRole.setMenuAdi("Rol Tanım");
+            menuRole.setMenuIndex(2);
+            menuRole.setIcon("");
+            menuRole.setModule("tanimlar");
+            menu.setParentMenu(menu);
+            menuRepository.save(menuRole);
+        }
 
-        Menu menuMenu = new Menu();
-        menuMenu.setMenuAdi("Menu Tanım");
-        menuMenu.setMenuIndex(3);
-        menuMenu.setIcon("");
-        menuMenu.setModule("tanimlar");
-        menuMenu.setParentMenu(menu);
-        menuRepository.save(menuMenu);
+        Menu menuMenu = menuRepository.findByMenuAdi("Menu Tanım");
+        if (menuMenu == null) {
+            menuMenu = new Menu();
+            menuMenu.setMenuAdi("Menu Tanım");
+            menuMenu.setMenuIndex(3);
+            menuMenu.setIcon("");
+            menuMenu.setModule("tanimlar");
+            menuMenu.setParentMenu(menu);
+            menuRepository.save(menuMenu);
+        }
 
-        Menu menuPersonel = new Menu();
-        menuPersonel.setMenuAdi("Personel Tanım");
-        menuPersonel.setMenuIndex(4);
-        menuPersonel.setIcon("");
-        menuPersonel.setModule("tanimlar");
-        menuPersonel.setParentMenu(menu);
-        menuRepository.save(menuPersonel);
+        Menu menuPersonel = menuRepository.findByMenuAdi("Personel Tanım");
+        if (menuPersonel == null) {
+            menuPersonel = new Menu();
+            menuPersonel.setMenuAdi("Personel Tanım");
+            menuPersonel.setMenuIndex(4);
+            menuPersonel.setIcon("");
+            menuPersonel.setModule("tanimlar");
+            menuPersonel.setParentMenu(menu);
+            menuRepository.saveAndFlush(menuPersonel);
+        }
 
-        Permission permission = new Permission();
-        permission.setMenu(menu);
-        permission.setPermissionAdi("tani permission");
-        permission.setRole(role);
-        permission.setUser(user);
-        permissionRepository.save(permission);
+        Permission permission = permissionRepository.findByMenu(menu);
+        if (permission == null) {
+            permission = new Permission();
+            permission.setMenu(menu);
+            permission.setPermissionAdi("tanim permission");
+            permission.setRole(role);
+            permission.setUser(user);
+            permissionRepository.saveAndFlush(permission);
+        } else {
+            permission.setPermissionAdi("tanim permission");
+            permissionRepository.saveAndFlush(permission);
+        }
+        Permission permissionRoleTanim = permissionRepository.findByMenu(menuRole);
+        if (permissionRoleTanim == null) {
+            permissionRoleTanim = new Permission();
+            permissionRoleTanim.setMenu(menuRole);
+            permissionRoleTanim.setPermissionAdi("Role Tanım permission");
+            permissionRoleTanim.setRole(role);
+            permissionRoleTanim.setUser(user);
+            permissionRepository.saveAndFlush(permissionRoleTanim);
+        } else {
+            permissionRepository.save(permissionRoleTanim);
+        }
 
     }
 }

@@ -4,15 +4,46 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-<h:head>User Tanım Ekranı</h:head>
-<h:form id="frmUser">
-    Kullanıcı Kodu: <h:inputText value="#{userController.userImp.username}"/>
-    Kullıcı Şifre:<h:inputSecret value="#{userController.userImp.password}"/>
-    Kullıcı Adı:<h:inputText value="#{userController.userImp.name}"/>
-    Kullıcı Soyadı:<h:inputText value="#{userController.userImp.surname}"/>
-    Aktif mi:<h:selectBooleanCheckbox value="#{userController.userImp.enabled}"/></h:form>
-<f:view>
-    <h:outputLabel value="Hello, world"/>
-</f:view>
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<center>
+    <h:panelGrid columns="4" style="margin-top: 50px; background-color: white">
+        <h3>Yeni Üye Kaydı</h3>
+        <h:outputText/>
+        <h:outputText/>
+        <h:outputText/>
+
+        <h:outputText value="Adı"/>
+        <h:outputText value="*"/>
+        <p:inputText id="name" value="#{userBean.user.name}" required="true"/>
+        <p:message for="name"/>
+
+        <h:outputText value="Soyadı"/>
+        <h:outputText value="*"/>
+        <p:inputText id="surname" value="#{userBean.user.surname}" required="true"/>
+        <p:message for="surname"/>
+
+        <h:outputText value="Kullanıcı Adı"/>
+        <h:outputText value="*"/>
+        <p:inputText id="username" value="#{userBean.user.username}" required="true"/>
+        <p:message for="username"/>
+
+
+        <h:outputText value="Parola"/>
+        <h:outputText value="*"/>
+        <p:password id="password" value="#{userBean.user.password}" required="true"
+                    match="passwordAgain"/>
+        <p:message for="password"/>
+
+        <h:outputText value="Parola Tekrar"/>
+        <h:outputText value="*"/>
+        <p:password id="passwordAgain" required="true"/>
+        <p:message for="passwordAgain"/>
+
+        <!--<p:commandButton value="Kaydet" id="kaydet" update="save" actionListener="#{userBean.save}"-->
+        <!--styleClass="ui-priority-primary"/>-->
+    </h:panelGrid>
+    <p:commandButton value="Kaydet" id="save" update="save" actionListener="#{userBean.save}"
+                     styleClass="ui-priority-primary"/>
+</center>
 </html>

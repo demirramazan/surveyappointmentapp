@@ -1,11 +1,12 @@
 package com.rdemir.donemprojesi.entities;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "MENU_TANIM")
-public class Menu extends BaseEntity {
-    @Column(length = 50, nullable = false)
+public class Menu extends BaseEntity<String> {
+    @Column(length = 50, nullable = false, unique = true)
     private String menuAdi;
 
     @Column(name = "MENU_INDEX")
@@ -20,7 +21,8 @@ public class Menu extends BaseEntity {
 
     @Column(length = 30)
     private String icon;
-
+    @Transient
+    private List<Menu> items;
 
     public Menu() {
     }
@@ -73,4 +75,11 @@ public class Menu extends BaseEntity {
         this.icon = icon;
     }
 
+    public List<Menu> getItems() {
+        return items;
+    }
+
+    public void setItems(List<Menu> items) {
+        this.items = items;
+    }
 }

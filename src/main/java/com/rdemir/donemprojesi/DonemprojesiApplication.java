@@ -11,14 +11,20 @@ import org.springframework.boot.web.servlet.ServletContextInitializer;
 import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+import org.springframework.web.context.ServletContextAware;
 
 import javax.faces.webapp.FacesServlet;
+import javax.servlet.ServletContext;
 import java.util.HashMap;
 import java.util.Map;
 
 @SpringBootApplication
-public class DonemprojesiApplication extends SpringBootServletInitializer {
+@EnableJpaAuditing
+@EnableCaching
+public class DonemprojesiApplication extends SpringBootServletInitializer implements ServletContextAware {
 
     public static void main(String[] args) {
         SpringApplication.run(DonemprojesiApplication.class, args);
@@ -40,7 +46,7 @@ public class DonemprojesiApplication extends SpringBootServletInitializer {
     @Bean
     public ServletContextInitializer servletContextInitializer() {
         return servletContext -> {
-            servletContext.setInitParameter("com.sun.faces.forceLoadConfiguration", Boolean.TRUE.toString());
+
             servletContext.setInitParameter("primefaces.THEME", "bootstrap");
             servletContext.setInitParameter("primefaces.CLIENT_SIDE_VALIDATION", Boolean.TRUE.toString());
             servletContext.setInitParameter("javax.faces.FACELETS_SKIP_COMMENTS", Boolean.TRUE.toString());
@@ -64,5 +70,10 @@ public class DonemprojesiApplication extends SpringBootServletInitializer {
         scopes.put(ScopeUtil.APPLICATION, new ViewConfig());
         configurer.setScopes(scopes);
         return configurer;
+    }
+
+    @Override
+    public void setServletContext(ServletContext servletContext) {
+        servletContext.setInitParameter("com.sun.faces.forceLoadConfiguration", Boolean.TRUE.toString());
     }
 }

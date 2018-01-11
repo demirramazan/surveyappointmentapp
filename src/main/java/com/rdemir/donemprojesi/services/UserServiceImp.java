@@ -20,6 +20,11 @@ public class UserServiceImp implements IUserService<User> {
     }
 
     @Override
+    public User getUserByUsernameAndPassword(String username, String password) {
+        return userRepository.findByUsernameAndPassword(username, password);
+    }
+
+    @Override
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }

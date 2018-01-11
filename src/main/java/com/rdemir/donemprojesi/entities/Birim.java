@@ -4,17 +4,13 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "BIRIM")
-public class Birim extends BaseEntity {
-
+public class Birim extends BaseEntity<String> {
 
     @Column(name = "BIRIM_KODU")
     private String birimKodu;
 
     @Column(name = "BIRIM_ADI")
     private String birimAdi;
-
-    @Column(name = "UZUN_ADI")
-    private String uzunAdi;
 
     @Column(name = "AKTIF_MI")
     private Integer aktifMi;
@@ -30,10 +26,9 @@ public class Birim extends BaseEntity {
     public Birim() {
     }
 
-    public Birim(String birimKodu, String birimAdi, String uzunAdi, Integer aktifMi, Salon salon) {
+    public Birim(String birimKodu, String birimAdi, Integer aktifMi, Salon salon) {
         this.birimKodu = birimKodu;
         this.birimAdi = birimAdi;
-        this.uzunAdi = uzunAdi;
         this.aktifMi = aktifMi;
         this.salon = salon;
     }
@@ -52,14 +47,6 @@ public class Birim extends BaseEntity {
 
     public void setBirimAdi(String birimAdi) {
         this.birimAdi = birimAdi;
-    }
-
-    public String getUzunAdi() {
-        return uzunAdi;
-    }
-
-    public void setUzunAdi(String uzunAdi) {
-        this.uzunAdi = uzunAdi;
     }
 
     public Integer getAktifMi() {
