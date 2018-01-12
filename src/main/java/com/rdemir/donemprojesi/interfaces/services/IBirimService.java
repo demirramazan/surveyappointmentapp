@@ -1,4 +1,4 @@
 package com.rdemir.donemprojesi.interfaces.services;
 
-public class IBirimService {
+public interface IBirimService {
 }

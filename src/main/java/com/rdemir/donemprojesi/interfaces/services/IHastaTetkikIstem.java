@@ -1,4 +1,4 @@
 package com.rdemir.donemprojesi.interfaces.services;
 
-public class IHastaTetkikIstem {
+public interface IHastaTetkikIstem {
 }
