@@ -1,45 +1,68 @@
-//package com.rdemir.donemprojesi.controllers;
-//
-//import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
-//
-//import javax.faces.application.NavigationHandler;
-//import javax.faces.bean.ManagedBean;
-//import javax.faces.bean.SessionScoped;
-//import javax.faces.context.FacesContext;
-//
-//@ManagedBean
-//@SessionScoped
-//public class LoginController {
-//
-//    public void login()  {
-//
-//        System.out.println("Login Metoduna Girildi");
-//        try {
-//
-//            RequestDispatcher dispatcher = ((ServletRequest)context.getRequest()).getRequestDispatcher("/j_spring_security_check");
-//
-//            dispatcher.forward((ServletRequest)context.getRequest(), (ServletResponse)context.getResponse());
-//            FacesContext.getCurrentInstance().responseComplete();
-//
-//        } catch (ServletException | IOException ex) {
-//            Logger.getLogger(LoginControlClass.class.getName()).log(Level.SEVERE, null, ex);
-//
-//        }
-//        /*finally {
-//            return null;
-//        }*/
-//        System.out.println("Login Metodundan Çıkıldı");
-//    }
-//
-//    public void authorizedUserControl(){
-//
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//
-//        if(!authentication.getPrincipal().toString().equals("anonymousUser")){
-//
-//            NavigationHandler nh =  FacesContext.getCurrentInstance().getApplication().getNavigationHandler();
-//            nh.handleNavigation(FacesContext.getCurrentInstance(), null, "/takingAppointment.xhtml?faces-redirect=true");
-//
-//        }
-//    }
-//}
+package com.rdemir.donemprojesi.controllers;
+
+
+import com.rdemir.donemprojesi.config.SessionInitializer;
+import com.rdemir.donemprojesi.entities.User;
+import com.rdemir.donemprojesi.interfaces.services.IUserService;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
+import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.io.Serializable;
+
+@ManagedBean(name = "loginBean")
+@RequestScoped
+public class LoginController  {
+    @Autowired
+    private IUserService userService;
+    @Inject
+    private SessionInitializer sessionInitializer;
+
+    private String username;
+    private String password;
+
+    public void login() throws Exception {
+        HttpSession httpSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+        User user = userService.login(username, password, httpSession);
+        if (user != null) {
+            sessionInitializer.setMenuModel();
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/home.jsf");
+        }
+    }
+
+    public void logout(String source) throws IOException {
+        ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+        context.invalidateSession();
+        context.redirect(context.getRequestContextPath() + "/login.jsf");
+    }
+
+    public void checkSessionForUser() throws IOException {
+        // Kullanıcı daha önce session almış ve login olmuş ise direk ana sayfaya yönlendiriyoruz
+        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+        HttpSession httpSession = (HttpSession) externalContext.getSession(false);
+        if (httpSession != null && httpSession.getAttribute("user") != null) {
+            externalContext.redirect("/home.jsf");
+        }
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+}

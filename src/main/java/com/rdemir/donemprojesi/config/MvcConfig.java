@@ -16,7 +16,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
          * Used for forwarding to the index page by default. This will trigger
          * the login.
          */
-        registry.addViewController("/").setViewName("forward:/home.xhtml");
+        registry.addViewController("/").setViewName("forward:/login.xhtml");
         registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
         super.addViewControllers(registry);
     }

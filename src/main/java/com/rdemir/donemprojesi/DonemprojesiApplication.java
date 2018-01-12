@@ -37,7 +37,7 @@ public class DonemprojesiApplication extends SpringBootServletInitializer implem
 
     @Bean
     public ServletRegistrationBean facesServletRegistraiton() {
-        ServletRegistrationBean registration = new ServletRegistrationBean(new FacesServlet(), new String[]{"*.xhtml"});
+        ServletRegistrationBean registration = new ServletRegistrationBean(new FacesServlet(), new String[]{"*.xhtml", "*.jsf"});
         registration.setName("Faces Servlet");
         registration.setLoadOnStartup(1);
         return registration;

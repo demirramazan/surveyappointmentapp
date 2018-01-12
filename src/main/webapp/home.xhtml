@@ -20,98 +20,56 @@
 <!--</h:form>-->
 <h:head>
     <!--<p:menu model="#{menuBean.model}"/>-->
-    <!--https://forum.primefaces.org/viewtopic.php?t=7502-->
-    <title>PrimeFaces Hello World Example</title>
+    <title>Hastane Otomasyon Projesi</title>
 
     <link rel="stylesheet" type="text/css" href="./resources/css/style.css"/>
 </h:head>
 
 
-<!--<h:form>-->
-<!--<p:panel id="panel" header="New User">-->
 
-<!--<p:messages id="msgs"/>-->
-
-<!--<h:panelGrid columns="3" cellpadding="5">-->
-<!--<p:outputLabel for="name" value="Kullanıcı Adı"/>-->
-<!--<p:inputText id="name" value="#{userBean.user.name}" required="true" label="Firstname">-->
-<!--<f:validateLength minimum="2"/>-->
-<!--</p:inputText>-->
-<!--<p:message for="name" display="icon"/>-->
-
-<!--<p:outputLabel for="surname" value="Kullanıcı Soyadı:"/>-->
-<!--<p:inputText id="surname" value="#{userBean.user.surname}" label="Lastname" required="true">-->
-<!--<f:validateLength minimum="2"/>-->
-<!--&lt;!&ndash;<p:ajax update="msgSurname" event="keyup" />&ndash;&gt;-->
-<!--</p:inputText>-->
-
-<!--<p:outputLabel for="username" value="Username:"/>-->
-<!--<p:inputText id="username" value="#{userBean.user.username}" label="Username" required="true">-->
-<!--<f:validateLength minimum="2"/>-->
-<!--&lt;!&ndash;<p:ajax update="msgUsername" event="keyup" />&ndash;&gt;-->
-<!--</p:inputText>-->
-<!--&lt;!&ndash;<p:message for="username" id="msgUsername" display="icon" />&ndash;&gt;-->
-
-<!--<p:outputLabel for="password" value="Password:"/>-->
-<!--<p:password id="password" value="#{userBean.user.password}" required="true">-->
-<!--<f:validateLength minimum="2"/>-->
-<!--&lt;!&ndash;<p:ajax update="msgPassword" event="keyup" />&ndash;&gt;-->
-<!--</p:password>-->
-<!--&lt;!&ndash;<p:message for="lastname" id="msgPassword" display="icon" />&ndash;&gt;-->
-<!--</h:panelGrid>-->
-
-<!--<p:commandButton value="Save" update="panel" actionListener="#{userBean.save()}" icon="ui-icon-check"/>-->
-<!--</p:panel>-->
-<!--</h:form>-->
 <h:body>
-    <center>
-        <h:panelGrid columns="4" style="margin-top: 50px; ">
-            <h3>Yeni Üye Kaydı</h3>
-            <h:outputText/>
-            <h:outputText/>
-            <h:outputText/>
+    <h:form>
+        <center>
+            <h:panelGrid columns="4" style="margin-top: 50px; ">
+                <h3>Yeni Üye Kaydı</h3>
+                <h:outputText/>
+                <h:outputText/>
+                <h:outputText/>
 
-            <h:outputText value="Adı"/>
-            <h:outputText value="*"/>
-            <p:inputText id="name" value="#{userBean.user.name}" required="true"/>
-            <p:message for="name"/>
+                <h:outputText value="Adı"/>
+                <h:outputText value="*"/>
+                <p:inputText id="name" value="#{userBean.user.name}" required="true"/>
+                <p:message for="name"/>
 
-            <h:outputText value="Soyadı"/>
-            <h:outputText value="*"/>
-            <p:inputText id="surname" value="#{userBean.user.surname}" required="true"/>
-            <p:message for="surname"/>
+                <h:outputText value="Soyadı"/>
+                <h:outputText value="*"/>
+                <p:inputText id="surname" value="#{userBean.user.surname}" required="true"/>
+                <p:message for="surname"/>
 
-            <h:outputText value="Kullanıcı Adı"/>
-            <h:outputText value="*"/>
-            <p:inputText id="username" value="#{userBean.user.username}" required="true"/>
-            <p:message for="username"/>
+                <h:outputText value="Kullanıcı Adı"/>
+                <h:outputText value="*"/>
+                <p:inputText id="username" value="#{userBean.user.username}" required="true"/>
+                <p:message for="username"/>
 
 
-            <h:outputText value="Parola"/>
-            <h:outputText value="*"/>
-            <p:password id="password" value="#{userBean.user.password}" required="true"
-                        match="passwordAgain"/>
-            <p:message for="password"/>
+                <h:outputText value="Parola"/>
+                <h:outputText value="*"/>
+                <p:password id="password" value="#{userBean.user.password}" required="true"
+                            match="passwordAgain"/>
+                <p:message for="password"/>
 
-            <h:outputText value="Parola Tekrar"/>
-            <h:outputText value="*"/>
-            <p:password id="passwordAgain" required="true"/>
-            <p:message for="passwordAgain"/>
+                <h:outputText value="Parola Tekrar"/>
+                <h:outputText value="*"/>
+                <p:password id="passwordAgain" required="true"/>
+                <p:message for="passwordAgain"/>
 
-            <!--<p:commandButton value="Kaydet" id="kaydet" update="save" actionListener="#{userBean.save}"-->
-            <!--styleClass="ui-priority-primary"/>-->
-        </h:panelGrid>
-        <p:commandButton value="Kaydet" id="save" update="save" actionListener="#{userBean.save}"
-                         styleClass="ui-priority-primary"/>
+            </h:panelGrid>
+            <center>
+                <p:commandButton value="Kaydet" actionListener="#{userBean.save}" ajax="false"
+                                 icon="fa fa-save" styleClass="ui-priority-primary" style="left: 125px"/>
+            </center>
 
-        <!--<p:-->
-        <!--<p:panelGrid columns="1">-->
-        <!--<p:commandButton value="Kaydet" style="float: right" update="display"-->
-        <!--actionListener="#{userBean.save}"/>-->
-        <!--<p:commandButton></p:commandButton>-->
-        <!--<p style="float:left;width:206px;margin-left:20px;font-family:Arial;font-size:14px;color:red;font-weight:bold;"-->
-        <!--id="warning_text"></p>-->
-        <!--</p:panelGrid>-->
-    </center>
+        </center>
+    </h:form>
 </h:body>
 </html>

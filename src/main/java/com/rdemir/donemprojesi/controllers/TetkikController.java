@@ -1,9 +1,9 @@
 package com.rdemir.donemprojesi.controllers;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 
-@RestController
-@RequestMapping("/tetkik")
+@ManagedBean
+@RequestScoped
 public class TetkikController {
 }

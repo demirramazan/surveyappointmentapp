@@ -2,6 +2,7 @@ package com.rdemir.donemprojesi.interfaces.services;
 
 import com.rdemir.donemprojesi.entities.User;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 public interface IUserService<T> {
@@ -14,4 +15,6 @@ public interface IUserService<T> {
     User save(T t);
 
     void delete(Long id);
+
+    User login(String username, String password, HttpSession httpSession);
 }

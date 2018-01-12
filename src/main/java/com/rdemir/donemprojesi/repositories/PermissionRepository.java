@@ -7,13 +7,17 @@ import com.rdemir.donemprojesi.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface PermissionRepository extends JpaRepository<Permission, Long> {
-    Permission findByRole(Role role);
+    List<Permission> findByRole(Role role);
 
-    Permission findByUser(User user);
+    List<Permission> findByUser(User user);
 
     Permission findByMenu(Menu menu);
 
-    Permission findByRoleAndMenu(Role role, Menu menu);
+    List<Permission> findByRoleAndMenu(Role role, Menu menu);
+
+    List<Permission> findByUserAndRole(User user, Role role);
 }
