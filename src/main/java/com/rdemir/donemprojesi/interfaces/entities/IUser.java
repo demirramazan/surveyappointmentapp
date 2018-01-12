@@ -1,7 +1,7 @@
 package com.rdemir.donemprojesi.interfaces.entities;
 
-import com.rdemir.donemprojesi.entities.PersonelImp;
-import com.rdemir.donemprojesi.entities.RoleImp;
+import com.rdemir.donemprojesi.entities.Personel;
+import com.rdemir.donemprojesi.entities.Role;
 
 import java.util.List;
 
@@ -17,8 +17,8 @@ public interface IUser {
 
     String getSurname();
 
-    List<RoleImp> getRole();
+    List<Role> getRole();
 
-    PersonelImp getPersonel();
+    Personel getPersonel();
 
 }
