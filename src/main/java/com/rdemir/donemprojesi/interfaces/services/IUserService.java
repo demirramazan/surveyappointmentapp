@@ -1,15 +1,20 @@
 package com.rdemir.donemprojesi.interfaces.services;
 
-import com.rdemir.donemprojesi.entities.UserImp;
+import com.rdemir.donemprojesi.entities.User;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 public interface IUserService<T> {
-    UserImp getUserById(Long id);
+    User getUserById(Long id);
 
-    List<UserImp> getAllUsers();
+    User getUserByUsernameAndPassword(String username, String password);
 
-    UserImp save(T t);
+    List<User> getAllUsers();
+
+    User save(T t);
 
     void delete(Long id);
+
+    User login(String username, String password, HttpSession httpSession);
 }

@@ -1,43 +1,61 @@
 package com.rdemir.donemprojesi.controllers;
 
-import com.rdemir.donemprojesi.entities.UserImp;
+import com.rdemir.donemprojesi.entities.User;
 import com.rdemir.donemprojesi.interfaces.services.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
-@ManagedBean
+//@Component("userBean")
+//@Scope(ScopeUtil.SESSION)
+@ManagedBean(name = "userBean")
 @SessionScoped
 public class UserController {
 
     @Autowired
     private IUserService userService;
 
-    private String deneme="RAMAZANN";
+    private String deneme = "RAMAZANN";
 
-    public UserImp userImp ;
+    public User user;
+    private String username;
+    private String password;
 
-    public UserController() {
-        this.userImp  = new UserImp();
-        userImp.setSurname("ramazan");
-        userImp.setUsername("demir");
+    public String getUsername() {
+        return username;
     }
 
-    public UserImp findById(Long id) {
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public UserController() {
+
+    }
+
+    public User findById(Long id) {
         return userService.getUserById(id);
     }
 
-    public UserImp save(UserImp userImp) {
-        return userService.save(userImp);
+    public User save() {
+        return userService.save(user);
     }
 
-    public UserImp getUserImp() {
-        return userImp;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserImp(UserImp userImp) {
-        this.userImp = userImp;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getDeneme() {

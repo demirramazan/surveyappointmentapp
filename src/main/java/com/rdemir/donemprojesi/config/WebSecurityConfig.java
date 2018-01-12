@@ -13,11 +13,11 @@
 //    protected void configure(HttpSecurity http) throws Exception {
 //        http
 //                .authorizeRequests()
-//                .antMatchers("/", "/home").permitAll()
+//                .antMatchers("/", "/pages/**").permitAll()
 //                .anyRequest().authenticated()
 //                .and()
 //                .formLogin()
-//                .loginPage("/login")
+//                .loginPage("/home.xhtml")
 //                .permitAll()
 //                .and()
 //                .logout()
@@ -28,6 +28,6 @@
 //    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 //        auth
 //                .inMemoryAuthentication()
-//                .withUser("user").password("password").roles("USER");
+//                .withUser("rdemir").password("123123").roles("ADMIN");
 //    }
 //}

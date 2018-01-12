@@ -2,12 +2,14 @@ package com.rdemir.donemprojesi.entities;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @MappedSuperclass
-public class BaseEntity {
+@EntityListeners(AuditingEntityListener.class)
+public abstract class BaseEntity<U> {
 
     @Id
     @Column(name = "ID", nullable = false, unique = true)
@@ -19,9 +21,11 @@ public class BaseEntity {
     private Integer version;
 
     @CreatedDate
+    @Temporal(TemporalType.TIMESTAMP)
     private Date createDate;
 
     @LastModifiedDate
+    @Temporal(TemporalType.TIMESTAMP)
     private Date updateDate;
 
 
