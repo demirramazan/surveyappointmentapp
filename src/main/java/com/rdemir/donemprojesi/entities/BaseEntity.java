@@ -18,7 +18,7 @@ public abstract class BaseEntity<U> {
 
     @Version
     @Column(name = "VERSION", nullable = false, columnDefinition = "int default 0")
-    private Long version;
+    private Integer version;
 
     @CreatedDate
     @Temporal(TemporalType.TIMESTAMP)
@@ -37,11 +37,11 @@ public abstract class BaseEntity<U> {
         this.id = id;
     }
 
-    public Long getVersion() {
+    public Integer getVersion() {
         return version;
     }
 
-    public void setVersion(Long version) {
+    public void setVersion(Integer version) {
         this.version = version;
     }
 
