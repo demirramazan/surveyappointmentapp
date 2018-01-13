@@ -22,14 +22,20 @@ public class Hasta extends BaseEntity {
     @Column(name = "DOGUM_TARIHI")
     private Date dogumTarihi;
 
+    @Column(name = "DOGUM_YERI")
+    private String dogumYeri;
+
     @Column(name = "ANNE_ADI")
     private String anneAdi;
 
     @Column(name = "BABA_ADI")
     private String babaAdi;
 
-    @Column(name = "HASTA_TELEFON")
-    private String telefonNo;
+    @Column(name = "HASTA_CEP_TELEFON")
+    private String hastaCepTelefonu;
+
+    @Column(name = "HASTA_EV_TELEFON")
+    private String hastaEvTelefonu;
 
     @Column(name = "HASTA_YAKINI_TELEFON")
     private String hastaYakiniTelefon;
@@ -43,14 +49,16 @@ public class Hasta extends BaseEntity {
     public Hasta() {
     }
 
-    public Hasta(String hastaAdi, String hastaSoyadi, EnumUtil.Cinsiyet cinsiyet, Date dogumTarihi, String anneAdi, String babaAdi, String telefonNo, String hastaYakiniTelefon, String hastaYakinlikDerecesi, String adres) {
+    public Hasta(String hastaAdi, String hastaSoyadi, EnumUtil.Cinsiyet cinsiyet, Date dogumTarihi, String anneAdi, String babaAdi,
+                 String hastaCepTelefonu, String hastaEvTelefonu, String hastaYakiniTelefon, String hastaYakinlikDerecesi, String adres) {
         this.hastaAdi = hastaAdi;
         this.hastaSoyadi = hastaSoyadi;
         this.cinsiyet = cinsiyet;
         this.dogumTarihi = dogumTarihi;
         this.anneAdi = anneAdi;
         this.babaAdi = babaAdi;
-        this.telefonNo = telefonNo;
+        this.hastaCepTelefonu = hastaCepTelefonu;
+        this.hastaEvTelefonu = hastaEvTelefonu;
         this.hastaYakiniTelefon = hastaYakiniTelefon;
         this.hastaYakinlikDerecesi = hastaYakinlikDerecesi;
         this.adres = adres;
@@ -104,12 +112,28 @@ public class Hasta extends BaseEntity {
         this.babaAdi = babaAdi;
     }
 
-    public String getTelefonNo() {
-        return telefonNo;
+    public String getDogumYeri() {
+        return dogumYeri;
     }
 
-    public void setTelefonNo(String telefonNo) {
-        this.telefonNo = telefonNo;
+    public void setDogumYeri(String dogumYeri) {
+        this.dogumYeri = dogumYeri;
+    }
+
+    public String getHastaCepTelefonu() {
+        return hastaCepTelefonu;
+    }
+
+    public void setHastaCepTelefonu(String hastaCepTelefonu) {
+        this.hastaCepTelefonu = hastaCepTelefonu;
+    }
+
+    public String getHastaEvTelefonu() {
+        return hastaEvTelefonu;
+    }
+
+    public void setHastaEvTelefonu(String hastaEvTelefonu) {
+        this.hastaEvTelefonu = hastaEvTelefonu;
     }
 
     public String getHastaYakiniTelefon() {
