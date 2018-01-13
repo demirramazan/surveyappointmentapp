@@ -10,13 +10,9 @@
 </h:head>
 <h:head>
     <title>Hastane Otomasyonu</title>
-    <f:metadata>
-
-    </f:metadata>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"></meta>
-    <link rel="stylesheet" type="text/css" href="./resources/css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="./css/style.css"/>
     <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>-->
-
 </h:head>
 
 <h:body onload="#{loginBean.checkSessionForUser()}">
@@ -47,7 +43,7 @@
 
                 <p:row>
                     <p:column style="padding-left:25px">
-                        <p:commandButton style="width:100%" action="#{loginBean.login()}" update="panel"
+                        <h:commandButton style="width:100%" action="#{loginBean.login()}" update="panel"
                                          icon="ui-icon-key"
                                          value="Giriş"/>
                     </p:column>

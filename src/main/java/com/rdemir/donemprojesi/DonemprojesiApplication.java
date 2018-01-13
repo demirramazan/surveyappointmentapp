@@ -1,6 +1,6 @@
 package com.rdemir.donemprojesi;
 
-import com.rdemir.donemprojesi.config.ViewConfig;
+import com.rdemir.donemprojesi.scope.ViewScope;
 import com.rdemir.donemprojesi.util.ScopeUtil;
 import com.sun.faces.config.ConfigureListener;
 import org.springframework.beans.factory.config.CustomScopeConfigurer;
@@ -11,7 +11,6 @@ import org.springframework.boot.web.servlet.ServletContextInitializer;
 import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
-import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.web.context.ServletContextAware;
@@ -23,7 +22,6 @@ import java.util.Map;
 
 @SpringBootApplication
 @EnableJpaAuditing
-@EnableCaching
 public class DonemprojesiApplication extends SpringBootServletInitializer implements ServletContextAware {
 
     public static void main(String[] args) {
@@ -46,7 +44,6 @@ public class DonemprojesiApplication extends SpringBootServletInitializer implem
     @Bean
     public ServletContextInitializer servletContextInitializer() {
         return servletContext -> {
-
             servletContext.setInitParameter("primefaces.THEME", "bootstrap");
             servletContext.setInitParameter("primefaces.CLIENT_SIDE_VALIDATION", Boolean.TRUE.toString());
             servletContext.setInitParameter("javax.faces.FACELETS_SKIP_COMMENTS", Boolean.TRUE.toString());
@@ -65,9 +62,9 @@ public class DonemprojesiApplication extends SpringBootServletInitializer implem
     public static CustomScopeConfigurer customScopeConfigurer() {
         CustomScopeConfigurer configurer = new CustomScopeConfigurer();
         Map<String, Object> scopes = new HashMap<String, Object>();
-        scopes.put(ScopeUtil.VIEW, new ViewConfig());
-        scopes.put(ScopeUtil.SESSION, new ViewConfig());
-        scopes.put(ScopeUtil.APPLICATION, new ViewConfig());
+        scopes.put(ScopeUtil.VIEW, new ViewScope());
+        scopes.put(ScopeUtil.SESSION, new ViewScope());
+        scopes.put(ScopeUtil.APPLICATION, new ViewScope());
         configurer.setScopes(scopes);
         return configurer;
     }

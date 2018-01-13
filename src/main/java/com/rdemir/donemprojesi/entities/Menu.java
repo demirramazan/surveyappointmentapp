@@ -13,8 +13,13 @@ public class Menu extends BaseEntity<String> {
     private int menuIndex;
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "CHILD_ID", foreignKey = @ForeignKey(name = "FK_CHILD_MENU_ID"))
+    private Menu childMenu;
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "PARENT_ID", foreignKey = @ForeignKey(name = "FK_PARENT_MENU_ID"))
     private Menu parentMenu;
+
 
     @Column(length = 50)
     private String module;
@@ -27,12 +32,14 @@ public class Menu extends BaseEntity<String> {
     public Menu() {
     }
 
-    public Menu(String menuAdi, int menuIndex, Menu parentMenu, String module, String icon) {
+    public Menu(String menuAdi, int menuIndex, Menu childMenu, Menu parentMenu, String module, String icon, List<Menu> items) {
         this.menuAdi = menuAdi;
         this.menuIndex = menuIndex;
+        this.childMenu = childMenu;
         this.parentMenu = parentMenu;
         this.module = module;
         this.icon = icon;
+        this.items = items;
     }
 
     public String getMenuAdi() {
@@ -57,6 +64,14 @@ public class Menu extends BaseEntity<String> {
 
     public void setParentMenu(Menu parentMenu) {
         this.parentMenu = parentMenu;
+    }
+
+    public Menu getChildMenu() {
+        return childMenu;
+    }
+
+    public void setChildMenu(Menu childMenu) {
+        this.childMenu = childMenu;
     }
 
     public String getModule() {

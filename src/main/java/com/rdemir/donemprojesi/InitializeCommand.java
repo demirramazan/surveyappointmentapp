@@ -74,19 +74,17 @@ public class InitializeCommand implements CommandLineRunner {
         }
 
         Menu menuRole = menuRepository.findByMenuAdi("Rol Tanım");
-        if (menuRole == null) {
-            menuRole = new Menu();
+        if (menuRole != null) {
             menuRole.setMenuAdi("Rol Tanım");
             menuRole.setMenuIndex(2);
             menuRole.setIcon("");
             menuRole.setModule("tanimlar");
             menu.setParentMenu(menu);
-            menuRepository.save(menuRole);
+            menuRepository.saveAndFlush(menuRole);
         }
 
         Menu menuMenu = menuRepository.findByMenuAdi("Menu Tanım");
-        if (menuMenu == null) {
-            menuMenu = new Menu();
+        if (menuMenu != null) {
             menuMenu.setMenuAdi("Menu Tanım");
             menuMenu.setMenuIndex(3);
             menuMenu.setIcon("");
@@ -96,21 +94,20 @@ public class InitializeCommand implements CommandLineRunner {
         }
 
         Menu menuPersonel = menuRepository.findByMenuAdi("Personel Tanım");
-        if (menuPersonel == null) {
-            menuPersonel = new Menu();
-            menuPersonel.setMenuAdi("Personel Tanım");
-            menuPersonel.setMenuIndex(4);
-            menuPersonel.setIcon("");
-            menuPersonel.setModule("tanimlar");
-            menuPersonel.setParentMenu(menu);
-            menuRepository.saveAndFlush(menuPersonel);
-        }
+//        if (menuPersonel == null) {
+        menuPersonel.setMenuAdi("Personel Tanım");
+        menuPersonel.setMenuIndex(4);
+        menuPersonel.setIcon("");
+        menuPersonel.setModule("tanimlar");
+        menuPersonel.setParentMenu(menu);
+        menuRepository.saveAndFlush(menuPersonel);
+//        }
 
         Permission permission = permissionRepository.findByMenu(menu);
         if (permission == null) {
             permission = new Permission();
             permission.setMenu(menu);
-            permission.setPermissionAdi("tanim permission");
+            permission.setPermissionAdi("Tanimlar permission");
             permission.setRole(role);
             permission.setUser(user);
             permissionRepository.saveAndFlush(permission);
@@ -129,6 +126,27 @@ public class InitializeCommand implements CommandLineRunner {
         } else {
             permissionRepository.save(permissionRoleTanim);
         }
-
+        Permission permissionMenuTanim = permissionRepository.findByMenu(menuMenu);
+        if (permissionMenuTanim == null) {
+            permissionMenuTanim = new Permission();
+            permissionMenuTanim.setMenu(menuMenu);
+            permissionMenuTanim.setPermissionAdi("Role Tanım permission");
+            permissionMenuTanim.setRole(role);
+            permissionMenuTanim.setUser(user);
+            permissionRepository.saveAndFlush(permissionMenuTanim);
+        } else {
+            permissionRepository.save(permissionMenuTanim);
+        }
+        Permission permissionPersonelTanim = permissionRepository.findByMenu(menuPersonel);
+        if (permissionPersonelTanim == null) {
+            permissionPersonelTanim = new Permission();
+            permissionPersonelTanim.setMenu(menuPersonel);
+            permissionPersonelTanim.setPermissionAdi("Role Tanım permission");
+            permissionPersonelTanim.setRole(role);
+            permissionPersonelTanim.setUser(user);
+            permissionRepository.saveAndFlush(permissionPersonelTanim);
+        } else {
+            permissionRepository.save(permissionPersonelTanim);
+        }
     }
 }

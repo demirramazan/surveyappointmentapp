@@ -2,15 +2,16 @@ package com.rdemir.donemprojesi.controllers;
 
 import com.rdemir.donemprojesi.entities.User;
 import com.rdemir.donemprojesi.interfaces.services.IUserService;
+import com.rdemir.donemprojesi.scope.ScopeName;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
-//@Component("userBean")
-//@Scope(ScopeUtil.SESSION)
-@ManagedBean(name = "userBean")
-@SessionScoped
+@Component("userBean")
+@Scope(ScopeName.SESSION)
 public class UserController {
 
     @Autowired
