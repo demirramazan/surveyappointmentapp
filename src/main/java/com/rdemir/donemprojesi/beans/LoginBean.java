@@ -1,5 +1,4 @@
-package com.rdemir.donemprojesi.controllers;
-
+package com.rdemir.donemprojesi.beans;
 
 import com.rdemir.donemprojesi.config.SessionInitializer;
 import com.rdemir.donemprojesi.entities.User;
@@ -7,17 +6,16 @@ import com.rdemir.donemprojesi.interfaces.services.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.Serializable;
 
 @ManagedBean(name = "loginBean")
-@RequestScoped
-public class LoginController  {
+@SessionScoped
+public class LoginBean {
     @Autowired
     private IUserService userService;
     @Inject
@@ -48,6 +46,9 @@ public class LoginController  {
         if (httpSession != null && httpSession.getAttribute("user") != null) {
             externalContext.redirect("/home.jsf");
         }
+    }
+
+    public LoginBean() {
     }
 
     public String getUsername() {

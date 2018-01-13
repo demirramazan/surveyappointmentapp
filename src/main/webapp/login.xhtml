@@ -19,80 +19,42 @@
 
 </h:head>
 
-<body onload="#{loginBean.checkSessionForUser()}">
-<p:growl autoUpdate="true"/>
-<center style="color: red">HASTANE OTOMASYONU PROJESİ</center>
-<center style="color: red">
-    <h3>TETKIK KAYIT VE RANDEVU ALMA SİSTEMİ</h3>
-</center>
-<h:form id="FRMLogin">
-    <p:focus context="FRMLogin" for="username"/>
-
-    <center>
-        <p:panelGrid id="panel" styleClass="grid">
-            <p:row>
-                <p:column>
-                    <span class="ui-icon ui-icon-person" style="display:inline-block;vertical-align: inherit;"/>
-                    <p:inputText placeholder="Kullanıcı Adı" id="username" value="#{loginBean.username}"
-                                 required="true" requiredMessage="Kullanıcı Adı"/>
-                </p:column>
-            </p:row>
-
-            <p:row>
-                <p:column>
-                    <span class="ui-icon ui-icon-locked" style="display:inline-block;vertical-align: inherit;"/>
-                    <p:password placeholder="Parola" id="password" value="#{loginBean.password}"/>
-                </p:column>
-            </p:row>
-
-            <p:row>
-                <p:column style="padding-left:25px">
-                    <p:commandButton style="width:100%" action="#{loginBean.login()}" update="panel" icon="ui-icon-key"
-                                     value="Giriş"/>
-                </p:column>
-            </p:row>
-
-        </p:panelGrid>
+<h:body onload="#{loginBean.checkSessionForUser()}">
+    <p:growl autoUpdate="true"/>
+    <center style="color: red">HASTANE OTOMASYONU PROJESİ</center>
+    <center style="color: red">
+        <h3>TETKIK KAYIT VE RANDEVU ALMA SİSTEMİ</h3>
     </center>
-</h:form>
-</body>
-<!--<h:body>-->
-<!--<center style="margin-top: 100px;">-->
-<!--<h:form id="form" prependId="false">-->
+    <h:form id="FRMLogin">
+        <p:focus context="FRMLogin" for="username"/>
 
-<!--<center>HASTANE OTOMASYONU PROJESİ</center>-->
-<!--<center>-->
-<!--<h3>TETKIK KAYIT VE RANDEVU ALMA SİSTEMİ</h3>-->
-<!--</center>-->
-<!--<div id="divClass1">-->
-<!--<h:panelGrid columns="2" style="margin-top:60px;">-->
+        <center>
+            <p:panelGrid id="panel" styleClass="grid">
+                <p:row>
+                    <p:column>
+                        <span class="ui-icon ui-icon-person" style="display:inline-block;vertical-align: inherit;"/>
+                        <p:inputText placeholder="Kullanıcı Adı" id="username" value="#{loginBean.username}"
+                                     required="true" requiredMessage="Kullanıcı Adı"/>
+                    </p:column>
+                </p:row>
 
-<!--<center>-->
-<!--<h:outputText value="Kullanıcı Giriş Ekranı"/>-->
-<!--</center>-->
-<!--<h:outputText value=""/>-->
+                <p:row>
+                    <p:column>
+                        <span class="ui-icon ui-icon-locked" style="display:inline-block;vertical-align: inherit;"/>
+                        <p:password placeholder="Parola" id="password" value="#{loginBean.password}"/>
+                    </p:column>
+                </p:row>
 
-<!--<h:outputText value="Kimlik Numaranız" style="margin-left: 15px;"/>-->
-<!--<p:inputText id="j_username" style="width: 130px;" required="true" maxlength="100" size="30"-->
-<!--value="#{userBean.username}"-->
-<!--requiredMessage="Kullanıcı adı alanı boş bırakılamaz..."/>-->
+                <p:row>
+                    <p:column style="padding-left:25px">
+                        <p:commandButton style="width:100%" action="#{loginBean.login()}" update="panel"
+                                         icon="ui-icon-key"
+                                         value="Giriş"/>
+                    </p:column>
+                </p:row>
 
-
-<!--<h:outputText value="Parola" style="margin-left: 15px;"/>-->
-<!--<p:password id="j_password" required="true" style="width: 130px;"-->
-<!--maxlength="50" size="30"-->
-<!--value="#{userBean.password}"-->
-<!--requiredMessage="Parola alanı boş bırakılamaz..."/>-->
-
-<!--<p:commandButton value="Giriş"-->
-<!--action="#{loginController.login()}" style="margin-left: 265px;" ajax="false"/>-->
-
-<!--<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>-->
-<!--<h:outputText value=""/>-->
-<!--</h:panelGrid>-->
-<!--</div>-->
-<!--</h:form>-->
-<!--</center>-->
-<!--<br/>-->
-<!--</h:body>-->
+            </p:panelGrid>
+        </center>
+    </h:form>
+</h:body>
 </html>
