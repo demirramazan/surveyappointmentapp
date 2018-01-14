@@ -3,6 +3,7 @@ package com.rdemir.donemprojesi.interfaces.services;
 import com.rdemir.donemprojesi.entities.Permission;
 import com.rdemir.donemprojesi.entities.Role;
 import com.rdemir.donemprojesi.entities.User;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 

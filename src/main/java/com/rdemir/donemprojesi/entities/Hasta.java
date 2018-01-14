@@ -1,8 +1,10 @@
 package com.rdemir.donemprojesi.entities;
 
-import com.rdemir.donemprojesi.util.EnumUtil;
+
+import com.rdemir.donemprojesi.util.Cinsiyet;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
@@ -16,7 +18,12 @@ public class Hasta extends BaseEntity {
     private String hastaSoyadi;
 
     @Column(name = "CINSIYET")
-    private EnumUtil.Cinsiyet cinsiyet;
+    @Enumerated(value = EnumType.STRING)
+    private Cinsiyet cinsiyet;
+
+    @Column(name = "HASTA_KIMLIK_NO")
+    @Size(max = 11)
+    private String hastaKimlikNo;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "DOGUM_TARIHI")
@@ -32,9 +39,11 @@ public class Hasta extends BaseEntity {
     private String babaAdi;
 
     @Column(name = "HASTA_CEP_TELEFON")
+    @Size(max = 10)
     private String hastaCepTelefonu;
 
     @Column(name = "HASTA_EV_TELEFON")
+    @Size(max = 10)
     private String hastaEvTelefonu;
 
     @Column(name = "HASTA_YAKINI_TELEFON")
@@ -43,16 +52,26 @@ public class Hasta extends BaseEntity {
     @Column(name = "HASTA_YAKINLIK_DERECESI")
     private String hastaYakinlikDerecesi;
 
-    @Column(name = "ADRES")
+    @Column(name = "ADRES", length = 1000)
     private String adres;
+
+    @Column(name = "KAN_GRUBU")
+    private String kanGrubu;
+
+    @Column(name = "HASTA_EMAIL")
+    private String hastaEmail;
+
+    @Column(name = "HASTA_MEDENI_HALI")
+    private String hastaMedeniHali;
 
     public Hasta() {
     }
 
-    public Hasta(String hastaAdi, String hastaSoyadi, EnumUtil.Cinsiyet cinsiyet, Date dogumTarihi, String anneAdi, String babaAdi,
-                 String hastaCepTelefonu, String hastaEvTelefonu, String hastaYakiniTelefon, String hastaYakinlikDerecesi, String adres) {
+    public Hasta(String hastaAdi, String hastaSoyadi, String hastaKimlikNo, Cinsiyet cinsiyet, Date dogumTarihi, String anneAdi, String babaAdi,
+                 String hastaCepTelefonu, String hastaEvTelefonu, String kanGrubu, String hastaYakiniTelefon, String hastaYakinlikDerecesi, String adres, String hastaMedeniHali) {
         this.hastaAdi = hastaAdi;
         this.hastaSoyadi = hastaSoyadi;
+        this.hastaKimlikNo = hastaKimlikNo;
         this.cinsiyet = cinsiyet;
         this.dogumTarihi = dogumTarihi;
         this.anneAdi = anneAdi;
@@ -62,6 +81,8 @@ public class Hasta extends BaseEntity {
         this.hastaYakiniTelefon = hastaYakiniTelefon;
         this.hastaYakinlikDerecesi = hastaYakinlikDerecesi;
         this.adres = adres;
+        this.kanGrubu = kanGrubu;
+        this.hastaMedeniHali = hastaMedeniHali;
     }
 
     public String getHastaAdi() {
@@ -80,11 +101,27 @@ public class Hasta extends BaseEntity {
         this.hastaSoyadi = hastaSoyadi;
     }
 
-    public EnumUtil.Cinsiyet getCinsiyet() {
+    public String getHastaKimlikNo() {
+        return hastaKimlikNo;
+    }
+
+    public void setHastaKimlikNo(String hastaKimlikNo) {
+        this.hastaKimlikNo = hastaKimlikNo;
+    }
+
+    public String getHastaEmail() {
+        return hastaEmail;
+    }
+
+    public void setHastaEmail(String hastaEmail) {
+        this.hastaEmail = hastaEmail;
+    }
+
+    public Cinsiyet getCinsiyet() {
         return cinsiyet;
     }
 
-    public void setCinsiyet(EnumUtil.Cinsiyet cinsiyet) {
+    public void setCinsiyet(Cinsiyet cinsiyet) {
         this.cinsiyet = cinsiyet;
     }
 
@@ -158,5 +195,13 @@ public class Hasta extends BaseEntity {
 
     public void setAdres(String adres) {
         this.adres = adres;
+    }
+
+    public String getKanGrubu() {
+        return kanGrubu;
+    }
+
+    public void setKanGrubu(String kanGrubu) {
+        this.kanGrubu = kanGrubu;
     }
 }

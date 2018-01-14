@@ -110,24 +110,24 @@ public class SessionInitializer implements Serializable {
                     DefaultSubMenu mainMenu = new DefaultSubMenu(menu.getMenuAdi());
                     mainMenu.setId(FacesContext.getCurrentInstance().getViewRoot().createUniqueId());
                     menuModel.addElement(mainMenu);
-                    arrangeMenuModel(mainMenu, menu);
+                    subMenuModel(mainMenu, menu);
                 }
             }
         }
     }
 
 
-    private void arrangeMenuModel(DefaultSubMenu currMenu, Menu currModule) {
+    private void subMenuModel(DefaultSubMenu currMenu, Menu currModule) {
         for (Menu menu : authMenus) {
             if (currModule.equals(menu.getParentMenu())) {
                 if (menu.getParentMenu() != null && menu.getChildMenu() != null) {
                     DefaultSubMenu childMenu = new DefaultSubMenu(menu.getMenuAdi());
                     currMenu.addElement(childMenu);
-                    arrangeMenuModel(childMenu, menu);
+                    subMenuModel(childMenu, menu);
                 } else {
                     DefaultMenuItem menuItem = new DefaultMenuItem(menu.getMenuAdi());
-                    menuItem.setOnclick("$(this).addTab('" + menu.getMenuAdi() + "', '" + menu.getModule() + "');");
-                    menuItem.setCommand("#{sessionInitializer.emptyCommand()}");
+//                    menuItem.setOnclick("$(this).addTab('pages/UserTanim.xhtml');");
+                    menuItem.setCommand("pages/UserTanim.xhtml");
                     menuItem.setId(FacesContext.getCurrentInstance().getViewRoot().createUniqueId());
                     currMenu.addElement(menuItem);
                 }

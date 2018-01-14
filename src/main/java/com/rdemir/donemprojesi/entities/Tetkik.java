@@ -13,7 +13,8 @@ public class Tetkik extends BaseEntity {
     private String tetkikAdi;
 
     @ManyToOne
-    @JoinColumn(name = "SALON_ID", foreignKey = @ForeignKey(name = "FK_TETKIK_SALON_ID"))
+    @JoinColumn(name = "SALON_ID",
+            foreignKey = @ForeignKey(name = "FK_TETKIK_SALON_ID"))
     private Salon salon;
 
     public Tetkik() {

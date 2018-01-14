@@ -1,9 +1,10 @@
 package com.rdemir.donemprojesi.controllers;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import com.rdemir.donemprojesi.scope.ScopeName;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
-@ManagedBean
-@RequestScoped
+@Component("permission")
+@Scope(ScopeName.REQUEST)
 public class PermissionController {
 }

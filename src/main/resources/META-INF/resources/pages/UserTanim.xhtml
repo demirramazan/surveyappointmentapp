@@ -3,7 +3,8 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 <!--<h:form>-->
 <!--<p:menubar>-->
 <!--<p:submenu label="Mail">-->
@@ -19,12 +20,14 @@
 
 <!--</h:form>-->
 <h:head>
-    <!--<p:menu model="#{menuBean.model}"/>-->
-    <title>Hastane Otomasyon Projesi</title>
 
-    <link rel="stylesheet" type="text/css" href="./resources/css/style.css"/>
+    <h:form>
+        <p:menubar model="#{sessionInitializer.menuModel}"/>
+    </h:form>
+    <title>Kullanıcı Tanım</title>
+
+    <link rel="stylesheet" type="text/css" href="./css/style.css"/>
 </h:head>
-
 
 
 <h:body>
@@ -38,23 +41,23 @@
 
                 <h:outputText value="Adı"/>
                 <h:outputText value="*"/>
-                <p:inputText id="name" value="#{userBean.user.name}" required="true"/>
+                <p:inputText id="name" value="#{userBean.name}" required="true"/>
                 <p:message for="name"/>
 
                 <h:outputText value="Soyadı"/>
                 <h:outputText value="*"/>
-                <p:inputText id="surname" value="#{userBean.user.surname}" required="true"/>
+                <p:inputText id="surname" value="#{userBean.surname}" required="true"/>
                 <p:message for="surname"/>
 
                 <h:outputText value="Kullanıcı Adı"/>
                 <h:outputText value="*"/>
-                <p:inputText id="username" value="#{userBean.user.username}" required="true"/>
+                <p:inputText id="username" value="#{userBean.username}" required="true"/>
                 <p:message for="username"/>
 
 
                 <h:outputText value="Parola"/>
                 <h:outputText value="*"/>
-                <p:password id="password" value="#{userBean.user.password}" required="true"
+                <p:password id="password" value="#{userBean.password}" required="true"
                             match="passwordAgain"/>
                 <p:message for="password"/>
 
@@ -63,6 +66,18 @@
                 <p:password id="passwordAgain" required="true"/>
                 <p:message for="passwordAgain"/>
 
+                <h:outputText value="Kullanıcı Aktif Mi"/>
+                <h:outputText value="*"/>
+                <p:selectBooleanCheckbox id="enabled" value="#{userBean.enabled}" required="true"/>
+                <p:message for="enabled"/>
+
+                <h:outputText value="Rolü"/>
+                <h:outputText value="*"/>
+                <p:selectOneMenu id="role" value="#{roleBean.role.id}" required="true">
+                    <f:selectItem itemLabel="Seçiniz" itemValue="-"/>
+                    <f:selectItem itemLabel="#{roleBean.name}" itemValue="#{roleBean.code}"/>
+                </p:selectOneMenu>
+                <p:message for="role"/>
             </h:panelGrid>
             <center>
                 <p:commandButton value="Kaydet" actionListener="#{userBean.save}" ajax="false"

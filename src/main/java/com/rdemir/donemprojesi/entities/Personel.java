@@ -1,6 +1,6 @@
 package com.rdemir.donemprojesi.entities;
 
-import com.rdemir.donemprojesi.util.EnumUtil;
+import com.rdemir.donemprojesi.util.Cinsiyet;
 import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
@@ -33,7 +33,7 @@ public class Personel extends BaseEntity {
 
     @Enumerated(EnumType.ORDINAL)
     @Column(name = "CINSIYET", nullable = false)
-    private EnumUtil.Cinsiyet cinsyet;
+    private Cinsiyet cinsiyet;
 
     @Column(name = "AKTIF")
     private Integer aktif;
@@ -46,14 +46,14 @@ public class Personel extends BaseEntity {
     public Personel() {
     }
 
-    public Personel(String personelAdi, String personelSoyadi, String kimlikNo, String email, String telefonNo, String adres, EnumUtil.Cinsiyet cinsyet, Integer aktif, Birim birim) {
+    public Personel(String personelAdi, String personelSoyadi, String kimlikNo, String email, String telefonNo, String adres, Cinsiyet cinsiyet, Integer aktif, Birim birim) {
         this.personelAdi = personelAdi;
         this.personelSoyadi = personelSoyadi;
         this.kimlikNo = kimlikNo;
         this.email = email;
         this.telefonNo = telefonNo;
         this.adres = adres;
-        this.cinsyet = cinsyet;
+        this.cinsiyet = cinsiyet;
         this.aktif = aktif;
         this.birim = birim;
     }
@@ -106,12 +106,12 @@ public class Personel extends BaseEntity {
         this.adres = adres;
     }
 
-    public EnumUtil.Cinsiyet getCinsyet() {
-        return cinsyet;
+    public Cinsiyet getCinsiyet() {
+        return cinsiyet;
     }
 
-    public void setCinsyet(EnumUtil.Cinsiyet cinsyet) {
-        this.cinsyet = cinsyet;
+    public void setCinsiyet(Cinsiyet cinsiyet) {
+        this.cinsiyet = cinsiyet;
     }
 
     public Integer getAktif() {

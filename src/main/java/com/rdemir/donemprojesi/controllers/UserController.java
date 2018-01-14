@@ -7,9 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
-
 @Component("userBean")
 @Scope(ScopeName.SESSION)
 public class UserController {
@@ -17,30 +14,15 @@ public class UserController {
     @Autowired
     private IUserService userService;
 
-    private String deneme = "RAMAZANN";
-
-    public User user;
+    private User user;
     private String username;
     private String password;
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
+    private String name;
+    private String surname;
+    private Boolean enabled;
 
     public UserController() {
-
+        user = new User();
     }
 
     public User findById(Long id) {
@@ -59,11 +41,51 @@ public class UserController {
         this.user = user;
     }
 
-    public String getDeneme() {
-        return deneme;
+    public String getUsername() {
+        return username;
     }
 
-    public void setDeneme(String deneme) {
-        this.deneme = deneme;
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public IUserService getUserService() {
+        return userService;
+    }
+
+    public void setUserService(IUserService userService) {
+        this.userService = userService;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 }

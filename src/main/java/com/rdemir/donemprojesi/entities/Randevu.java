@@ -7,54 +7,65 @@ import java.util.Date;
 @Table(name = "RANDEVU")
 public class Randevu extends BaseEntity {
 
-    @Column(name = "RANDEVU_TARIHI")
-    private Date randevuTarihi;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "BASLANGIC_TARIHI")
+    private Date baslangicTarihi;
 
-    @Column(name = "RANDEVU_SAATI")
-    private String randevuSaati;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "BITIS_TARIHI")
+    private Date bitisTarihi;
+
+    @OneToOne
+    @JoinColumn(name = "HASTA_TETKIK_ISTEM_ID",
+            foreignKey =
+            @ForeignKey(name = "FK_RANDEVU_ISTEM_DETAY_ID"))
+    private HastaTetkikIstem istem;
 
     @ManyToOne
-    @JoinColumn(name = "HASTA_TETKIK_ISTEM_DETAY_ID", foreignKey = @ForeignKey(name = "FK_RANDEVU_ISTEM_DETAY_ID"))
-    private HastaTetkikIstemDetay istemDetay;
-
-    @ManyToOne
-    @JoinColumn(name = "SALON_ID", foreignKey = @ForeignKey(name = "FK_RANDEVU_SALON_ID"))
+    @JoinColumn(name = "SALON_ID",
+            foreignKey =
+            @ForeignKey(name = "FK_RANDEVU_SALON_ID"))
     private Salon salon;
 
     @ManyToOne
-    @JoinColumn(name = "CIHAZ_ID", foreignKey = @ForeignKey(name = "FK_RANDEVU_CIHAZ_ID"))
+    @JoinColumn(name = "CIHAZ_ID",
+            foreignKey =
+            @ForeignKey(name = "FK_RANDEVU_CIHAZ_ID"))
     private Cihaz cihaz;
 
-    public Randevu(Date randevuTarihi, String randevuSaati, HastaTetkikIstemDetay istemDetay, Salon salon, Cihaz cihaz) {
-        this.randevuTarihi = randevuTarihi;
-        this.randevuSaati = randevuSaati;
-        this.istemDetay = istemDetay;
+    public Randevu() {
+    }
+
+    public Randevu(Date baslangicTarihi, Date bitisTarihi, HastaTetkikIstem istem, Salon salon, Cihaz cihaz) {
+        this.baslangicTarihi = baslangicTarihi;
+        this.bitisTarihi = bitisTarihi;
+        this.istem = istem;
         this.salon = salon;
         this.cihaz = cihaz;
     }
 
-    public Date getRandevuTarihi() {
-        return randevuTarihi;
+    public Date getBaslangicTarihi() {
+        return baslangicTarihi;
     }
 
-    public void setRandevuTarihi(Date randevuTarihi) {
-        this.randevuTarihi = randevuTarihi;
+    public void setBaslangicTarihi(Date baslangicTarihi) {
+        this.baslangicTarihi = baslangicTarihi;
     }
 
-    public String getRandevuSaati() {
-        return randevuSaati;
+    public Date getBitisTarihi() {
+        return bitisTarihi;
     }
 
-    public void setRandevuSaati(String randevuSaati) {
-        this.randevuSaati = randevuSaati;
+    public void setBitisTarihi(Date bitisTarihi) {
+        this.bitisTarihi = bitisTarihi;
     }
 
-    public HastaTetkikIstemDetay getIstemDetay() {
-        return istemDetay;
+    public HastaTetkikIstem getIstem() {
+        return istem;
     }
 
-    public void setIstemDetay(HastaTetkikIstemDetay istemDetay) {
-        this.istemDetay = istemDetay;
+    public void setIstem(HastaTetkikIstem istem) {
+        this.istem = istem;
     }
 
     public Salon getSalon() {

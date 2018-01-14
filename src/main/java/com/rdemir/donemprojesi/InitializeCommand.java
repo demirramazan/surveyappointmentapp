@@ -74,7 +74,8 @@ public class InitializeCommand implements CommandLineRunner {
         }
 
         Menu menuRole = menuRepository.findByMenuAdi("Rol Tanım");
-        if (menuRole != null) {
+        if (menuRole == null) {
+            menuRole = new Menu();
             menuRole.setMenuAdi("Rol Tanım");
             menuRole.setMenuIndex(2);
             menuRole.setIcon("");
@@ -84,7 +85,8 @@ public class InitializeCommand implements CommandLineRunner {
         }
 
         Menu menuMenu = menuRepository.findByMenuAdi("Menu Tanım");
-        if (menuMenu != null) {
+        if (menuMenu == null) {
+            menuMenu = new Menu();
             menuMenu.setMenuAdi("Menu Tanım");
             menuMenu.setMenuIndex(3);
             menuMenu.setIcon("");
@@ -94,14 +96,22 @@ public class InitializeCommand implements CommandLineRunner {
         }
 
         Menu menuPersonel = menuRepository.findByMenuAdi("Personel Tanım");
-//        if (menuPersonel == null) {
-        menuPersonel.setMenuAdi("Personel Tanım");
-        menuPersonel.setMenuIndex(4);
-        menuPersonel.setIcon("");
-        menuPersonel.setModule("tanimlar");
-        menuPersonel.setParentMenu(menu);
-        menuRepository.saveAndFlush(menuPersonel);
-//        }
+        if (menuPersonel == null) {
+            menuPersonel = new Menu();
+            menuPersonel.setMenuAdi("Personel Tanım");
+            menuPersonel.setMenuIndex(4);
+            menuPersonel.setIcon("");
+            menuPersonel.setModule("tanimlar");
+            menuPersonel.setParentMenu(menu);
+            menuRepository.saveAndFlush(menuPersonel);
+        } else {
+            menuPersonel.setMenuAdi("Personel Tanım");
+            menuPersonel.setMenuIndex(4);
+            menuPersonel.setIcon("");
+            menuPersonel.setModule("tanimlar");
+            menuPersonel.setParentMenu(menu);
+            menuRepository.saveAndFlush(menuPersonel);
+        }
 
         Permission permission = permissionRepository.findByMenu(menu);
         if (permission == null) {
