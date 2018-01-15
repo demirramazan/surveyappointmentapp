@@ -12,20 +12,20 @@
     <h:form>
         <p:menubar>
             <p:submenu label="Tanımlama İşlemleri" icon="ui-icon-person">
-                <p:menuitem value="Kullanıcı Tanım" url="pages/UserTanim.xhtml" icon="ui-icon-person"/>
-                <p:menuitem value="Role Tanım" url="pages/RoleTanim.xhtml" icon="ui-icon-person"/>
-                <p:menuitem value="Menu Tanım" url="pages/MenuTanim" icon="ui-icon-person"/>
-                <p:menuitem value="Permission Tanım" url="pages/PermissionTanim.xhtml" icon="ui-icon-person"/>
-                <p:menuitem value="Personel Tanım" url="pages/PersonelTanim.xhtml" icon="ui-icon-person"/>
-                <p:menuitem value="Tetkik Tanım" url="pages/TetkikTanim.xhtml"/>
-                <p:menuitem value="Birim Tanım" url="pages/BirimTanim.xhtml"/>
-                <p:menuitem value="Salon Tanım" url="pages/SalonTanim.xhtml"/>
-                <p:menuitem value="Cihaz Tanım" url="pages/CihazTanim.xhtml"/>
+                <p:menuitem value="Kullanıcı Tanım" url="./UserTanim.xhtml" icon="ui-icon-person"/>
+                <p:menuitem value="Role Tanım" url="./RoleTanim.xhtml" icon="ui-icon-person"/>
+                <p:menuitem value="Menu Tanım" url="./MenuTanim" icon="ui-icon-person"/>
+                <p:menuitem value="Permission Tanım" url="./PermissionTanim.xhtml" icon="ui-icon-person"/>
+                <p:menuitem value="Personel Tanım" url="./PersonelTanim.xhtml" icon="ui-icon-person"/>
+                <p:menuitem value="Tetkik Tanım" url="./TetkikTanim.xhtml"/>
+                <p:menuitem value="Birim Tanım" url="./BirimTanim.xhtml"/>
+                <p:menuitem value="Salon Tanım" url="./SalonTanim.xhtml"/>
+                <p:menuitem value="Cihaz Tanım" url="./CihazTanim.xhtml"/>
             </p:submenu>
             <p:submenu label="Hasta Kabul İşlemleri">
-                <p:menuitem value="Hasta Kabul" url="pages/HastaBasvuru.xhtml"/>
-                <p:menuitem value="Doktor Kabul" url="pages/HastaTetkikIstem.xhtml"/>
-                <p:menuitem value="Tetkik Kabul" url="pages/TetkikKabul.xhtml" includeViewParams="MR"/>
+                <p:menuitem value="Hasta Kabul" url="./HastaBasvuru.xhtml"/>
+                <p:menuitem value="Doktor Kabul" url="./HastaTetkikIstem.xhtml"/>
+                <p:menuitem value="Tetkik Kabul" url="./TetkikKabul.xhtml" includeViewParams="MR"/>
             </p:submenu>
             <p:submenu label="Randevu İşlemleri" icon="fa-calendar">
                 <p:menuitem value="Randevu Şablon" url="pages/RandevuSablon.xhtml" icon="fa-calendar"/>
@@ -42,8 +42,24 @@
 <h:body>
     <h:form>
         <h:panelGrid style="float: left">
-            <h3>Yeni Kullanıcı Kaydı</h3>
-            <h:outputText/>
+            <p:dataTable id="eventsDT" var="car" value="#{userBean.users}" selectionMode="single" selection="#{dtSelectionView.selectedCar}" rowKey="#{car.id}">
+                <f:facet name="header">
+                    Select Events
+                </f:facet>
+                <p:ajax event="rowSelect" listener="#{dtSelectionView.onRowSelect}" update=":form:msgs" />
+                <p:column headerText="Id">
+                    <h:outputText value="#{car.id}" />
+                </p:column>
+                <p:column headerText="Year">
+                    <h:outputText value="#{car.year}" />
+                </p:column>
+                <p:column headerText="Brand">
+                    <h:outputText value="#{car.brand}" />
+                </p:column>
+                <p:column headerText="Color">
+                    <h:outputText value="#{car.color}" />
+                </p:column>
+            </p:dataTable>
         </h:panelGrid>
         <h:panelGrid columns="4" style="margin-top: 50px; float: right">
             <h3>Yeni Kullanıcı Kaydı</h3>

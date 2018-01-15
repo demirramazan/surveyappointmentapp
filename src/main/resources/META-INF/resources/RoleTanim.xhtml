@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Kullanıcı Tanım</title>
+
+    <link rel="stylesheet" type="text/css" href="./css/style.css"/>
+    <h:form>
+        <p:menubar>
+            <p:submenu label="Tanımlama İşlemleri" icon="ui-icon-person">
+                <p:menuitem value="Kullanıcı Tanım" url="./UserTanim.xhtml" icon="ui-icon-person"/>
+                <p:menuitem value="Role Tanım" url="./RoleTanim.xhtml" icon="ui-icon-person"/>
+                <p:menuitem value="Menu Tanım" url="./MenuTanim" icon="ui-icon-person"/>
+                <p:menuitem value="Permission Tanım" url="./PermissionTanim.xhtml" icon="ui-icon-person"/>
+                <p:menuitem value="Personel Tanım" url="./PersonelTanim.xhtml" icon="ui-icon-person"/>
+                <p:menuitem value="Tetkik Tanım" url="./TetkikTanim.xhtml"/>
+                <p:menuitem value="Birim Tanım" url="./BirimTanim.xhtml"/>
+                <p:menuitem value="Salon Tanım" url="./SalonTanim.xhtml"/>
+                <p:menuitem value="Cihaz Tanım" url="./CihazTanim.xhtml"/>
+            </p:submenu>
+            <p:submenu label="Hasta Kabul İşlemleri">
+                <p:menuitem value="Hasta Kabul" url="./HastaBasvuru.xhtml"/>
+                <p:menuitem value="Doktor Kabul" url="./HastaTetkikIstem.xhtml"/>
+                <p:menuitem value="Tetkik Kabul" url="./TetkikKabul.xhtml" includeViewParams="MR"/>
+            </p:submenu>
+            <p:submenu label="Randevu İşlemleri" icon="fa-calendar">
+                <p:menuitem value="Randevu Şablon" url="./RandevuSablon.xhtml" icon="fa-calendar"/>
+                <p:menuitem value="Randevu Seans" url="./RandevuSeans.xhtml" icon="fa-calendar"/>
+                <p:menuitem value="Randevu Alma" url="./Randevu.xhtml" icon="fa-calendar"/>
+            </p:submenu>
+        </p:menubar>
+        <!--<p:menubar model="#{sessionInitializer.menuModel}"/>-->
+    </h:form>
+
+</h:head>
+<p:panelGrid id="roles" columns="4">
+    <center>
+        <h:panelGrid columns="4" style="margin-top: 50px; background-color: white">
+            <h3>Yeni Role Kaydı</h3>
+            <h:outputText/>
+            <h:outputText/>
+            <h:outputText/>
+
+            <h:outputText value="Adı"/>
+            <h:outputText value="*"/>
+            <p:inputText id="name" value="#{roleBean.role.name}" required="true"/>
+            <p:message for="name"/>
+
+            <h:outputText value="Kodu"/>
+            <h:outputText value="*"/>
+            <p:inputText id="code" value="#{roleBean.role.code}" required="true"/>
+            <p:message for="code"/>
+
+            <!--<h:outputText value="Role Tipi"/>-->
+            <!--<h:outputText value="*"/>-->
+            <!--<p:selectOneMenu id="type"  style="width:125px">-->
+                <!--<f:selectItem itemLabel="Seçiniz" itemValue="" />-->
+                <!--<f:selectItem itemLabel="Admin" itemValue="#{roleBean.roleType.name()}" />-->
+            <!--</p:selectOneMenu>-->
+            <!--<p:message for="type"/>-->
+            <!--<h:outputText value="#{personelController.}"-->
+        </h:panelGrid>
+    </center>
+</p:panelGrid>
+</html>
