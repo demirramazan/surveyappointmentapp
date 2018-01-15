@@ -12,8 +12,31 @@
     <link rel="stylesheet" type="text/css" href="./css/style.css"/>
 
     <h:form>
-        <p:menubar model="#{sessionInitializer.menuModel}"/>
-        <p:remoteCommand value="Çıkış" name="logout" actionListener="#{loginBean.logout()}"/>
+        <p:menubar>
+            <p:submenu label="Tanımlama İşlemleri" icon="ui-icon-document">
+                <!--<p:submenu label="Kullanıcı Tanım" icon="ui-icon-person">-->
+                <p:menuitem value="Kullanıcı Tanım" url="pages/UserTanim.xhtml" icon="ui-icon-person"/>
+                <!--</p:submenu>-->
+                <!--<p:submenu label="Role Tanım" icon="ui-icon-person">-->
+                <p:menuitem value="Role Tanım" url="pages/RoleTanim.xhtml"/>
+                <!--</p:submenu>-->
+                <p:menuitem value="Menu Tanım" url="pages/MenuTanim"/>
+                <p:menuitem value="Permission Tanım" url="pages/PermissionTanim.xhtml"/>
+                <p:menuitem value="Personel Tanım" url="pages/PersonelTanim.xhtml"/>
+                <p:menuitem value="Tetkik Tanım" url="pages/TetkikTanim.xhtml"/>
+                <p:menuitem value="Birim Tanım" url="pages/TetkikTanim.xhtml"/>
+            </p:submenu>
+            <p:submenu label="Hasta Kabul İşlemleri" icon="ui-icon-pencil">
+                <p:menuitem value="Hasta Kabul" url="pages/HastaBasvuru.xhtml" icon="ui-icon-arrowreturnthick-1-w"/>
+                <p:menuitem value="Doktor Kabul" url="pages/HastaTetkikIstem.xhtml" icon="ui-icon-arrowreturnthick-1-e"/>
+                <p:menuitem value="Tetkik Kabul" url="pages/TetkikKabul.xhtml" icon="ui-icon-arrowreturnthick-1-e"/>
+            </p:submenu>
+            <p:submenu label="Randevu İşlemleri" icon="ui-icon-pencil">
+                <p:menuitem value="Randevu Şablon" url="pages/RandevuSablon.xhtml" icon="ui-icon-arrowreturnthick-1-w"/>
+                <p:menuitem value="Randevu Seans" url="pages/RandevuSeans.xhtml" icon="ui-icon-arrowreturnthick-1-e"/>
+                <p:menuitem value="Randevu Alma" url="pages/Randevu.xhtml" icon="ui-icon-arrowreturnthick-1-e"/>
+            </p:submenu>
+        </p:menubar>
     </h:form>
 </h:head>
 

@@ -1,5 +1,6 @@
 package com.rdemir.donemprojesi.controllers;
 
+import com.rdemir.donemprojesi.entities.Role;
 import com.rdemir.donemprojesi.entities.User;
 import com.rdemir.donemprojesi.interfaces.services.IUserService;
 import com.rdemir.donemprojesi.scope.ScopeName;
@@ -20,9 +21,10 @@ public class UserController {
     private String name;
     private String surname;
     private Boolean enabled;
+    private Role role;
 
     public UserController() {
-        user = new User();
+        user = new User(username, password, name, surname, enabled, role, null);
     }
 
     public User findById(Long id) {
@@ -39,6 +41,14 @@ public class UserController {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     public String getUsername() {

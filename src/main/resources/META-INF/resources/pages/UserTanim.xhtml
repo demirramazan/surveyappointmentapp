@@ -22,7 +22,32 @@
 <h:head>
 
     <h:form>
-        <p:menubar model="#{sessionInitializer.menuModel}"/>
+        <p:menubar>
+            <p:submenu label="Tanımlama İşlemleri" icon="ui-icon-document">
+                <!--<p:submenu label="Kullanıcı Tanım" icon="ui-icon-person">-->
+                <p:menuitem value="Kullanıcı Tanım" url="pages/UserTanim.xhtml" icon="ui-icon-person"/>
+                <!--</p:submenu>-->
+                <!--<p:submenu label="Role Tanım" icon="ui-icon-person">-->
+                <p:menuitem value="Role Tanım" url="pages/RoleTanim.xhtml"/>
+                <!--</p:submenu>-->
+                <p:menuitem value="Menu Tanım" url="pages/MenuTanim"/>
+                <p:menuitem value="Permission Tanım" url="pages/PermissionTanim.xhtml"/>
+                <p:menuitem value="Personel Tanım" url="pages/PersonelTanim.xhtml"/>
+                <p:menuitem value="Tetkik Tanım" url="pages/TetkikTanim.xhtml"/>
+                <p:menuitem value="Birim Tanım" url="pages/TetkikTanim.xhtml"/>
+            </p:submenu>
+            <p:submenu label="Hasta Kabul İşlemleri" icon="ui-icon-pencil">
+                <p:menuitem value="Hasta Kabul" url="pages/HastaBasvuru.xhtml" icon="ui-icon-arrowreturnthick-1-w"/>
+                <p:menuitem value="Doktor Kabul" url="pages/HastaTetkikIstem.xhtml" icon="ui-icon-arrowreturnthick-1-e"/>
+                <p:menuitem value="Tetkik Kabul" url="pages/TetkikKabul.xhtml" icon="ui-icon-arrowreturnthick-1-e"/>
+            </p:submenu>
+            <p:submenu label="Randevu İşlemleri" icon="ui-icon-pencil">
+                <p:menuitem value="Randevu Şablon" url="pages/RandevuSablon.xhtml" icon="ui-icon-arrowreturnthick-1-w"/>
+                <p:menuitem value="Randevu Seans" url="pages/RandevuSeans.xhtml" icon="ui-icon-arrowreturnthick-1-e"/>
+                <p:menuitem value="Randevu Alma" url="pages/Randevu.xhtml" icon="ui-icon-arrowreturnthick-1-e"/>
+            </p:submenu>
+        </p:menubar>
+        <!--<p:menubar model="#{sessionInitializer.menuModel}"/>-->
     </h:form>
     <title>Kullanıcı Tanım</title>
 
@@ -32,59 +57,60 @@
 
 <h:body>
     <h:form>
-        <center>
-            <h:panelGrid columns="4" style="margin-top: 50px; ">
-                <h3>Yeni Üye Kaydı</h3>
-                <h:outputText/>
-                <h:outputText/>
-                <h:outputText/>
+        <h:panelGrid style="float: left">
+            <h3>Yeni Kullanıcı Kaydı</h3>
+            <h:outputText/>
+        </h:panelGrid>
+        <h:panelGrid columns="4" style="margin-top: 50px; float: right">
+            <h3>Yeni Kullanıcı Kaydı</h3>
+            <h:outputText/>
+            <h:outputText/>
+            <h:outputText/>
 
-                <h:outputText value="Adı"/>
-                <h:outputText value="*"/>
-                <p:inputText id="name" value="#{userBean.name}" required="true"/>
-                <p:message for="name"/>
+            <h:outputText value="Adı"/>
+            <h:outputText value="*"/>
+            <p:inputText id="name" value="#{userBean.name}" required="true"/>
+            <p:message for="name"/>
 
-                <h:outputText value="Soyadı"/>
-                <h:outputText value="*"/>
-                <p:inputText id="surname" value="#{userBean.surname}" required="true"/>
-                <p:message for="surname"/>
+            <h:outputText value="Soyadı"/>
+            <h:outputText value="*"/>
+            <p:inputText id="surname" value="#{userBean.surname}" required="true"/>
+            <p:message for="surname"/>
 
-                <h:outputText value="Kullanıcı Adı"/>
-                <h:outputText value="*"/>
-                <p:inputText id="username" value="#{userBean.username}" required="true"/>
-                <p:message for="username"/>
+            <h:outputText value="Kullanıcı Adı"/>
+            <h:outputText value="*"/>
+            <p:inputText id="username" value="#{userBean.username}" required="true"/>
+            <p:message for="username"/>
 
 
-                <h:outputText value="Parola"/>
-                <h:outputText value="*"/>
-                <p:password id="password" value="#{userBean.password}" required="true"
-                            match="passwordAgain"/>
-                <p:message for="password"/>
+            <h:outputText value="Parola"/>
+            <h:outputText value="*"/>
+            <p:password id="password" value="#{userBean.password}" required="true"
+                        match="passwordAgain"/>
+            <p:message for="password"/>
 
-                <h:outputText value="Parola Tekrar"/>
-                <h:outputText value="*"/>
-                <p:password id="passwordAgain" required="true"/>
-                <p:message for="passwordAgain"/>
+            <h:outputText value="Parola Tekrar"/>
+            <h:outputText value="*"/>
+            <p:password id="passwordAgain" required="true"/>
+            <p:message for="passwordAgain"/>
 
-                <h:outputText value="Kullanıcı Aktif Mi"/>
-                <h:outputText value="*"/>
-                <p:selectBooleanCheckbox id="enabled" value="#{userBean.enabled}" required="true"/>
-                <p:message for="enabled"/>
+            <h:outputText value="Rolü"/>
+            <h:outputText value="*"/>
+            <h:selectOneMenu id="role" value="#{roleBean.role}">
+                <f:selectItems value="#{roleBean.roles}" var="role" itemValue="#{role}" itemLabel="#{role.name}"/>
+            </h:selectOneMenu>
+            <p:message for="role"/>
+            <!--var="role" itemValue="#{role.id}" itemLabel="#{role.name}"-->
+            <h:outputText value="Kullanıcı Aktif Mi"/>
+            <h:outputText value="*"/>
+            <p:selectBooleanCheckbox id="enabled" value="#{userBean.enabled}" required="true"/>
+            <p:message for="enabled"/>
 
-                <h:outputText value="Rolü"/>
-                <h:outputText value="*"/>
-                <p:selectOneMenu id="role" value="#{roleBean.role.id}" required="true">
-                    <f:selectItem itemLabel="Seçiniz" itemValue="-"/>
-                    <f:selectItem itemLabel="#{roleBean.name}" itemValue="#{roleBean.code}"/>
-                </p:selectOneMenu>
-                <p:message for="role"/>
-            </h:panelGrid>
-            <center>
-                <p:commandButton value="Kaydet" actionListener="#{userBean.save}" ajax="false"
-                                 icon="fa fa-save" styleClass="ui-priority-primary" style="left: 125px"/>
-            </center>
+            <p:commandButton value="Kaydet" actionListener="#{userBean.save}" ajax="false"
+                             icon="fa fa-save" styleClass="ui-priority-primary" style="left: 125px"/>
+        </h:panelGrid>
 
-        </center>
+
     </h:form>
 </h:body>
 </html>

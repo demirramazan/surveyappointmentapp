@@ -3,11 +3,11 @@ package com.rdemir.donemprojesi.controllers;
 import com.rdemir.donemprojesi.entities.Role;
 import com.rdemir.donemprojesi.interfaces.services.IRoleService;
 import com.rdemir.donemprojesi.scope.ScopeName;
-import com.rdemir.donemprojesi.util.RoleType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 
 @Component("roleBean")
@@ -24,33 +24,34 @@ public class RoleController {
     private String description;
 
     private Role role;
+    private List<Role> roles;
 
-    private RoleType roleType;
+    @PostConstruct
+    public void init() {
+        roles = roleService.getRoles();
+    }
 
     public void setRole(Role role) {
         this.role = role;
     }
 
-    public RoleType getRoleType() {
-        return roleType;
+    public Role getRole() {
+        return role;
     }
-
-    public void setRoleType(RoleType roleType) {
-        this.roleType = roleType;
-    }
-
 
     public List<Role> getRoles() {
-        return roleService.getRoles();
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 
     public Role saveRole() {
         return roleService.save(role);
     }
 
-    public Role getRole() {
-        return roleService.getRole(role.getId());
-    }
+
 
     public void deleteRole() {
         roleService.delete(role.getId());
