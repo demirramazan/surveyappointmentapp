@@ -37,4 +37,65 @@
     </h:form>
 
 </h:head>
+
+<h:body>
+    <h:form id="FRMCihz">
+        <h:panelGrid styleClass="leftPanel">
+            <p:dataTable id="slnDT" var="cihaz" value="#{cihazBean.cihazList}" selectionMode="single"
+                         selection="#{cihazBean.selectedCihaz}" rowKey="#{cihaz.id}">
+
+                <p:ajax event="rowSelect" listener="#{cihazBean.onRowSelect}" update=":FRMCihz:chzPg"/>
+                <p:column headerText="Cihaz Kodu">
+                    <h:outputText value="#{cihaz.kodu}"/>
+                </p:column>
+                <p:column headerText="Cihaz Adı">
+                    <h:outputText value="#{cihaz.adi}"/>
+                </p:column>
+                <p:column headerText="Aktif Mi">
+                    <h:outputText value="#{cihaz.aktifMi}"/>
+                </p:column>
+                <p:column headerText="Salon Adı">
+                    <h:outputText value="#{cihaz.salon.salonAdi}"/>
+                </p:column>
+            </p:dataTable>
+        </h:panelGrid>
+        <h:panelGrid id="chzPg" columns="4" styleClass="rightPanel">
+            <h3>Yeni Cihaz Tanımı</h3>
+            <h:outputText/>
+            <h:outputText/>
+            <h:outputText/>
+
+            <h:outputText value="Cihaz Kodu"/>
+            <h:outputText value="*"/>
+            <p:inputText id="kodu" value="#{cihazBean.cihaz.kodu}" required="true"/>
+            <p:message for="kodu"/>
+
+            <h:outputText value="Cihaz Adı"/>
+            <h:outputText value="*"/>
+            <p:inputText id="adi" value="#{cihazBean.cihaz.adi}" required="true"/>
+            <p:message for="adi"/>
+
+            <h:outputText value="Salonu"/>
+            <h:outputText value="*"/>
+            <h:selectOneMenu id="salon" value="#{salonBean.salon}" converter="#{listConverter}">
+                <f:selectItem value="" var="salon" itemValue="" itemLabel="Salon Seçiniz" />
+                <f:selectItems value="#{salonBean.salonList}" var="salon" itemValue="#{salon}" itemLabel="#{salon.salonAdi}" />
+            </h:selectOneMenu>
+            <p:message for="salon"/>
+
+            <h:outputText value="Cihaz Aktif Mi"/>
+            <h:outputText value="*"/>
+            <p:selectBooleanCheckbox id="aktifMi" value="#{cihazBean.cihaz.aktifMi}" required="true"/>
+            <p:message for="aktifMi"/>
+
+            <p:commandButton value="Kaydet" actionListener="#{cihazBean.save()}" ajax="false"
+                             icon="fa fa-save" styleClass="ui-priority-primary" style="left: 125px"/>
+            <p:commandButton value="Sil" actionListener="#{salonBean.delete()}" ajax="false"
+                             icon="ui-icon-trash"  style="left: 150px"/>
+            <p:commandButton value="Yeni" actionListener="#{salonBean.reset()}" ajax="false"
+                             icon="ui-icon-trash"  style="left: 175px"/>
+
+        </h:panelGrid>
+    </h:form>
+</h:body>
 </html>
