@@ -3,8 +3,8 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core" >
 <h:head>
     <title>Kullanıcı Tanım</title>
 
@@ -14,7 +14,7 @@
             <p:submenu label="Tanımlama İşlemleri" icon="ui-icon-person">
                 <p:menuitem value="Kullanıcı Tanım" url="./UserTanim.xhtml" icon="ui-icon-person"/>
                 <p:menuitem value="Role Tanım" url="./RoleTanim.xhtml" icon="ui-icon-person"/>
-                <p:menuitem value="Menu Tanım" url="./MenuTanim" icon="ui-icon-person"/>
+                <p:menuitem value="Menu Tanım" url="./MenuTanim.xhtml" icon="ui-icon-person"/>
                 <p:menuitem value="Permission Tanım" url="./PermissionTanim.xhtml" icon="ui-icon-person"/>
                 <p:menuitem value="Personel Tanım" url="./PersonelTanim.xhtml" icon="ui-icon-person"/>
                 <p:menuitem value="Tetkik Tanım" url="./TetkikTanim.xhtml"/>
@@ -32,9 +32,64 @@
                 <p:menuitem value="Randevu Seans" url="./RandevuSeans.xhtml" icon="fa-calendar"/>
                 <p:menuitem value="Randevu Alma" url="./Randevu.xhtml" icon="fa-calendar"/>
             </p:submenu>
+            <p:menuitem value="Çıkış" style="float: right" action="#{sessionInitializer.exit}" icon="ui-icon-close"/>
+
         </p:menubar>
         <!--<p:menubar model="#{sessionInitializer.menuModel}"/>-->
     </h:form>
 
 </h:head>
+
+
+<h:body>
+    <h:form id="FRMSln">
+        <h:panelGrid styleClass="leftPanel">
+            <p:dataTable id="slnDT" var="salon" value="#{salonBean.salonList}" selectionMode="single"
+                         selection="#{salonBean.selectedSalon}" rowKey="#{salon.id}">
+
+                <p:ajax event="rowSelect" listener="#{salonBean.onRowSelect}" update=":FRMSln:slnPG"/>
+                <p:column headerText="Salon Kodu">
+                    <h:outputText value="#{salon.salonKodu}"/>
+                </p:column>
+                <p:column headerText="Salon Adı">
+                    <h:outputText value="#{salon.salonAdi}"/>
+                </p:column>
+            </p:dataTable>
+        </h:panelGrid>
+        <h:panelGrid id="slnPG" columns="4" styleClass="rightPanel">
+            <h3>Yeni Salon Tanımı</h3>
+            <h:outputText/>
+            <h:outputText/>
+            <h:outputText/>
+
+            <h:outputText value="Salon Kodu"/>
+            <h:outputText value="*"/>
+            <p:inputText id="kodu" value="#{salonBean.salon.salonKodu}" required="true"/>
+            <p:message for="kodu"/>
+
+            <h:outputText value="Salon Adı"/>
+            <h:outputText value="*"/>
+            <p:inputText id="adi" value="#{salonBean.salon.salonAdi}" required="true"/>
+            <p:message for="adi"/>
+            <!--<p:toolbar style="grid-auto-columns: auto">-->
+                <!--<f:facet name="right">-->
+                    <!--<p:commandButton type="button" value="Kaydet" title="Kaydet" icon="ui-icon-disk" update="slnPG"-->
+                                     <!--actionListener="#{salonBean.saveSalon()}" ajax="false" styleClass="ui-priority-primary" />-->
+                    <!--<p:commandButton type="button" value="Sil"  title="Sil" update="slnPG"-->
+                                     <!--icon="ui-icon-trash" actionListener="#{salonBean.delete()}" ajax="false" />-->
+                    <!--<p:commandButton type="button" value="Yeni"  title="Yeni" icon="fa fa-plus" update="slnPG"-->
+                                     <!--actionListener="#{salonBean.reset()}" ajax="false" />-->
+                <!--</f:facet>-->
+            <!--</p:toolbar>-->
+
+            <p:commandButton value="Kaydet" actionListener="#{salonBean.saveSalon()}" ajax="false"
+                             icon="fa fa-save" styleClass="ui-priority-primary" style="left: 125px"/>
+            <p:commandButton value="Sil" actionListener="#{salonBean.delete()}" ajax="false"
+                             icon="ui-icon-trash"  style="left: 150px"/>
+            <p:commandButton value="Yeni" actionListener="#{salonBean.reset()}" ajax="false"
+                             icon="ui-icon-trash"  style="left: 175px"/>
+
+        </h:panelGrid>
+    </h:form>
+</h:body>
 </html>

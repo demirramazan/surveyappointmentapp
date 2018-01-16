@@ -3,6 +3,7 @@ package com.rdemir.donemprojesi.controllers;
 import com.rdemir.donemprojesi.entities.Role;
 import com.rdemir.donemprojesi.interfaces.services.IRoleService;
 import com.rdemir.donemprojesi.scope.ScopeName;
+import org.primefaces.event.SelectEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -24,7 +25,17 @@ public class RoleController {
     private String description;
 
     private Role role;
+    private Role selectedRole;
     private List<Role> roles;
+
+    public RoleController() {
+        if (role == null) {
+            role = new Role();
+            role.setName(name);
+            role.setCode(code);
+            role.setDescription(description);
+        }
+    }
 
     @PostConstruct
     public void init() {
@@ -50,8 +61,6 @@ public class RoleController {
     public Role saveRole() {
         return roleService.save(role);
     }
-
-
 
     public void deleteRole() {
         roleService.delete(role.getId());
@@ -80,5 +89,18 @@ public class RoleController {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Role getSelectedRole() {
+        return selectedRole;
+    }
+
+    public void setSelectedRole(Role selectedRole) {
+        this.selectedRole = selectedRole;
+    }
+
+    public void onRowSelect(SelectEvent event) {
+        selectedRole = (Role) event.getObject();
+        this.role = selectedRole;
     }
 }

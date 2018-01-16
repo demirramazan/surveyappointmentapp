@@ -1,5 +1,6 @@
 package com.rdemir.donemprojesi.controllers;
 
+import com.rdemir.donemprojesi.entities.Personel;
 import com.rdemir.donemprojesi.interfaces.services.IPersonelService;
 import com.rdemir.donemprojesi.util.ScopeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,4 +12,7 @@ import org.springframework.stereotype.Component;
 public class PersonelController {
     @Autowired
     private IPersonelService personelService;
+
+    private Personel personel;
+
 }

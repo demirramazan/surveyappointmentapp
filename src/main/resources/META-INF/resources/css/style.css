@@ -9,3 +9,14 @@ body{
     -o-background-size: cover;
     background-size: cover;
 }
+
+.leftPanel{
+    float: left;
+    width: 30%;
+}
+
+.rightPanel{
+    float: right;
+    width: 70%;
+    margin-top: 50px
+}

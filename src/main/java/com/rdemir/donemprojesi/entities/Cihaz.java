@@ -7,10 +7,10 @@ import javax.persistence.*;
 public class Cihaz extends BaseEntity<String> {
 
     @Column(name = "KODU", nullable = false)
-    String kodu;
+    private String kodu;
 
     @Column(name = "ADI", nullable = false)
-    String adi;
+    private String adi;
 
     @Column(name = "AKTIF_MI")
     private Integer aktifMi;

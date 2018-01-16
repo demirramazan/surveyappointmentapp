@@ -4,6 +4,7 @@ import com.rdemir.donemprojesi.entities.Role;
 import com.rdemir.donemprojesi.entities.User;
 import com.rdemir.donemprojesi.interfaces.services.IUserService;
 import com.rdemir.donemprojesi.scope.ScopeName;
+import org.primefaces.component.panelgrid.PanelGrid;
 import org.primefaces.event.SelectEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -128,7 +129,13 @@ public class UserController {
     }
 
     public void onRowSelect(SelectEvent event) {
-        FacesContext.getCurrentInstance().addMessage(null, null);
+        selectedUser = (User) event.getObject();
+        this.user = selectedUser;
     }
 
+    public void clearGrid() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        PanelGrid panelGrid = (PanelGrid) context.getViewRoot().findComponent(":FRMUsr:userPG");
+        panelGrid.clearInitialState();
+    }
 }

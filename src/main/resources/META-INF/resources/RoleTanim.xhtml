@@ -3,8 +3,6 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 <h:head>
     <title>Kullanıcı Tanım</title>
@@ -15,7 +13,7 @@
             <p:submenu label="Tanımlama İşlemleri" icon="ui-icon-person">
                 <p:menuitem value="Kullanıcı Tanım" url="./UserTanim.xhtml" icon="ui-icon-person"/>
                 <p:menuitem value="Role Tanım" url="./RoleTanim.xhtml" icon="ui-icon-person"/>
-                <p:menuitem value="Menu Tanım" url="./MenuTanim" icon="ui-icon-person"/>
+                <p:menuitem value="Menu Tanım" url="./MenuTanim.xhtml" icon="ui-icon-person"/>
                 <p:menuitem value="Permission Tanım" url="./PermissionTanim.xhtml" icon="ui-icon-person"/>
                 <p:menuitem value="Personel Tanım" url="./PersonelTanim.xhtml" icon="ui-icon-person"/>
                 <p:menuitem value="Tetkik Tanım" url="./TetkikTanim.xhtml"/>
@@ -33,15 +31,33 @@
                 <p:menuitem value="Randevu Seans" url="./RandevuSeans.xhtml" icon="fa-calendar"/>
                 <p:menuitem value="Randevu Alma" url="./Randevu.xhtml" icon="fa-calendar"/>
             </p:submenu>
+            <p:menuitem value="Çıkış" style="float: right" action="#{sessionInitializer.exit}" icon="ui-icon-close"/>
+
         </p:menubar>
         <!--<p:menubar model="#{sessionInitializer.menuModel}"/>-->
     </h:form>
 
 </h:head>
-<p:panelGrid id="roles" columns="4">
-    <center>
-        <h:panelGrid columns="4" style="margin-top: 50px; background-color: white">
-            <h3>Yeni Role Kaydı</h3>
+<h:body>
+    <h:form id="FRMRole">
+        <h:panelGrid styleClass="leftPanel">
+            <p:dataTable id="roleDT" var="role" value="#{roleBean.roles}" selectionMode="single"
+                         selection="#{roleBean.selectedRole}" rowKey="#{role.id}" >
+
+                <p:ajax event="rowSelect" listener="#{roleBean.onRowSelect}" update=":FRMRole:rolePg"/>
+                <p:column headerText="Rol Adı" style="min-width: 100px; height: 20px;">
+                    <h:outputText value="#{role.name}"/>
+                </p:column>
+                <p:column headerText="Rol Kodu">
+                    <h:outputText value="#{role.code}"/>
+                </p:column>
+                <p:column headerText="Rol Açıklama-">
+                    <h:outputText value="#{role.description}"/>
+                </p:column>
+            </p:dataTable>
+        </h:panelGrid>
+        <h:panelGrid columns="4" id="rolePg" styleClass="rightPanel">
+            <h3>Yeni Role Kaydı ve Güncellme</h3>
             <h:outputText/>
             <h:outputText/>
             <h:outputText/>
@@ -56,15 +72,14 @@
             <p:inputText id="code" value="#{roleBean.role.code}" required="true"/>
             <p:message for="code"/>
 
-            <!--<h:outputText value="Role Tipi"/>-->
-            <!--<h:outputText value="*"/>-->
-            <!--<p:selectOneMenu id="type"  style="width:125px">-->
-                <!--<f:selectItem itemLabel="Seçiniz" itemValue="" />-->
-                <!--<f:selectItem itemLabel="Admin" itemValue="#{roleBean.roleType.name()}" />-->
-            <!--</p:selectOneMenu>-->
-            <!--<p:message for="type"/>-->
-            <!--<h:outputText value="#{personelController.}"-->
+            <h:outputText value="Rol Açıklama"/>
+            <h:outputText value="*"/>
+            <p:inputText id="description" value="#{roleBean.role.description}" required="true"/>
+            <p:message for="code"/>
+
+            <p:commandButton value="Kaydet" actionListener="#{roleBean.saveRole()}" ajax="false"
+                             icon="fa fa-save" styleClass="ui-priority-primary" style="left: 125px"/>
         </h:panelGrid>
-    </center>
-</p:panelGrid>
+    </h:form>
+</h:body>
 </html>
