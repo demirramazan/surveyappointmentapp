@@ -3,11 +3,9 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
 <h:head>
-    <title>Kullanıcı Tanım</title>
-
+    <title>Personel Tanım</title>
     <link rel="stylesheet" type="text/css" href="./css/style.css"/>
     <h:form>
         <p:menubar>
@@ -33,11 +31,109 @@
                 <p:menuitem value="Randevu Seans" url="./RandevuSeans.xhtml" icon="fa-calendar"/>
                 <p:menuitem value="Randevu Alma" url="./Randevu.xhtml" icon="fa-calendar"/>
             </p:submenu>
-            <p:menuitem value="Çıkış" style="float: right"  action="#{sessionInitializer.exit}" icon="ui-icon-close"/>
+            <p:menuitem value="Çıkış" style="float: right" action="#{sessionInitializer.exit}" icon="ui-icon-close"/>
 
         </p:menubar>
         <!--<p:menubar model="#{sessionInitializer.menuModel}"/>-->
     </h:form>
 
 </h:head>
+<h:body>
+    <h:form id="FRMPrsnl">
+        <div class="leftPanel">
+            <h:panelGrid>
+                <p:dataTable id="slnDT" var="cihaz" value="#{personelBean.personelList}" selectionMode="single"
+                             selection="#{personelBean.selectedPersonel}" rowKey="#{personel.id}">
+
+                    <p:ajax event="rowDblselect" listener="#{personelBean.onDcRowSelect}" update=":FRMPrsnl:psnlPg"/>
+                    <p:column headerText="Personel Adı">
+                        <h:outputText value="#{personel.personelAdi}"/>
+                    </p:column>
+                    <p:column headerText="Personel Soyadı">
+                        <h:outputText value="#{personel.personelSoyadi}"/>
+                    </p:column>
+                    <p:column headerText="Kimlik Numarası">
+                        <h:outputText value="#{personel.kimlikNo}"/>
+                    </p:column>
+                    <p:column headerText="Personel Telefon">
+                        <h:outputText value="#{personel.telefonNo}"/>
+                    </p:column>
+                </p:dataTable>
+            </h:panelGrid>
+        </div>
+        <div class="rightPanel">
+            <h:panelGrid id="psnlPg" columns="4">
+                <h3>Yeni Personel Tanımı</h3>
+                <h:outputText/>
+                <h:outputText/>
+                <h:outputText/>
+
+                <h:outputText value="Personel Adı"/>
+                <h:outputText value="*"/>
+                <p:inputText id="ad" value="#{personelBean.personel.personelAdi}" required="true"
+                             requiredMessage="Personel adı Zorunlu Alandır!"/>
+                <p:message for="ad"/>
+
+                <h:outputText value="Personel Soyadı"/>
+                <h:outputText value="*"/>
+                <p:inputText id="soyad" value="#{personelBean.personel.personelSoyadi}" required="true"/>
+                <p:message for="soyad"/>
+
+                <h:outputText value="Personel Kimlik No"/>
+                <h:outputText value="*"/>
+                <p:inputText id="kimlikNo" value="#{personelBean.personel.kimlikNo}" required="true"/>
+                <p:message for="kimlikNo"/>
+
+                <h:outputText value="Personel Email"/>
+                <h:outputText/>
+                <p:inputText id="email" value="#{personelBean.personel.email}">
+                    <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]"/>
+                </p:inputText>
+                <p:message for="email"/>
+
+                <h:outputText value="Personel Telefon"/>
+                <h:outputText/>
+                <p:inputText id="tel" value="#{personelBean.personel.telefonNo}"/>
+                <p:message for="tel"/>
+
+                <h:outputText value="Personel Adres"/>
+                <h:outputText/>
+                <p:inputTextarea id="adres" value="#{personelBean.personel.adres}"/>
+                <p:message for="adres"/>
+
+
+                <h:outputText value="Cinsiyet"/>
+                <h:outputText value="*"/>
+                <p:selectOneMenu id="cinsiyet" value="#{personelBean.personel.cinsiyet}">
+                    <f:selectItem itemLabel="Erkek" itemValue="1"/>
+                    <f:selectItem itemLabel="Kadın" itemValue="2"/>
+                    <f:selectItem itemLabel="Belirsiz" itemValue="3"/>
+                </p:selectOneMenu>
+                <p:message for="cinsiyet"/>
+
+                <h:outputText value="Personel Aktif Mi"/>
+                <h:outputText value="*"/>
+                <p:selectBooleanCheckbox id="aktifMi" value="#{personelBean.personel.aktifMi}" required="true"/>
+                <p:message for="aktifMi"/>
+
+                <h:outputText value="Personel Birimi"/>
+                <h:outputText value="*"/>
+                <p:selectOneMenu id="birim" value="#{personelBean.birim}" converter="#{listConverter}">
+                    <f:selectItem itemLabel="Birim Seçiniz" itemValue="#{null}"/>
+                    <f:selectItems value="#{birimBean.birimList}" var="birim" itemValue="#{birim}"
+                                   itemLabel="#{birim.birimAdi}"/>
+                    <p:ajax update=":FRMPrsnl:psnlPg" listener="#{personelBean.birim}"/>
+                </p:selectOneMenu>
+
+                <p:commandButton value="Kaydet" actionListener="#{personelBean.save()}" ajax="false"
+                                 icon="fa fa-save" styleClass="ui-priority-primary" style="left: 125px"/>
+                <p:commandButton value="Sil" actionListener="#{personelBean.delete()}" ajax="false"
+                                 icon="ui-icon-trash" style="left: 150px"/>
+                <p:commandButton value="Yeni" actionListener="#{personelBean.reset()}" ajax="false"
+                                 icon="ui-icon-trash" style="left: 175px"/>
+
+            </h:panelGrid>
+        </div>
+    </h:form>
+</h:body>
 </html>

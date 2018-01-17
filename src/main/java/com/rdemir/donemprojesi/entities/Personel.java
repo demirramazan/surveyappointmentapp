@@ -36,7 +36,7 @@ public class Personel extends BaseEntity {
     private Cinsiyet cinsiyet;
 
     @Column(name = "AKTIF")
-    private Integer aktif;
+    private Boolean aktifMi;
 
     @ManyToOne
     @JoinColumn(name = "BIRIM_ID",
@@ -46,7 +46,8 @@ public class Personel extends BaseEntity {
     public Personel() {
     }
 
-    public Personel(String personelAdi, String personelSoyadi, String kimlikNo, String email, String telefonNo, String adres, Cinsiyet cinsiyet, Integer aktif, Birim birim) {
+    public Personel(String personelAdi, String personelSoyadi, String kimlikNo, String email,
+                    String telefonNo, String adres, Cinsiyet cinsiyet, Boolean aktifMi, Birim birim) {
         this.personelAdi = personelAdi;
         this.personelSoyadi = personelSoyadi;
         this.kimlikNo = kimlikNo;
@@ -54,7 +55,7 @@ public class Personel extends BaseEntity {
         this.telefonNo = telefonNo;
         this.adres = adres;
         this.cinsiyet = cinsiyet;
-        this.aktif = aktif;
+        this.aktifMi = aktifMi;
         this.birim = birim;
     }
 
@@ -114,12 +115,12 @@ public class Personel extends BaseEntity {
         this.cinsiyet = cinsiyet;
     }
 
-    public Integer getAktif() {
-        return aktif;
+    public Boolean getAktifMi() {
+        return aktifMi;
     }
 
-    public void setAktif(Integer aktif) {
-        this.aktif = aktif;
+    public void setAktifMi(Boolean aktifMi) {
+        this.aktifMi = aktifMi;
     }
 
     public Birim getBirim() {

@@ -3,10 +3,9 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
 <h:head>
-    <title>Kullanıcı Tanım</title>
+    <title>Birim Tanım</title>
 
     <link rel="stylesheet" type="text/css" href="./css/style.css"/>
     <h:form>
@@ -35,6 +34,74 @@
             </p:submenu>
         </p:menubar>
     </h:form>
-
 </h:head>
+
+<h:body>
+    <h:form id="FRMBrm">
+        <div class="leftPanel">
+            <h:panelGrid>
+                <p:dataTable id="brmDT" var="birim" value="#{birimBean.birimList}" selectionMode="single"
+                             selection="#{birimBean.selectedBirim}" rowKey="#{birim.id}">
+                    <p:ajax event="rowDblselect" listener="#{birimBean.onDcRowSelect}" update=":FRMBrm:brmPg"/>
+                    <p:column headerText="Birim Kodu">
+                        <h:outputText value="#{birim.birimKodu}"/>
+                    </p:column>
+                    <p:column headerText="Cihaz Adı">
+                        <h:outputText value="#{birim.birimAdi}"/>
+                    </p:column>
+                    <p:column headerText="Aktif Mi">
+                        <h:outputText value="#{birim.aktifMi}"/>
+                    </p:column>
+                    <p:column headerText="Salon Adı">
+                        <h:outputText value="#{birim.salon.salonAdi}"/>
+                    </p:column>
+                </p:dataTable>
+            </h:panelGrid>
+        </div>
+        <div class="rightPanel">
+            <h:panelGrid id="brmPg" columns="4">
+                <h3>Yeni Birim Tanımı</h3>
+                <h:outputText />
+                <h:outputText />
+                <h:outputText />
+
+                <h:outputText value="Birim Kodu "/>
+                <h:outputText value=" *"/>
+                <p:inputText id="birimKodu" value="#{birimBean.birim.birimKodu}" required="true"
+                             requiredMessage="Birim Kodu Alanı Boş Alamaz!"/>
+                <p:message for="birimKodu"/>
+
+                <h:outputText value="Birim Adı"/>
+                <h:outputText value="*"/>
+                <p:inputText id="birimAdi" value="#{birimBean.birim.birimAdi}" required="true"
+                             requiredMessage="Birim Adı Alanı Boş Olamaz!"/>
+                <p:message for="birimAdi"/>
+
+                <h:outputText value="Salonu"/>
+                <h:outputText value="*"/>
+                <p:selectOneMenu id="salon" value="#{birimBean.salon}" converter="#{listConverter}">
+                    <f:selectItem itemLabel="Salon Seçiniz" itemValue="#{null}"/>
+                    <f:selectItems value="#{salonBean.salonList}" var="salon" itemValue="#{salon}"
+                                   itemLabel="#{salon.salonAdi}"/>
+                    <p:ajax update=":FRMBrm:brmPg" listener="#{birimBean.salon}"/>
+                </p:selectOneMenu>
+                <p:message for="salon"/>
+
+                <h:outputText value="Birim Aktif Mi *"/>
+                <h:outputText value="*"/>
+                <p:selectBooleanCheckbox id="aktifMi" value="#{birimBean.birim.aktifMi}" required="true"
+                                         requiredMessage="Birim Aktif Mi Alanı Boş Olamaz!"/>
+                <p:message for="aktifMi"/>
+
+                <p:commandButton value="Kaydet" actionListener="#{birimBean.save()}" ajax="false"
+                                 icon="fa fa-save" styleClass="ui-priority-primary" style="left: 125px"/>
+                <p:commandButton value="Sil" actionListener="#{birimBean.delete()}" ajax="false"
+                                 icon="ui-icon-trash" style="left: 150px"/>
+                <p:commandButton value="Yeni" actionListener="#{birimBean.reset()}" ajax="false"
+                                 icon="ui-icon-trash" style="left: 175px"/>
+
+            </h:panelGrid>
+        </div>
+    </h:form>
+</h:body>
 </html>

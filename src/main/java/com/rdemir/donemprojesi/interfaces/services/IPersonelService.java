@@ -1,4 +1,13 @@
 package com.rdemir.donemprojesi.interfaces.services;
 
-public interface IPersonelService {
+import java.util.List;
+
+public interface IPersonelService<T> {
+    List<T> getPersonelList();
+
+    T getPersonel(Long id);
+
+    void save(T t);
+
+    void delete(Long id);
 }

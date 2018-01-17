@@ -106,7 +106,7 @@
                     <f:selectItems value="#{roleBean.roles}" var="role" itemValue="#{role}" itemLabel="#{role.name}"/>
                 </h:selectOneMenu>
                 <p:message for="role"/>
-                <!--var="role" itemValue="#{role.id}" itemLabel="#{role.name}"-->
+
                 <h:outputText value="Kullanıcı Aktif Mi"/>
                 <h:outputText value="*"/>
                 <p:selectBooleanCheckbox id="enabled" value="#{userBean.user.enabled}" required="true"/>
@@ -114,10 +114,6 @@
 
                 <p:commandButton value="Kaydet" actionListener="#{userBean.save}" ajax="false"
                                  icon="fa fa-save" styleClass="ui-priority-primary" style="left: 125px"/>
-
-                <!--<p:commandButton value="Reset" actionListener="#{userBean.clearGrid}" immediate="true" ajax="false" style="margin-right:20px;">-->
-                <!--<p:resetInput target="userPG" />-->
-                <!--</p:commandButton>-->
 
             </h:panelGrid>
         </div>

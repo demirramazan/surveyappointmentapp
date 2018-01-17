@@ -3,7 +3,6 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
 <h:head>
     <title>Tetkik Tanım</title>
@@ -33,7 +32,7 @@
                 <p:menuitem value="Randevu Seans" url="./RandevuSeans.xhtml" icon="fa-calendar"/>
                 <p:menuitem value="Randevu Alma" url="./Randevu.xhtml" icon="fa-calendar"/>
             </p:submenu>
-            <p:menuitem value="Çıkış" style="float: right"  action="#{sessionInitializer.exit}" icon="ui-icon-close"/>
+            <p:menuitem value="Çıkış" style="float: right" action="#{sessionInitializer.exit}" icon="ui-icon-close"/>
 
         </p:menubar>
         <!--<p:menubar model="#{sessionInitializer.menuModel}"/>-->
@@ -42,64 +41,82 @@
 
 <h:body>
     <h:form id="FRMTtk">
-        <h:panelGrid styleClass="leftPanel">
-            <p:dataTable id="slnDT" var="cihaz" value="#{cihazBean.cihazList}" selectionMode="single"
-                         selection="#{cihazBean.selectedCihaz}" rowKey="#{cihaz.id}">
+        <div class="leftPanel">
+            <h:panelGrid>
+                <p:dataTable id="ttk" var="tetkik" value="#{tetkikBean.tetkikList}" selectionMode="single"
+                             selection="#{tetkikBean.selectedTetkik}" rowKey="#{tetkik.id}">
 
-                <p:ajax event="rowDblselect" listener="#{cihazBean.onDcRowSelect}" update=":FRMTtk:chzPg"/>
-                <p:column headerText="Cihaz Kodu">
-                    <h:outputText value="#{cihaz.kodu}"/>
-                </p:column>
-                <p:column headerText="Cihaz Adı">
-                    <h:outputText value="#{cihaz.adi}"/>
-                </p:column>
-                <p:column headerText="Aktif Mi">
-                    <h:outputText value="#{cihaz.aktifMi}"/>
-                </p:column>
-                <p:column headerText="Salon Adı">
-                    <h:outputText value="#{cihaz.salon.salonAdi}"/>
-                </p:column>
-            </p:dataTable>
-        </h:panelGrid>
-        <h:panelGrid id="chzPg" columns="4" styleClass="rightPanel">
-            <h3>Yeni Cihaz Tanımı</h3>
-            <h:outputText/>
-            <h:outputText/>
-            <h:outputText/>
+                    <p:ajax event="rowDblselect" listener="#{tetkikBean.onDcRowSelect}" update=":FRMTtk:ttkPG"/>
+                    <p:column headerText="Tetkik Kodu">
+                        <h:outputText value="#{tetkik.tetkikKodu}"/>
+                    </p:column>
+                    <p:column headerText="Tetkik Adı">
+                        <h:outputText value="#{tetkik.tetkikAdi}"/>
+                    </p:column>
+                    <p:column headerText="Aktif Mi">
+                        <h:outputText value="#{tetkik.aktifMi}"/>
+                    </p:column>
+                    <p:column headerText="Salon Adı">
+                        <h:outputText value="#{tetkik.salon.salonAdi}"/>
+                    </p:column>
+                </p:dataTable>
+            </h:panelGrid>
+        </div>
+        <div class="rightPanel">
+            <h:panelGrid id="ttkPG" columns="4" style="margin: 0 auto;">
+                <h3>Yeni Cihaz Tanımı</h3>
+                <h:outputText/>
+                <h:outputText/>
+                <h:outputText/>
 
-            <h:outputText value="Cihaz Kodu"/>
-            <h:outputText value="*"/>
-            <p:inputText id="kodu" value="#{cihazBean.cihaz.kodu}" required="true"/>
-            <p:message for="kodu"/>
+                <h:outputText value="Tetkik Kodu"/>
+                <h:outputText value="*"/>
+                <p:inputText id="kodu" value="#{tetkikBean.tetkik.tetkikKodu}" required="true"
+                             requiredMessage="Tetkik Kodu Zorunludur!"/>
+                <p:message for="kodu"/>
 
-            <h:outputText value="Cihaz Adı"/>
-            <h:outputText value="*"/>
-            <p:inputText id="adi" value="#{cihazBean.cihaz.adi}" required="true"/>
-            <p:message for="adi"/>
+                <h:outputText value="Tetkik Adı"/>
+                <h:outputText value="*"/>
+                <p:inputText id="adi" value="#{tetkikBean.tetkik.tetkikAdi}" required="true"
+                             requiredMessage="Tetkik Adı Zorunludur!"/>
+                <p:message for="adi"/>
 
-            <h:outputText value="Salonu"/>
-            <h:outputText value="*"/>
-            <p:selectOneMenu id="salon" value="#{cihazBean.salon}" converter="#{listConverter}">
-                <f:selectItem itemLabel="Salon Seçiniz-" itemValue="#{null}"/>
-                <f:selectItems value="#{salonBean.salonList}" var="salon" itemValue="#{salon}"
-                               itemLabel="#{salon.salonAdi}"/>
-                <p:ajax update=":FRMCihz:chzPg" listener="#{cihazBean.salon}"/>
-            </p:selectOneMenu>
-            <p:message for="salon"/>
+                <h:outputText value="tetkik Salonu"/>
+                <h:outputText value="*"/>
+                <p:selectOneMenu id="salon" value="#{tetkikBean.salon}" converter="#{listConverter}">
+                    <f:selectItem itemLabel="Salon Seçiniz" itemValue="#{null}"/>
+                    <f:selectItems value="#{salonBean.salonList}" var="salon" itemValue="#{salon}"
+                                   itemLabel="#{salon.salonAdi}"/>
+                    <p:ajax update=":FRMTtk:ttkPG" listener="#{tetkikController.salon}"/>
+                </p:selectOneMenu>
+                <p:message for="salon"/>
 
-            <h:outputText value="Cihaz Aktif Mi"/>
-            <h:outputText value="*"/>
-            <p:selectBooleanCheckbox id="aktifMi" value="#{cihazBean.cihaz.aktifMi}" required="true"/>
-            <p:message for="aktifMi"/>
+                <h:outputText value="Tetkik Aktif Mi"/>
+                <h:outputText value="*"/>
+                <p:selectBooleanCheckbox id="aktifMi" value="#{tetkikBean.tetkik.aktifMi}" required="true"/>
+                <p:message for="aktifMi"/>
 
-            <p:commandButton value="Kaydet" actionListener="#{cihazBean.save()}" ajax="false"
-                             icon="fa fa-save" styleClass="ui-priority-primary" style="left: 125px"/>
-            <p:commandButton value="Sil" actionListener="#{cihazBean.delete()}" ajax="false"
-                             icon="ui-icon-trash" style="left: 150px"/>
-            <p:commandButton value="Yeni" actionListener="#{cihazBean.reset()}" ajax="false"
-                             icon="ui-icon-trash" style="left: 175px"/>
+                <h:outputText value="Fiyat"/>
+                <h:outputText value="*"/>
+                <p:inputText id="fiyat" value="#{tetkikBean.tetkik.fiyat}" required="true"
+                             requiredMessage="Tetkik Fiyat Zorunludur!"/>
+                <p:message for="fiyat"/>
 
-        </h:panelGrid>
+                <h:outputText value="Puan"/>
+                <h:outputText value="*"/>
+                <p:inputText id="puan" value="#{tetkikBean.tetkik.puan}" required="true"
+                             requiredMessage="Tetkik Puanı Zorunludur!"/>
+                <p:message for="puan"/>
+
+                <p:commandButton value="Kaydet" actionListener="#{tetkikBean.save()}" ajax="false"
+                                 icon="fa fa-save" styleClass="ui-priority-primary" style="left: 125px"/>
+                <p:commandButton value="Sil" actionListener="#{tetkikBean.delete()}" ajax="false"
+                                 icon="ui-icon-trash" style="left: 150px"/>
+                <p:commandButton value="Yeni" actionListener="#{tetkikBean.reset()}" ajax="false"
+                                 icon="ui-icon-trash" style="left: 175px"/>
+
+            </h:panelGrid>
+        </div>
     </h:form>
 </h:body>
 </html>

@@ -39,7 +39,7 @@ public class UserController {
     }
 
     public UserController() {
-        user = new User(username, password, name, surname, enabled, role, null);
+        user = new User();
     }
 
     public User findById(Long id) {
@@ -47,6 +47,7 @@ public class UserController {
     }
 
     public User save() {
+        user.setRole(role);
         return userService.save(user);
     }
 

@@ -13,9 +13,9 @@ public class Birim extends BaseEntity<String> {
     private String birimAdi;
 
     @Column(name = "AKTIF_MI")
-    private Integer aktifMi;
+    private Boolean aktifMi;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     @JoinColumn(
             name = "SALON_ID",
             foreignKey = @ForeignKey(
@@ -26,7 +26,7 @@ public class Birim extends BaseEntity<String> {
     public Birim() {
     }
 
-    public Birim(String birimKodu, String birimAdi, Integer aktifMi, Salon salon) {
+    public Birim(String birimKodu, String birimAdi, Boolean aktifMi, Salon salon) {
         this.birimKodu = birimKodu;
         this.birimAdi = birimAdi;
         this.aktifMi = aktifMi;
@@ -49,11 +49,11 @@ public class Birim extends BaseEntity<String> {
         this.birimAdi = birimAdi;
     }
 
-    public Integer getAktifMi() {
+    public Boolean getAktifMi() {
         return aktifMi;
     }
 
-    public void setAktifMi(Integer aktifMi) {
+    public void setAktifMi(Boolean aktifMi) {
         this.aktifMi = aktifMi;
     }
 
