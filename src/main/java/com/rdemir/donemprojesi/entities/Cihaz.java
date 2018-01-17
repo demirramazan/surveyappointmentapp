@@ -13,7 +13,7 @@ public class Cihaz extends BaseEntity<String> {
     private String adi;
 
     @Column(name = "AKTIF_MI")
-    private Integer aktifMi;
+    private Boolean aktifMi;
 
     @ManyToOne
     @JoinColumn(name = "SALON_ID",
@@ -23,7 +23,7 @@ public class Cihaz extends BaseEntity<String> {
     public Cihaz() {
     }
 
-    public Cihaz(String kodu, String adi, Integer aktifMi, Salon salon) {
+    public Cihaz(String kodu, String adi, Boolean aktifMi, Salon salon) {
         this.kodu = kodu;
         this.adi = adi;
         this.aktifMi = aktifMi;
@@ -46,11 +46,11 @@ public class Cihaz extends BaseEntity<String> {
         this.adi = adi;
     }
 
-    public Integer getAktifMi() {
+    public Boolean getAktifMi() {
         return aktifMi;
     }
 
-    public void setAktifMi(Integer aktifMi) {
+    public void setAktifMi(Boolean aktifMi) {
         this.aktifMi = aktifMi;
     }
 

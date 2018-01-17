@@ -45,6 +45,16 @@ public class User extends BaseEntity {
         this.personel = personel;
     }
 
+    @Override
+    public Long getId() {
+        return super.getId();
+    }
+
+    @Override
+    public void setId(Long id) {
+        super.setId(id);
+    }
+
     public String getUsername() {
         return username;
     }

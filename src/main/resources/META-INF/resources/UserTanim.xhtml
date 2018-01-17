@@ -11,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="./css/style.css"/>
     <h:form>
         <p:menubar>
+            <p:menuitem value="Anasayfa" url="./home.xhtml" icon="fa fa-home"/>
             <p:submenu label="Tanımlama İşlemleri" icon="ui-icon-person">
                 <p:menuitem value="Kullanıcı Tanım" url="./UserTanim.xhtml" icon="ui-icon-person"/>
                 <p:menuitem value="Role Tanım" url="./RoleTanim.xhtml" icon="ui-icon-person"/>
@@ -42,78 +43,88 @@
 
 <h:body>
     <h:form id="FRMUsr">
-        <h:panelGrid styleClass="leftPanel">
-            <p:dataTable id="userDt" var="user" value="#{userBean.userList}" selectionMode="single"
-                         selection="#{userBean.selectedUser}" rowKey="#{user.id}" >
+        <div class="leftPanel">
+            <h:panelGrid>
+                <p:dataTable id="userDt" var="user" value="#{userBean.userList}" selectionMode="single"
+                             selection="#{userBean.selectedUser}" rowKey="#{user.id}">
 
-                <p:ajax event="rowSelect" listener="#{userBean.onRowSelect}" update=":FRMUsr:userPG"/>
-                <p:column headerText="Adı">
-                    <h:outputText value="#{user.name}"/>
-                </p:column>
-                <p:column headerText="Soyadı">
-                    <h:outputText value="#{user.surname}"/>
-                </p:column>
-                <p:column headerText="Kullanıcı Adı">
-                    <h:outputText value="#{user.username}"/>
-                </p:column>
-                <p:column headerText="Kullanıcı Aktif Mi">
-                    <h:outputText value="#{user.enabled}"/>
-                </p:column>
-            </p:dataTable>
-        </h:panelGrid>
-        <h:panelGrid id="userPG" columns="4" styleClass="rightPanel">
-            <h3>Yeni Kullanıcı Kaydı</h3>
-            <h:outputText/>
-            <h:outputText/>
-            <h:outputText/>
+                    <p:ajax event="rowSelect" listener="#{userBean.onRowSelect}" update=":FRMUsr:userPG"/>
+                    <p:column headerText="Adı">
+                        <h:outputText value="#{user.name}"/>
+                    </p:column>
+                    <p:column headerText="Soyadı">
+                        <h:outputText value="#{user.surname}"/>
+                    </p:column>
+                    <p:column headerText="Kullanıcı Adı">
+                        <h:outputText value="#{user.username}"/>
+                    </p:column>
+                    <p:column headerText="Kullanıcı Aktif Mi">
+                        <h:outputText value="#{user.enabled}"/>
+                    </p:column>
+                </p:dataTable>
+            </h:panelGrid>
+        </div>
+        <div class="rightPanel">
+            <h:panelGrid id="userPG" columns="4">
+                <h3>Yeni Kullanıcı Kaydı</h3>
+                <h:outputText/>
+                <h:outputText/>
+                <h:outputText/>
 
-            <h:outputText value="Adı"/>
-            <h:outputText value="*"/>
-            <p:inputText id="name" value="#{userBean.user.name}" required="true"/>
-            <p:message for="name"/>
+                <h:outputText width="100" value="Adı"/>
+                <h:outputText width="100" value="*"/>
+                <p:inputText width="100" id="name" value="#{userBean.user.name}" required="true"/>
+                <p:message for="name"/>
 
-            <h:outputText value="Soyadı"/>
-            <h:outputText value="*"/>
-            <p:inputText id="surname" value="#{userBean.user.surname}" required="true"/>
-            <p:message for="surname"/>
+                <h:outputText value="Soyadı"/>
+                <h:outputText value="*"/>
+                <p:inputText id="surname" value="#{userBean.user.surname}" required="true"/>
+                <p:message for="surname"/>
 
-            <h:outputText value="Kullanıcı Adı"/>
-            <h:outputText value="*"/>
-            <p:inputText id="username" value="#{userBean.user.username}" required="true"/>
-            <p:message for="username"/>
+                <h:outputText value="Kullanıcı Adı"/>
+                <h:outputText value="*"/>
+                <p:inputText id="username" value="#{userBean.user.username}" required="true"/>
+                <p:message for="username"/>
 
 
-            <h:outputText value="Parola"/>
-            <h:outputText value="*"/>
-            <p:password id="password" value="#{userBean.user.password}" required="true"
-                        match="passwordAgain"/>
-            <p:message for="password"/>
+                <h:outputText value="Parola"/>
+                <h:outputText value="*"/>
+                <p:password id="password" value="#{userBean.user.password}" required="true"
+                            match="passwordAgain"/>
+                <p:message for="password"/>
 
-            <h:outputText value="Parola Tekrar"/>
-            <h:outputText value="*"/>
-            <p:password id="passwordAgain" required="true"/>
-            <p:message for="passwordAgain"/>
+                <h:outputText value="Parola Tekrar"/>
+                <h:outputText value="*"/>
+                <p:password id="passwordAgain" required="true"/>
+                <p:message for="passwordAgain"/>
 
-            <h:outputText value="Rolü"/>
-            <h:outputText value="*"/>
-            <h:selectOneMenu id="role" value="#{roleBean.role}" converter="#{listConverter}">
-                <f:selectItems value="#{roleBean.roles}" var="role" itemValue="#{role}" itemLabel="#{role.name}" />
-            </h:selectOneMenu>
-            <p:message for="role"/>
-            <!--var="role" itemValue="#{role.id}" itemLabel="#{role.name}"-->
-            <h:outputText value="Kullanıcı Aktif Mi"/>
-            <h:outputText value="*"/>
-            <p:selectBooleanCheckbox id="enabled" value="#{userBean.user.enabled}" required="true"/>
-            <p:message for="enabled"/>
+                <h:outputText value="Rolü"/>
+                <h:outputText value="*"/>
+                <h:selectOneMenu id="role" value="#{userBean.role}" converter="#{listConverter}">
+                    <p:ajax update=":FRMUsr:userPG" listener="#{userBean.salon}"/>
+                    <f:selectItem itemLabel="Rol Seçiniz-" itemValue="#{null}"/>
+                    <f:selectItems value="#{roleBean.roles}" var="role" itemValue="#{role}" itemLabel="#{role.name}"/>
+                </h:selectOneMenu>
+                <p:message for="role"/>
+                <!--var="role" itemValue="#{role.id}" itemLabel="#{role.name}"-->
+                <h:outputText value="Kullanıcı Aktif Mi"/>
+                <h:outputText value="*"/>
+                <p:selectBooleanCheckbox id="enabled" value="#{userBean.user.enabled}" required="true"/>
+                <p:message for="enabled"/>
 
-            <p:commandButton value="Kaydet" actionListener="#{userBean.save}" ajax="false"
-                             icon="fa fa-save" styleClass="ui-priority-primary" style="left: 125px"/>
+                <p:commandButton value="Kaydet" actionListener="#{userBean.save}" ajax="false"
+                                 icon="fa fa-save" styleClass="ui-priority-primary" style="left: 125px"/>
 
-            <!--<p:commandButton value="Reset" actionListener="#{userBean.clearGrid}" immediate="true" ajax="false" style="margin-right:20px;">-->
+                <!--<p:commandButton value="Reset" actionListener="#{userBean.clearGrid}" immediate="true" ajax="false" style="margin-right:20px;">-->
                 <!--<p:resetInput target="userPG" />-->
-            <!--</p:commandButton>-->
+                <!--</p:commandButton>-->
 
-        </h:panelGrid>
+            </h:panelGrid>
+        </div>
+
+
+
+
 
 
     </h:form>

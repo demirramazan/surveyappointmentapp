@@ -28,6 +28,16 @@ public class Salon extends BaseEntity {
         this.cihaz = cihaz;
     }
 
+    @Override
+    public Long getId() {
+        return super.getId();
+    }
+
+    @Override
+    public void setId(Long id) {
+        super.setId(id);
+    }
+
     public String getSalonKodu() {
         return salonKodu;
     }

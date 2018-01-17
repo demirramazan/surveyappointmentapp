@@ -35,7 +35,7 @@ public class ListConverter implements Converter {
         if (value.isEmpty()) {
             return null;
         }
-        return getViewMap(context).get(value + c.getClientId());
+        return getViewMap(context).get(value);
     }
 
     @Override
@@ -46,22 +46,11 @@ public class ListConverter implements Converter {
         String stringValue;
         if (value instanceof BaseEntity) {
             stringValue = ((BaseEntity) value).getId().toString();
-            try {
-                Class methodParams[] = new Class[0];
-                if (value instanceof BaseEntity) {
-                    Method getName = value.getClass().getDeclaredMethod("getName", methodParams);
-                    if (getName != null) {
-                        stringValue = (String) getName.invoke(value);
-                    }
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
         } else {
             stringValue = value.toString();
         }
 
-        getViewMap(context).put(stringValue + c.getClientId(), value);
+        getViewMap(context).put(stringValue, value);
         return stringValue;
     }
 }

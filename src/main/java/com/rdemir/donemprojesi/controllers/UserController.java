@@ -1,16 +1,17 @@
 package com.rdemir.donemprojesi.controllers;
 
+import com.rdemir.donemprojesi.entities.Personel;
 import com.rdemir.donemprojesi.entities.Role;
 import com.rdemir.donemprojesi.entities.User;
 import com.rdemir.donemprojesi.interfaces.services.IUserService;
 import com.rdemir.donemprojesi.scope.ScopeName;
-import org.primefaces.component.panelgrid.PanelGrid;
 import org.primefaces.event.SelectEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import javax.faces.component.html.HtmlPanelGrid;
 import javax.faces.context.FacesContext;
 import java.util.List;
 
@@ -30,6 +31,7 @@ public class UserController {
     private String surname;
     private Boolean enabled;
     private Role role;
+    private Personel personel;
 
     @PostConstruct
     public void init() {
@@ -54,6 +56,14 @@ public class UserController {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Personel getPersonel() {
+        return personel;
+    }
+
+    public void setPersonel(Personel personel) {
+        this.personel = personel;
     }
 
     public Role getRole() {
@@ -135,7 +145,7 @@ public class UserController {
 
     public void clearGrid() {
         FacesContext context = FacesContext.getCurrentInstance();
-        PanelGrid panelGrid = (PanelGrid) context.getViewRoot().findComponent(":FRMUsr:userPG");
+        HtmlPanelGrid panelGrid = (HtmlPanelGrid) context.getViewRoot().findComponent(":FRMUsr:userPG");
         panelGrid.clearInitialState();
     }
 }

@@ -6,11 +6,12 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
 <h:head>
-    <title>Kullanıcı Tanım</title>
+    <title>Tetkik Tanım</title>
 
     <link rel="stylesheet" type="text/css" href="./css/style.css"/>
     <h:form>
         <p:menubar>
+            <p:menuitem value="Anasayfa" url="./home.xhtml" icon="fa fa-home"/>
             <p:submenu label="Tanımlama İşlemleri" icon="ui-icon-person">
                 <p:menuitem value="Kullanıcı Tanım" url="./UserTanim.xhtml" icon="ui-icon-person"/>
                 <p:menuitem value="Role Tanım" url="./RoleTanim.xhtml" icon="ui-icon-person"/>
@@ -37,6 +38,68 @@
         </p:menubar>
         <!--<p:menubar model="#{sessionInitializer.menuModel}"/>-->
     </h:form>
-
 </h:head>
+
+<h:body>
+    <h:form id="FRMTtk">
+        <h:panelGrid styleClass="leftPanel">
+            <p:dataTable id="slnDT" var="cihaz" value="#{cihazBean.cihazList}" selectionMode="single"
+                         selection="#{cihazBean.selectedCihaz}" rowKey="#{cihaz.id}">
+
+                <p:ajax event="rowDblselect" listener="#{cihazBean.onDcRowSelect}" update=":FRMTtk:chzPg"/>
+                <p:column headerText="Cihaz Kodu">
+                    <h:outputText value="#{cihaz.kodu}"/>
+                </p:column>
+                <p:column headerText="Cihaz Adı">
+                    <h:outputText value="#{cihaz.adi}"/>
+                </p:column>
+                <p:column headerText="Aktif Mi">
+                    <h:outputText value="#{cihaz.aktifMi}"/>
+                </p:column>
+                <p:column headerText="Salon Adı">
+                    <h:outputText value="#{cihaz.salon.salonAdi}"/>
+                </p:column>
+            </p:dataTable>
+        </h:panelGrid>
+        <h:panelGrid id="chzPg" columns="4" styleClass="rightPanel">
+            <h3>Yeni Cihaz Tanımı</h3>
+            <h:outputText/>
+            <h:outputText/>
+            <h:outputText/>
+
+            <h:outputText value="Cihaz Kodu"/>
+            <h:outputText value="*"/>
+            <p:inputText id="kodu" value="#{cihazBean.cihaz.kodu}" required="true"/>
+            <p:message for="kodu"/>
+
+            <h:outputText value="Cihaz Adı"/>
+            <h:outputText value="*"/>
+            <p:inputText id="adi" value="#{cihazBean.cihaz.adi}" required="true"/>
+            <p:message for="adi"/>
+
+            <h:outputText value="Salonu"/>
+            <h:outputText value="*"/>
+            <p:selectOneMenu id="salon" value="#{cihazBean.salon}" converter="#{listConverter}">
+                <f:selectItem itemLabel="Salon Seçiniz-" itemValue="#{null}"/>
+                <f:selectItems value="#{salonBean.salonList}" var="salon" itemValue="#{salon}"
+                               itemLabel="#{salon.salonAdi}"/>
+                <p:ajax update=":FRMCihz:chzPg" listener="#{cihazBean.salon}"/>
+            </p:selectOneMenu>
+            <p:message for="salon"/>
+
+            <h:outputText value="Cihaz Aktif Mi"/>
+            <h:outputText value="*"/>
+            <p:selectBooleanCheckbox id="aktifMi" value="#{cihazBean.cihaz.aktifMi}" required="true"/>
+            <p:message for="aktifMi"/>
+
+            <p:commandButton value="Kaydet" actionListener="#{cihazBean.save()}" ajax="false"
+                             icon="fa fa-save" styleClass="ui-priority-primary" style="left: 125px"/>
+            <p:commandButton value="Sil" actionListener="#{cihazBean.delete()}" ajax="false"
+                             icon="ui-icon-trash" style="left: 150px"/>
+            <p:commandButton value="Yeni" actionListener="#{cihazBean.reset()}" ajax="false"
+                             icon="ui-icon-trash" style="left: 175px"/>
+
+        </h:panelGrid>
+    </h:form>
+</h:body>
 </html>

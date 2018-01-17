@@ -1,15 +1,16 @@
 package com.rdemir.donemprojesi.controllers;
 
 import com.rdemir.donemprojesi.entities.Cihaz;
+import com.rdemir.donemprojesi.entities.Salon;
 import com.rdemir.donemprojesi.interfaces.services.ICihazService;
 import com.rdemir.donemprojesi.scope.ScopeName;
-import org.primefaces.component.panelgrid.PanelGrid;
 import org.primefaces.event.SelectEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import javax.faces.component.html.HtmlPanelGrid;
 import javax.faces.context.FacesContext;
 import java.util.List;
 
@@ -21,6 +22,7 @@ public class CihazController {
 
     private Cihaz cihaz;
     private Cihaz selectedCihaz;
+    private Salon salon;
     private List<Cihaz> cihazList;
 
     public CihazController() {
@@ -33,6 +35,7 @@ public class CihazController {
     }
 
     public void save() {
+        cihaz.setSalon(salon);
         cihazService.save(cihaz);
     }
 
@@ -46,7 +49,7 @@ public class CihazController {
 
     public void reset() {
         FacesContext facesContext = FacesContext.getCurrentInstance();
-        PanelGrid panelGrid = (PanelGrid) facesContext.getViewRoot().findComponent(":FRMSln:slnPG");
+        HtmlPanelGrid panelGrid = (HtmlPanelGrid) facesContext.getViewRoot().findComponent(":FRMCihz:chzPg");
         panelGrid.clearInitialState();
     }
 
@@ -70,11 +73,19 @@ public class CihazController {
         return cihazList;
     }
 
+    public Salon getSalon() {
+        return salon;
+    }
+
+    public void setSalon(Salon salon) {
+        this.salon = salon;
+    }
+
     public void setCihazList(List<Cihaz> cihazList) {
         this.cihazList = cihazList;
     }
 
-    public void onRowSelect(SelectEvent event) {
+    public void onDcRowSelect(SelectEvent event) {
         selectedCihaz = (Cihaz) event.getObject();
         this.cihaz = selectedCihaz;
     }

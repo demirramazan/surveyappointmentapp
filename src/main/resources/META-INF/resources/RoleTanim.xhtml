@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="./css/style.css"/>
     <h:form>
         <p:menubar>
+            <p:menuitem value="Anasayfa" url="./home.xhtml" icon="fa fa-home"/>
             <p:submenu label="Tanımlama İşlemleri" icon="ui-icon-person">
                 <p:menuitem value="Kullanıcı Tanım" url="./UserTanim.xhtml" icon="ui-icon-person"/>
                 <p:menuitem value="Role Tanım" url="./RoleTanim.xhtml" icon="ui-icon-person"/>
@@ -40,46 +41,50 @@
 </h:head>
 <h:body>
     <h:form id="FRMRole">
-        <h:panelGrid styleClass="leftPanel">
-            <p:dataTable id="roleDT" var="role" value="#{roleBean.roles}" selectionMode="single"
-                         selection="#{roleBean.selectedRole}" rowKey="#{role.id}" >
+        <div class="leftPanel">
+            <h:panelGrid>
+                <p:dataTable id="roleDT" var="role" value="#{roleBean.roles}" selectionMode="single"
+                             selection="#{roleBean.selectedRole}" rowKey="#{role.id}">
 
-                <p:ajax event="rowSelect" listener="#{roleBean.onRowSelect}" update=":FRMRole:rolePg"/>
-                <p:column headerText="Rol Adı" style="min-width: 100px; height: 20px;">
-                    <h:outputText value="#{role.name}"/>
-                </p:column>
-                <p:column headerText="Rol Kodu">
-                    <h:outputText value="#{role.code}"/>
-                </p:column>
-                <p:column headerText="Rol Açıklama-">
-                    <h:outputText value="#{role.description}"/>
-                </p:column>
-            </p:dataTable>
-        </h:panelGrid>
-        <h:panelGrid columns="4" id="rolePg" styleClass="rightPanel">
-            <h3>Yeni Role Kaydı ve Güncellme</h3>
-            <h:outputText/>
-            <h:outputText/>
-            <h:outputText/>
+                    <p:ajax event="rowSelect" listener="#{roleBean.onRowSelect}" update=":FRMRole:rolePg"/>
+                    <p:column headerText="Rol Adı" style="min-width: 100px; height: 20px;">
+                        <h:outputText value="#{role.name}"/>
+                    </p:column>
+                    <p:column headerText="Rol Kodu">
+                        <h:outputText value="#{role.code}"/>
+                    </p:column>
+                    <p:column headerText="Rol Açıklama-">
+                        <h:outputText value="#{role.description}"/>
+                    </p:column>
+                </p:dataTable>
+            </h:panelGrid>
+        </div>
+        <div class="rightPanel">
+            <h:panelGrid columns="4" id="rolePg">
+                <h3>Yeni Role Kaydı ve Güncellme</h3>
+                <h:outputText/>
+                <h:outputText/>
+                <h:outputText/>
 
-            <h:outputText value="Adı"/>
-            <h:outputText value="*"/>
-            <p:inputText id="name" value="#{roleBean.role.name}" required="true"/>
-            <p:message for="name"/>
+                <h:outputText value="Adı"/>
+                <h:outputText value="*"/>
+                <p:inputText id="name" value="#{roleBean.role.name}" required="true"/>
+                <p:message for="name"/>
 
-            <h:outputText value="Kodu"/>
-            <h:outputText value="*"/>
-            <p:inputText id="code" value="#{roleBean.role.code}" required="true"/>
-            <p:message for="code"/>
+                <h:outputText value="Kodu"/>
+                <h:outputText value="*"/>
+                <p:inputText id="code" value="#{roleBean.role.code}" required="true"/>
+                <p:message for="code"/>
 
-            <h:outputText value="Rol Açıklama"/>
-            <h:outputText value="*"/>
-            <p:inputText id="description" value="#{roleBean.role.description}" required="true"/>
-            <p:message for="code"/>
+                <h:outputText value="Rol Açıklama"/>
+                <h:outputText value="*"/>
+                <p:inputText id="description" value="#{roleBean.role.description}" required="true"/>
+                <p:message for="code"/>
 
-            <p:commandButton value="Kaydet" actionListener="#{roleBean.saveRole()}" ajax="false"
-                             icon="fa fa-save" styleClass="ui-priority-primary" style="left: 125px"/>
-        </h:panelGrid>
+                <p:commandButton value="Kaydet" actionListener="#{roleBean.saveRole()}" ajax="false"
+                                 icon="fa fa-save" styleClass="ui-priority-primary" style="left: 125px"/>
+            </h:panelGrid>
+        </div>
     </h:form>
 </h:body>
 </html>
