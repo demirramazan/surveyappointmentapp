@@ -12,7 +12,7 @@ public class HastaBasvuru extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "HASTA_ID",
-            foreignKey = @ForeignKey(name = "FK_HASTA_ISLEM_HASTA"))
+            foreignKey = @ForeignKey(name = "FK_HASTA_ISLEM_HASTA_ID"))
     private Hasta hasta;
 
     @Column(name = "HASTA_KURUM")

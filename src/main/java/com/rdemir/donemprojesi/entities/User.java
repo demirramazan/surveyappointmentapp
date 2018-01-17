@@ -29,7 +29,7 @@ public class User extends BaseEntity {
     private Role role;
 
     @OneToOne
-    @JoinColumn(name = "PERSONEL_ID", foreignKey = @ForeignKey(name = "FK_USER_PERSONEL"))
+    @JoinColumn(name = "PERSONEL_ID", foreignKey = @ForeignKey(name = "FK_USER_PERSONEL_ID"))
     private Personel personel;
 
     public User() {
