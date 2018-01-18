@@ -47,6 +47,7 @@ public class DonemprojesiApplication extends SpringBootServletInitializer implem
             servletContext.setInitParameter("primefaces.THEME", "bootstrap");
             servletContext.setInitParameter("primefaces.CLIENT_SIDE_VALIDATION", Boolean.TRUE.toString());
             servletContext.setInitParameter("javax.faces.FACELETS_SKIP_COMMENTS", Boolean.TRUE.toString());
+            servletContext.setInitParameter("javax.faces.STATE_SAVING_METHOD", "client");
             servletContext.setInitParameter("primefaces.FONT_AWESOME", Boolean.TRUE.toString());
             servletContext.setInitParameter("primefaces.UPLOADER", "commons");
         };

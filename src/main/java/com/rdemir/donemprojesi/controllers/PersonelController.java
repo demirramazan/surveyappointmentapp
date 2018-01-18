@@ -3,6 +3,7 @@ package com.rdemir.donemprojesi.controllers;
 import com.rdemir.donemprojesi.entities.Birim;
 import com.rdemir.donemprojesi.entities.Personel;
 import com.rdemir.donemprojesi.interfaces.services.IPersonelService;
+import com.rdemir.donemprojesi.util.Cinsiyet;
 import com.rdemir.donemprojesi.util.ScopeUtil;
 import org.primefaces.event.SelectEvent;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import javax.faces.component.html.HtmlPanelGrid;
 import javax.faces.context.FacesContext;
+import javax.faces.model.SelectItem;
 import java.util.List;
 
 @Component("personelBean")
@@ -21,6 +23,8 @@ public class PersonelController {
     private IPersonelService personelService;
 
     private Personel personel;
+    private Cinsiyet cinsiyet;
+    private SelectItem[] cinsiyetList = getCinsiyetList();
     private Personel selectedPersonel;
     private List<Personel> personelList;
     private Birim birim;
@@ -34,7 +38,8 @@ public class PersonelController {
         personel = new Personel();
     }
 
-    public void save() {
+    public void savePersonel() {
+        personel.setCinsiyet(cinsiyet);
         personel.setBirim(birim);
         personelService.save(personel);
     }
@@ -73,6 +78,24 @@ public class PersonelController {
 
     public void setBirim(Birim birim) {
         this.birim = birim;
+    }
+
+    public Cinsiyet getCinsiyet() {
+        return cinsiyet;
+    }
+
+
+    public void setCinsiyet(Cinsiyet cinsiyet) {
+        this.cinsiyet = cinsiyet;
+    }
+
+    public SelectItem[] getCinsiyetList() {
+        SelectItem[] items = new SelectItem[Cinsiyet.values().length];
+        int i = 0;
+        for (Cinsiyet cinsiyet : Cinsiyet.values()) {
+            items[i++] = new SelectItem(cinsiyet, cinsiyet.getAdi());
+        }
+        return items;
     }
 
     public void reset() {

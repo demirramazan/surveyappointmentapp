@@ -44,8 +44,8 @@ public class InitializeCommand implements CommandLineRunner {
             user = new User();
             user.setName("Ramazan");
             user.setSurname("Demir");
-            user.setUsername("rdemir");
-            user.setPassword("123123");
+            user.setUsername("admin");
+            user.setPassword("123");
             user.setEnabled(true);
             user.setRole(role);
             userRepository.saveAndFlush(user);

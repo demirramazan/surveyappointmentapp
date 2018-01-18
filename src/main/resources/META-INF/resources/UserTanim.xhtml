@@ -101,7 +101,7 @@
                 <h:outputText value="Rolü"/>
                 <h:outputText value="*"/>
                 <h:selectOneMenu id="role" value="#{userBean.role}" converter="#{listConverter}">
-                    <p:ajax update=":FRMUsr:userPG" listener="#{userBean.salon}"/>
+                    <p:ajax update=":FRMUsr:userPG" listener="#{userBean.role}"/>
                     <f:selectItem itemLabel="Rol Seçiniz-" itemValue="#{null}"/>
                     <f:selectItems value="#{roleBean.roles}" var="role" itemValue="#{role}" itemLabel="#{role.name}"/>
                 </h:selectOneMenu>
