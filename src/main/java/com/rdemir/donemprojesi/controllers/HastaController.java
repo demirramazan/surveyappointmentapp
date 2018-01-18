@@ -39,6 +39,7 @@ public class HastaController {
     }
 
     public void saveHasta() {
+        hasta.setKanGrubu(kanGrubu);
         hasta.setCinsiyet(cinsiyet);
         hastaService.save(hasta);
     }

@@ -23,8 +23,9 @@
                 <p:menuitem value="Cihaz Tanım" url="./CihazTanim.xhtml"/>
             </p:submenu>
             <p:submenu label="Hasta Kabul İşlemleri">
-                <p:menuitem value="Hasta Kabul" url="./HastaBasvuru.xhtml"/>
-                <p:menuitem value="Doktor Kabul" url="./HastaTetkikIstem.xhtml"/>
+                <p:menuitem value="Hasta Kayıt" url="/HastaTanim.xhtml"/>
+                <p:menuitem value="Hasta Kabul" url="/HastaBasvuru.xhtml"/>
+                <p:menuitem value="Tetkik İstem" url="/HastaTetkikIstem.xhtml"/>
                 <p:menuitem value="Tetkik Kabul" url="./TetkikKabul.xhtml" includeViewParams="MR"/>
             </p:submenu>
             <p:submenu label="Randevu İşlemleri" icon="fa-calendar">
@@ -59,7 +60,7 @@
                         <h:outputText value="#{hasta.hastaCepTelefonu}"/>
                     </p:column>
                     <p:column headerText="Hasta Dogum Tarihi">
-                        <p:calendar value="#{hasta.dogumTarihi}" pattern="dd.MM.yyyy" />
+                        <p:calendar value="#{hasta.dogumTarihi}" pattern="dd.MM.yyyy"/>
                     </p:column>
                 </p:dataTable>
             </h:panelGrid>
@@ -109,8 +110,7 @@
                         <p:outputLabel/>
                     </p:column>
                     <p:column>
-                        <p:selectOneMenu id="cinsiyet" value="#{hastaBean.cinsiyet}" converter="#{cinsiyetConverter}"
-                                         style="width: 50% !important">
+                        <p:selectOneMenu id="cinsiyet" value="#{hastaBean.cinsiyet}" converter="#{cinsiyetConverter}">
                             <f:selectItem itemLabel="Seçiniz" itemValue=""/>
                             <f:selectItems var="cinsiyet" value="#{hastaBean.cinsiyetList}" itemValue="#{cinsiyet.kodu}"
                                            itemLabel="#{cinsiyet.adi}"/>
@@ -190,25 +190,23 @@
                                     pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/>
                         </p:inputText>
                     </p:column>
-                    <!--<p:column>-->
-                        <!--<p:outputLabel value="Hasta Kan Grubu"/>-->
-                    <!--</p:column>-->
-                    <!--<p:column>-->
-                        <!--<p:selectOneMenu id="kanGrubu" value="#{hastaBean.kanGrubu}" converter="#{kanGrubuConventer}"-->
-                                         <!--style="width: 50% !important">-->
-                            <!--<f:selectItem itemLabel="Seçiniz" itemValue=""/>-->
-                            <!--<f:selectItems var="kanGrubu" value="#{hastaBean.kanGrubuList}" itemValue="#{kanGrubu}"-->
-                                           <!--itemLabel="#{kanGrubu.name()}"/>-->
-                        <!--</p:selectOneMenu>-->
-                    <!--</p:column>-->
+                    <p:column>
+                        <p:outputLabel value="Hasta Kan Grubu"/>
+                    </p:column>
+                    <p:column>
+                        <p:selectOneMenu id="kanGrubu" value="#{hastaBean.kanGrubu}">
+                            <f:selectItem itemLabel="Seçiniz" itemValue=""/>
+                            <f:selectItems var="kanGrubu" value="#{hastaBean.kanGrubuList}" itemValue="#{kanGrubu}"
+                                           itemLabel="#{kanGrubu.name()}"/>
+                        </p:selectOneMenu>
+                    </p:column>
                 </p:row>
                 <p:row>
                     <p:column>
                         <p:outputLabel value="Hasta Medeni Hali"/>
                     </p:column>
                     <p:column>
-                        <p:selectOneMenu id="medeniHal" value="#{hastaBean.hasta.hastaMedeniHali}"
-                                         style="width: 50% !important">
+                        <p:selectOneMenu id="medeniHal" value="#{hastaBean.hasta.hastaMedeniHali}">
                             <f:selectItem itemLabel="Seçiniz" itemValue=""/>
                             <f:selectItem itemLabel="Bekar" itemValue="Bekar"/>
                             <f:selectItem itemLabel="Evli" itemValue="Evli"/>
