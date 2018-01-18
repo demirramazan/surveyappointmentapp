@@ -3,8 +3,8 @@ package com.rdemir.donemprojesi.controllers;
 import com.rdemir.donemprojesi.entities.Birim;
 import com.rdemir.donemprojesi.entities.Personel;
 import com.rdemir.donemprojesi.interfaces.services.IPersonelService;
+import com.rdemir.donemprojesi.scope.ScopeName;
 import com.rdemir.donemprojesi.util.Cinsiyet;
-import com.rdemir.donemprojesi.util.ScopeUtil;
 import org.primefaces.event.SelectEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -17,7 +17,7 @@ import javax.faces.model.SelectItem;
 import java.util.List;
 
 @Component("personelBean")
-@Scope(ScopeUtil.SESSION)
+@Scope(ScopeName.SESSION)
 public class PersonelController {
     @Autowired
     private IPersonelService personelService;

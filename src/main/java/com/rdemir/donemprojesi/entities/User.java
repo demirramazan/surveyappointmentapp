@@ -6,7 +6,9 @@ import javax.persistence.*;
 import static javax.persistence.CascadeType.*;
 
 @Entity
-@Table(name = "USER", uniqueConstraints = @UniqueConstraint(name = "UNQ_USERNAME", columnNames = {"username"}))
+@Table(name = "USER",
+uniqueConstraints = @UniqueConstraint(name = "UNQ_USERNAME", columnNames = {"username"})
+,schema = "hbys")
 public class User extends BaseEntity {
 
     @Column(name = "USERNAME")

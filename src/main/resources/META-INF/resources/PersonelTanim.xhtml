@@ -42,7 +42,7 @@
     <h:form id="FRMPrsnl">
         <div class="leftPanel">
             <h:panelGrid>
-                <p:dataTable id="slnDT" var="cihaz" value="#{personelBean.personelList}" selectionMode="single"
+                <p:dataTable id="prsnl" var="personel" value="#{personelBean.personelList}" selectionMode="single"
                              selection="#{personelBean.selectedPersonel}" rowKey="#{personel.id}">
 
                     <p:ajax event="rowDblselect" listener="#{personelBean.onDcRowSelect}" update=":FRMPrsnl:psnlPg"/>
@@ -107,7 +107,7 @@
                 <h:outputText value="*"/>
                 <p:selectOneMenu id="cinsiyet" value="#{personelBean.cinsiyet}"  converter="#{cinsiyetConverter}" style="width: 100% !important">
                     <f:selectItem itemLabel="Seçiniz" itemValue=""/>
-                    <f:selectItems var="cinsiyet" value="#{personelBean.cinsiyetList}" itemValue="#{cinsiyet}" itemLabel="#{cinsiyet.adi}"/>
+                    <f:selectItems var="cinsiyet" value="#{personelBean.cinsiyetList}" itemValue="#{cinsiyet.kodu}" itemLabel="#{cinsiyet.adi}"/>
                 </p:selectOneMenu>
                 <p:message for="cinsiyet"/>
 
@@ -128,8 +128,8 @@
                                  icon="fa fa-save" styleClass="ui-priority-primary" style="left: 125px"/>
                 <p:commandButton value="Sil" actionListener="#{personelBean.delete()}" ajax="false"
                                  icon="ui-icon-trash" style="left: 135px"/>
-                <p:commandButton value="Yeni" actionListener="#{personelBean.reset()}" ajax="false"
-                                 icon="ui-icon-plus"/>
+                <!--<p:commandButton value="Yeni" actionListener="#{personelBean.reset()}" ajax="false"-->
+                                 <!--icon="ui-icon-plus"/>-->
 
             </h:panelGrid>
         </div>

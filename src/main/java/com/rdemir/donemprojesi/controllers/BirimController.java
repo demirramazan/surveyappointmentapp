@@ -3,7 +3,7 @@ package com.rdemir.donemprojesi.controllers;
 import com.rdemir.donemprojesi.entities.Birim;
 import com.rdemir.donemprojesi.entities.Salon;
 import com.rdemir.donemprojesi.interfaces.services.IBirimService;
-import com.rdemir.donemprojesi.util.ScopeUtil;
+import com.rdemir.donemprojesi.scope.ScopeName;
 import org.primefaces.event.SelectEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -15,7 +15,7 @@ import javax.faces.context.FacesContext;
 import java.util.List;
 
 @Component("birimBean")
-@Scope(ScopeUtil.SESSION)
+@Scope(ScopeName.SESSION)
 public class BirimController {
     @Autowired
     private IBirimService birimService;
