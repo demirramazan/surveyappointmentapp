@@ -81,7 +81,7 @@ public class PersonelController {
     }
 
     public Cinsiyet getCinsiyet() {
-        return cinsiyet;
+            return cinsiyet;
     }
 
 

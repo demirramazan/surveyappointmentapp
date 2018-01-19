@@ -24,8 +24,10 @@ public class HastaBasvuruServiceImp implements IHastaBasvuruService<HastaBasvuru
     }
 
     @Override
-    public void save(HastaBasvuru hastaBasvuru) {
-        basvuruRepository.save(hastaBasvuru);
+    public HastaBasvuru save(HastaBasvuru hastaBasvuru) {
+        Integer basvuruNo=basvuruRepository.getMaxBasvuruNo();
+        hastaBasvuru.setBasvuruNo(basvuruNo);
+        return basvuruRepository.save(hastaBasvuru);
     }
 
     @Override

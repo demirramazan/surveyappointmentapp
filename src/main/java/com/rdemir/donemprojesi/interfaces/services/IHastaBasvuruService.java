@@ -7,7 +7,7 @@ public interface IHastaBasvuruService<T> {
 
     T findOne(Long id);
 
-    void save(T t);
+    T save(T t);
 
     void delete(Long id);
 }
