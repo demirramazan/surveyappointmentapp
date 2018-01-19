@@ -2,7 +2,7 @@ package com.rdemir.donemprojesi.interfaces.services;
 
 import java.util.List;
 
-public interface IRandevuSablon<T> {
+public interface IHastaBasvuruDetayService<T> {
     List<T> findAll();
 
     T findOne(Long id);
