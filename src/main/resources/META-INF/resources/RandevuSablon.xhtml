@@ -3,7 +3,6 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
 <h:head>
     <title>Randevu Şablon</title>
@@ -29,15 +28,94 @@
                 <p:menuitem value="Tetkik İstem" url="/HastaTetkikIstem.xhtml"/>
                 <p:menuitem value="Tetkik Kabul" url="./TetkikKabul.xhtml" includeViewParams="MR"/>
             </p:submenu>
-            <p:submenu label="Randevu İşlemleri" icon="fa-calendar">
-                <p:menuitem value="Randevu Şablon" url="./RandevuSablon.xhtml" icon="fa-calendar"/>
-                <p:menuitem value="Randevu Seans" url="./RandevuSeans.xhtml" icon="fa-calendar"/>
-                <p:menuitem value="Randevu Alma" url="./Randevu.xhtml" icon="fa-calendar"/>
+            <p:submenu label="Randevu İşlemleri" icon="ui-icon-calendar">
+                <p:menuitem value="Randevu Şablon" url="./RandevuSablon.xhtml" icon="ui-icon-calendar"/>
+                <p:menuitem value="Randevu Seans" url="./RandevuSeans.xhtml" icon="ui-icon-calendar"/>
+                <p:menuitem value="Randevu Alma" url="./Randevu.xhtml" icon="ui-icon-calendar"/>
             </p:submenu>
-            <p:menuitem value="Çıkış" style="float: right"  action="#{sessionInitializer.exit}" icon="ui-icon-close"/>
+            <p:menuitem value="Çıkış" style="float: right" action="#{sessionInitializer.exit}" icon="ui-icon-close"/>
         </p:menubar>
         <!--<p:menubar model="#{sessionInitializer.menuModel}"/>-->
     </h:form>
-
 </h:head>
+
+<h:body>
+    <h:form id="FRMRandSabln">
+        <div class="leftPanel">
+            <h:panelGrid>
+                <p:dataTable id="rndSbln" var="randevuSablon" value="#{randevuSablonBean.randevuSablonList}"
+                             selectionMode="single"
+                             selection="#{randevuSablonBean.selectedRandSablon}" rowKey="#{randevuSablon.id}">
+                    <p:ajax event="rowDblselect" listener="#{randevuSablonBean.onDcRowSelect}"
+                            update=":FRMRandSabln:sblnPg"/>
+                    <p:column headerText="Şablon Adı">
+                        <h:outputText value="#{randevuSablon.ad}"/>
+                    </p:column>
+                    <p:column headerText="Şablon Başlangıç">
+                        <h:outputText value="#{randevuSablon.saatBaslangic}"/>
+                    </p:column>
+                    <p:column headerText="Şablon Bitiş Saati">
+                        <h:outputText value="#{randevuSablon.saatBitis}"/>
+                    </p:column>
+                    <p:column headerText="Salon Adı">
+                        <h:outputText value="#{randevuSablon.salon.salonAdi}"/>
+                    </p:column>
+                    <p:column headerText="Cihaz Adı">
+                        <p:calendar value="#{randevuSablon.cihaz.adi}" pattern="dd.MM.yyyy"/>
+                    </p:column>
+                </p:dataTable>
+            </h:panelGrid>
+        </div>
+        <div class="rightPanel">
+            <!--<h:panelGrid id="hstBsvrPg" style="margin: 0 auto">-->
+            <p:panelGrid id="sblnPg" columns="4" layout="grid">
+                <p:outputLabel value="Şablon Aktif Mi"/>
+                <p:selectBooleanCheckbox id="durum" value="#{randevuSablonBean.randevuSablon.durum}" required="true"
+                                         requiredMessage="Randevu Aktif Durumunu Seçiniz!"/>
+                <p:outputLabel value="Şablon Adı"/>
+                <p:inputText id="ad" value="#{randevuSablonBean.randevuSablon.ad}" required="true"
+                             requiredMessage="Şablon Adı giriniz"/>
+
+                <p:outputLabel value="Şablon Başlangıç Saati"/>
+                <p:inputText id="basSaat" value="#{randevuSablonBean.randevuSablon.saatBaslangic}" required="true"
+                             requiredMessage="Randevu Şablon Başlangıc Saatini Giriniz"/>
+                <p:outputLabel value="Şablon Bitiş Saati"/>
+                <p:inputText id="sblnBts" value="#{randevuSablonBean.randevuSablon.saatBitis}" required="true"
+                             requiredMessage="Randevu Şablon Bitiş Saatini Giriniz"/>
+
+                <p:outputLabel value="Öğlen Başlangıç Saati"/>
+                <p:inputText value="#{randevuSablonBean.randevuSablon.saatOglenBaslangic}" required="true"
+                             requiredMessage="Öglen Başlangıç Saatini Giriniz"/>
+                <p:outputLabel value="Öğlen Bitiş Saati"/>
+                <p:inputText value="#{randevuSablonBean.randevuSablon.saatOglenBitis}" required="true"
+                             requiredMessage="Öglen Bitiş Saatini Giriniz!"/>
+
+                <p:outputLabel value="Randevu Süresi"/>
+                <p:inputText value="#{randevuSablonBean.randevuSablon.randevuSuresi}" required="true"
+                             requiredMessage="Randevu Süresini Giriniz!!"/>
+                <p:outputLabel value="Salon"/>
+                <h:selectOneMenu id="salon" value="#{randevuSablonBean.salon}" converter="#{listConverter}">
+                    <f:selectItem itemLabel="Salon Seçiniz" itemValue="#{null}"/>
+                    <f:selectItems value="#{randevuSablonBean.salonList}" var="salon" itemValue="#{salon}"
+                                   itemLabel="#{salon.salonAdi}"/>
+                </h:selectOneMenu>
+
+                <p:outputLabel value="Cihaz"/>
+                <h:selectOneMenu id="cihaz" value="#{randevuSablonBean.cihaz}" converter="#{listConverter}">
+                    <f:selectItem itemLabel="Cihaz Seçiniz" itemValue="#{null}"/>
+                    <f:selectItems value="#{randevuSablonBean.cihazList}" var="cihaz" itemValue="#{cihaz}"
+                                   itemLabel="#{cihaz.adi}"/>
+                    <p:ajax update=":FRMRandSabln:sblnPg" listener="#{randevuSablonBean.cihaz}"/>
+                </h:selectOneMenu>
+                <p:outputLabel/>
+                <p:outputLabel/>
+
+                <p:commandButton value="Kaydet" actionListener="#{randevuSablonBean.saveSablon()}" ajax="false"
+                                 icon="fa fa-save" styleClass="ui-priority-primary" style="left: 125px"/>
+                <p:commandButton value="Sil" actionListener="#{randevuSablonBean.deleteSablon()}" ajax="false"
+                                 icon="ui-icon-trash" style="left: 135px"/>
+            </p:panelGrid>
+        </div>
+    </h:form>
+</h:body>
 </html>

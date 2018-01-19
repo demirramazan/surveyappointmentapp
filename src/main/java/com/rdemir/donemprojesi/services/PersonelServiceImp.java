@@ -1,5 +1,6 @@
 package com.rdemir.donemprojesi.services;
 
+import com.rdemir.donemprojesi.entities.Birim;
 import com.rdemir.donemprojesi.entities.Personel;
 import com.rdemir.donemprojesi.interfaces.services.IPersonelService;
 import com.rdemir.donemprojesi.repositories.PersonelRepository;
@@ -16,6 +17,12 @@ public class PersonelServiceImp implements IPersonelService<Personel> {
     @Override
     public List<Personel> getPersonelList() {
         return personelRepository.findAll();
+    }
+
+    @Override
+    public List<Personel> getPersonelListByBirim(Birim birim) {
+//        return personelRepository.findAllByBirim_Id(birim.getId());
+        return null;
     }
 
     @Override

@@ -25,6 +25,7 @@ public class HastaBasvuruDetayServiceImp implements IHastaBasvuruDetayService<Ha
 
     @Override
     public void save(HastaBasvuruDetay hastaBasvuruDetay) {
+        hastaBasvuruDetay.setSiraNumarasi(basvuruDetayRepository.getMaxSiraNumarasi() + 1);
         basvuruDetayRepository.save(hastaBasvuruDetay);
     }
 

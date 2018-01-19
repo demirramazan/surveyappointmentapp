@@ -115,7 +115,8 @@
 
                 <p:commandButton value="Kaydet" actionListener="#{userBean.save}" ajax="false"
                                  icon="fa fa-save" styleClass="ui-priority-primary" style="left: 125px"/>
-
+                <p:commandButton value="Sil" actionListener="#{userBean.delete()}" ajax="false"
+                                 icon="ui-icon-trash" style="left: 135px"/>
             </h:panelGrid>
         </div>
     </h:form>

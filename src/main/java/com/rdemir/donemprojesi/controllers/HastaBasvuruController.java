@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import javax.faces.event.ValueChangeEvent;
 import java.util.List;
 
 @Component("hastaBasvuruBean")
@@ -28,6 +29,7 @@ public class HastaBasvuruController {
     private IPersonelService personelService;
 
     private Birim birim;
+    private Birim changedBirim;
     private List<Birim> birimList;
     private Personel personel;
     private List<Personel> personelList;
@@ -156,5 +158,21 @@ public class HastaBasvuruController {
 
     public void setHastaBasvuruDetay(HastaBasvuruDetay hastaBasvuruDetay) {
         this.hastaBasvuruDetay = hastaBasvuruDetay;
+    }
+
+    public Birim getChangedBirim() {
+        return changedBirim;
+    }
+
+    public void setChangedBirim(Birim changedBirim) {
+        this.changedBirim = changedBirim;
+    }
+
+    public void selectOneMenuListener(ValueChangeEvent event) {
+        Object newBirim = event.getNewValue();
+        personelList = personelService.getPersonelListByBirim((Birim) newBirim);
+        if (personelList != null && personelList.size() > 0) {
+            personel = personelList.get(0);
+        }
     }
 }

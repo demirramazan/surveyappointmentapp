@@ -6,7 +6,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 <h:head>
-    <title>Kullanıcı Tanım</title>
+    <title>Hasta Tanım</title>
     <link rel="stylesheet" type="text/css" href="./css/style.css"/>
     <h:form>
         <p:menubar>
@@ -64,173 +64,77 @@
                 </p:dataTable>
             </h:panelGrid>
         </div>
+
         <div class="rightPanel">
-            <h:panelGrid id="hstPg">
-                <p:row>
-                    <p:column>
-                        <p:outputLabel value="Hasta Adı"/>
-                        <p:outputLabel/>
-                        <p:outputLabel/>
-                    </p:column>
+            <!--<h:panelGrid id="hstPg" style="width: 100%; height: 100%">-->
+            <p:panelGrid id="hstPg" columns="4" layout="grid">
+                <p:outputLabel value="Hasta Adı"/>
+                <p:inputText id="ad" value="#{hastaBean.hasta.hastaAdi}" required="true"
+                             requiredMessage="Hasta adı Zorunlu Alandır!"/>
+                <p:outputLabel value="Hasta Soyadı"/>
+                <p:inputText id="soyad" value="#{hastaBean.hasta.hastaSoyadi}" required="true"
+                             requiredMessage="Hasta Soyadı Zorunlu Alandır!"/>
 
-                    <p:column>
-                        <p:inputText id="ad" value="#{hastaBean.hasta.hastaAdi}" required="true"
-                                     requiredMessage="Hasta adı Zorunlu Alandır!"/>
-                        <p:outputLabel/>
-                        <p:outputLabel/>
-                    </p:column>
+                <p:outputLabel value="Hasta Kimlik No"/>
+                <p:inputText id="kimlikNo" value="#{hastaBean.hasta.hastaKimlikNo}" required="true"
+                             requiredMessage="Hasta Kimlik Numarası Zorunlu Alandır!"/>
+                <p:outputLabel value="Cinsiyet"/>
+                <p:selectOneMenu id="cinsiyet" value="#{hastaBean.cinsiyet}" converter="#{cinsiyetConverter}">
+                    <f:selectItem itemLabel="Seçiniz" itemValue=""/>
+                    <f:selectItems var="cinsiyet" value="#{hastaBean.cinsiyetList}" itemValue="#{cinsiyet.kodu}"
+                                   itemLabel="#{cinsiyet.adi}"/>
+                </p:selectOneMenu>
 
-                    <p:column>
-                        <p:outputLabel value="Hasta Soyadı"/>
-                        <p:outputLabel/>
-                        <p:outputLabel/>
-                    </p:column>
-                    <p:column>
-                        <p:inputText id="soyad" value="#{hastaBean.hasta.hastaSoyadi}" required="true"
-                                     requiredMessage="Hasta Soyadı Zorunlu Alandır!"/>
-                        <p:outputLabel/>
-                        <p:outputLabel/>
-                    </p:column>
+                <p:outputLabel value="Dogum Tarihi"/>
+                <p:calendar value="#{hastaBean.hasta.dogumTarihi}" locale="tr" navigator="true"
+                            showButtonPanel="true" pattern="dd.MM.yyyy"/>
+                <p:outputLabel value="Dogum Yeri "/>
+                <p:inputText value="#{hastaBean.hasta.dogumYeri}" required="true"
+                             requiredMessage="Dogum Yeri Zorunludur"/>
 
-                </p:row>
+                <p:outputLabel value="Anne Adı"/>
+                <p:inputText value="#{hastaBean.hasta.anneAdi}"/>
+                <p:outputLabel value="Baba Adı"/>
+                <p:inputText value="#{hastaBean.hasta.babaAdi}"/>
 
-                <p:row>
-                    <p:column><p:outputLabel value="Hasta Kimlik No"/></p:column>
-                    <p:column>
-                        <p:inputText id="kimlikNo" value="#{hastaBean.hasta.hastaKimlikNo}" required="true"
-                                     requiredMessage="Hasta Kimlik Numarası Zorunlu Alandır!"/>
-                        <p:outputLabel/>
-                        <p:outputLabel/>
-                    </p:column>
+                <p:outputLabel value="Hasta Cep Telefonu"/>
+                <p:inputMask id="phonenum" value="#{hastaBean.hasta.hastaCepTelefonu}" mask="(999) 999-9999"/>
+                <p:outputLabel value="Hasta Ev Telefonu"/>
+                <p:inputMask id="homenum" value="#{hastaBean.hasta.hastaEvTelefonu}" mask="(999) 999-9999"/>
 
-                    <p:column>
-                        <p:outputLabel value="Cinsiyet"/>
-                        <p:outputLabel/>
-                        <p:outputLabel/>
-                    </p:column>
-                    <p:column>
-                        <p:selectOneMenu id="cinsiyet" value="#{hastaBean.cinsiyet}" converter="#{cinsiyetConverter}">
-                            <f:selectItem itemLabel="Seçiniz" itemValue=""/>
-                            <f:selectItems var="cinsiyet" value="#{hastaBean.cinsiyetList}" itemValue="#{cinsiyet.kodu}"
-                                           itemLabel="#{cinsiyet.adi}"/>
-                        </p:selectOneMenu>
-                    </p:column>
-                </p:row>
+                <p:outputLabel value="Hasta yakınının telefonu"/>
+                <p:inputMask id="num" value="#{hastaBean.hasta.hastaYakiniTelefon}" mask="(999) 999-9999"/>
+                <p:outputLabel value="Hasta Yakınlık derecesi"/>
+                <p:inputText id="hasYakDer" value="#{hastaBean.hasta.hastaYakinlikDerecesi}"/>
 
-                <p:row>
-                    <p:column>
-                        <p:outputLabel value="Dogum Tarihi"/>
-                    </p:column>
-                    <p:column>
-                        <p:calendar value="#{hastaBean.hasta.dogumTarihi}" locale="tr" navigator="true"
-                                    showButtonPanel="true" pattern="dd.MM.yyyy"/>
-                    </p:column>
+                <p:outputLabel value="Hasta Email"/>
+                <p:inputText id="email" value="#{hastaBean.hasta.hastaEmail}"
+                             validatorMessage="Email hatalıdır!">
+                    <f:validateRegex
+                            pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/>
+                </p:inputText>
+                <p:outputLabel value="Hasta Kan Grubu"/>
+                <p:selectOneMenu id="kanGrubu" value="#{hastaBean.kanGrubu}">
+                    <f:selectItem itemLabel="Seçiniz" itemValue=""/>
+                    <f:selectItems var="kanGrubu" value="#{hastaBean.kanGrubuList}" itemValue="#{kanGrubu}"
+                                   itemLabel="#{kanGrubu.name()}"/>
+                </p:selectOneMenu>
 
-                    <p:column>
-                        <p:outputLabel value="Dogum Yeri "/>
-                    </p:column>
-                    <p:column>
-                        <p:inputText value="#{hastaBean.hasta.dogumYeri}" required="true"
-                                     requiredMessage="Dogum Yeri Zorunludur"/>
-                    </p:column>
-                </p:row>
+                <p:outputLabel value="Hasta Medeni Hali"/>
+                <p:selectOneMenu id="medeniHal" value="#{hastaBean.hasta.hastaMedeniHali}">
+                    <f:selectItem itemLabel="Seçiniz" itemValue=""/>
+                    <f:selectItem itemLabel="Bekar" itemValue="Bekar"/>
+                    <f:selectItem itemLabel="Evli" itemValue="Evli"/>
+                    <f:selectItem itemLabel="Dul" itemValue="Dul"/>
+                </p:selectOneMenu>
+                <p:outputLabel value="Hastanın Adresi"/>
+                <p:inputTextarea id="adres" placeholder="Adres" value="#{hastaBean.hasta.adres}"/>
 
-                <p:row>
-                    <p:column>
-                        <p:outputLabel value="Anne Adı"/>
-                    </p:column>
-                    <p:column>
-                        <p:inputText value="#{hastaBean.hasta.anneAdi}"/>
-                    </p:column>
-                    <p:column>
-                        <p:outputLabel value="Baba Adı"/>
-                    </p:column>
-                    <p:column>
-                        <p:inputText value="#{hastaBean.hasta.babaAdi}"/>
-                    </p:column>
-                </p:row>
-                <p:row>
-                    <p:column>
-                        <p:outputLabel value="Hasta Cep Telefonu"/>
-                    </p:column>
-                    <p:column>
-                        <p:inputMask id="phonenum" value="#{hastaBean.hasta.hastaCepTelefonu}" mask="(999) 999-9999"/>
-                    </p:column>
-                    <p:column>
-                        <p:outputLabel value="Hasta Ev Telefonu"/>
-                    </p:column>
-                    <p:column>
-                        <p:inputMask id="homenum" value="#{hastaBean.hasta.hastaEvTelefonu}" mask="(999) 999-9999"/>
-                    </p:column>
-                </p:row>
-                <p:row>
-                    <p:column>
-                        <p:outputLabel value="Hasta yakınının telefonu"/>
-                    </p:column>
-                    <p:column>
-                        <p:inputMask id="num" value="#{hastaBean.hasta.hastaYakiniTelefon}" mask="(999) 999-9999"/>
-
-                    </p:column>
-                    <p:column>
-                        <p:outputLabel value="Hasta Yakınlık derecesi"/>
-                    </p:column>
-                    <p:column>
-                        <p:inputText id="hasYakDer" value="#{hastaBean.hasta.hastaYakinlikDerecesi}"/>
-                    </p:column>
-                </p:row>
-                <p:row>
-                    <p:column>
-                        <p:outputLabel value="Hasta Email"/>
-                    </p:column>
-                    <p:column>
-                        <p:inputText id="email" value="#{hastaBean.hasta.hastaEmail}"
-                                     validatorMessage="Email hatalıdır!">
-                            <f:validateRegex
-                                    pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/>
-                        </p:inputText>
-                    </p:column>
-                    <p:column>
-                        <p:outputLabel value="Hasta Kan Grubu"/>
-                    </p:column>
-                    <p:column>
-                        <p:selectOneMenu id="kanGrubu" value="#{hastaBean.kanGrubu}">
-                            <f:selectItem itemLabel="Seçiniz" itemValue=""/>
-                            <f:selectItems var="kanGrubu" value="#{hastaBean.kanGrubuList}" itemValue="#{kanGrubu}"
-                                           itemLabel="#{kanGrubu.name()}"/>
-                        </p:selectOneMenu>
-                    </p:column>
-                </p:row>
-                <p:row>
-                    <p:column>
-                        <p:outputLabel value="Hasta Medeni Hali"/>
-                    </p:column>
-                    <p:column>
-                        <p:selectOneMenu id="medeniHal" value="#{hastaBean.hasta.hastaMedeniHali}">
-                            <f:selectItem itemLabel="Seçiniz" itemValue=""/>
-                            <f:selectItem itemLabel="Bekar" itemValue="Bekar"/>
-                            <f:selectItem itemLabel="Evli" itemValue="Evli"/>
-                            <f:selectItem itemLabel="Dul" itemValue="Dul"/>
-                        </p:selectOneMenu>
-                    </p:column>
-                    <p:column>
-                        <p:outputLabel value="Hastanın Adresi"/>
-                    </p:column>
-                    <p:column>
-                        <p:inputTextarea id="adres" placeholder="Adres" value="#{hastaBean.hasta.adres}"/>
-                    </p:column>
-                </p:row>
-
-                <p:row>
-                    <p:column>
-                        <p:commandButton value="Kaydet" actionListener="#{hastaBean.saveHasta()}" ajax="false"
-                                         icon="fa fa-save" styleClass="ui-priority-primary" style="left: 125px"/>
-                    </p:column>
-                    <p:column>
-                        <p:commandButton value="Sil" actionListener="#{personelBean.deleteHasta()}" ajax="false"
-                                         icon="ui-icon-trash" style="left: 135px"/>
-                    </p:column>
-                </p:row>
-            </h:panelGrid>
+                <p:commandButton value="Kaydet" actionListener="#{hastaBean.saveHasta()}" ajax="false"
+                                 icon="fa fa-save" styleClass="ui-priority-primary" style="left: 125px"/>
+                <p:commandButton value="Sil" actionListener="#{personelBean.deleteHasta()}" ajax="false"
+                                 icon="ui-icon-trash" style="left: 135px"/>
+            </p:panelGrid>
         </div>
     </h:form>
 </h:body>

@@ -26,6 +26,13 @@ public class RandevuSeans extends BaseEntity {
     public RandevuSeans() {
     }
 
+    public RandevuSeans(RandevuSablon randevuSablon, String saatBaslangic, String saatBitis, Integer siraNo) {
+        this.randevuSablon = randevuSablon;
+        this.saatBaslangic = saatBaslangic;
+        this.saatBitis = saatBitis;
+        this.siraNo = siraNo;
+    }
+
     public RandevuSablon getRandevuSablon() {
         return randevuSablon;
     }

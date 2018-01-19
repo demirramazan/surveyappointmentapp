@@ -1,7 +1,7 @@
 package com.rdemir.donemprojesi.services;
 
 import com.rdemir.donemprojesi.entities.RandevuSablon;
-import com.rdemir.donemprojesi.interfaces.services.IRandevuSablon;
+import com.rdemir.donemprojesi.interfaces.services.IRandevuSablonService;
 import com.rdemir.donemprojesi.repositories.RandevuSablonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class RandevuSablonServiceImp implements IRandevuSablon<RandevuSablon> {
+public class RandevuSablonServiceImp implements IRandevuSablonService<RandevuSablon> {
 
     @Autowired
     private RandevuSablonRepository sablonRepository;

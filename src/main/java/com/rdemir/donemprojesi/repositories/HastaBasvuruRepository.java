@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface HastaBasvuruRepository extends JpaRepository<HastaBasvuru, Long> {
-    @Query("SELECT coalesce(max(hb.basvuruNo), 1) FROM HastaBasvuru hb")
+    @Query("SELECT coalesce(max(hb.basvuruNo), 0) FROM HastaBasvuru hb")
     Integer getMaxBasvuruNo();
 }

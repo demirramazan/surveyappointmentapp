@@ -6,7 +6,7 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
-    <title>Kullanıcı Tanım</title>
+    <title>Hasta Başvuru</title>
 
     <link rel="stylesheet" type="text/css" href="./css/style.css"/>
     <h:form>
@@ -41,7 +41,6 @@
 <h:body>
     <h:form id="FRMHastaBsvr">
         <div class="leftPanel">
-
             <h:panelGrid>
                 <p:dataTable id="hstBsvr" var="hasta" value="#{hastaBasvuruBean.hastaList}" selectionMode="single"
                              selection="#{hastaBasvuruBean.selectedHasta}" rowKey="#{hasta.id}">
@@ -67,153 +66,64 @@
             </h:panelGrid>
         </div>
         <div class="rightPanel">
-            <h:panelGrid id="hstBsvrPg">
-                <p:row>
-                    <p:column>
-                        <p:outputLabel value="Hasta Adı"/>
-                    </p:column>
-                    <p:outputLabel/>
-                    <p:outputLabel/>
-                    <p:column>
-                        <p:inputText id="ad" value="#{hastaBasvuruBean.hasta.hastaAdi}" required="true"
-                                     requiredMessage="Hasta adı Zorunlu Alandır!"/>
-                        <p:outputLabel/>
-                        <p:outputLabel/>
-                    </p:column>
+            <!--<h:panelGrid id="hstBsvrPg" style="margin: 0 auto">-->
+            <p:panelGrid id="hstBsvrPg" columns="4" layout="grid" style="margin: 0 auto">
+                <p:outputLabel value="Hasta Adı"/>
+                <p:inputText id="ad" value="#{hastaBasvuruBean.hasta.hastaAdi}" disabled="true"/>
+                <p:outputLabel value="Hasta Soyadı"/>
+                <p:inputText id="soyad" value="#{hastaBasvuruBean.hasta.hastaSoyadi}" disabled="true"/>
 
-                    <p:column>
-                        <p:outputLabel value="Hasta Soyadı"/>
-                        <p:outputLabel/>
-                        <p:outputLabel/>
-                    </p:column>
-                    <p:column>
-                        <p:inputText id="soyad" value="#{hastaBasvuruBean.hasta.hastaSoyadi}" disabled="true"/>
-                        <p:outputLabel/>
-                        <p:outputLabel/>
-                    </p:column>
+                <p:outputLabel value="Hasta Kimlik No"/>
+                <p:inputText id="kimlikNo" value="#{hastaBasvuruBean.hasta.hastaKimlikNo}" disabled="true"/>
+                <p:outputLabel value="Cinsiyet"/>
+                <p:inputText id="cinsiyet" value="#{hastaBasvuruBean.hasta.cinsiyet}" disabled="true"/>
 
-                </p:row>
+                <p:outputLabel value="Dogum Tarihi"/>
+                <p:calendar value="#{hastaBasvuruBean.hasta.dogumTarihi}" locale="tr" navigator="true"
+                            showButtonPanel="true" pattern="dd.MM.yyyy" disabled="true"/>
+                <p:outputLabel value="Başvuru Numarası"/>
+                <p:inputText value="#{hastaBasvuruBean.hastaBasvuru.basvuruNo}" disabled="true"/>
 
-                <p:row>
-                    <p:column><p:outputLabel value="Hasta Kimlik No"/></p:column>
-                    <p:column>
-                        <p:inputText id="kimlikNo" value="#{hastaBasvuruBean.hasta.hastaKimlikNo}" disabled="true"/>
-                    </p:column>
-                    <p:outputLabel/>
-                    <p:outputLabel/>
+                <p:outputLabel value="Hasta Kurum"/>
+                <p:selectOneMenu id="hastaKurum" value="#{hastaBasvuruBean.hastaBasvuru.hastaKurum}">
+                    <f:selectItem itemLabel="Seçiniz" itemValue=""/>
+                    <f:selectItem itemLabel="SGK" itemValue="SGK"/>
+                    <f:selectItem itemLabel="Yeşil Kart" itemValue="Yeşil Kart"/>
+                    <f:selectItem itemLabel="Resmi Kurum" itemValue="Resmi Kurum"/>
+                </p:selectOneMenu>
+                <p:outputLabel value="Öncelik"/>
+                <p:selectOneMenu id="oncelik" value="#{hastaBasvuruBean.hastaBasvuru.oncelik}">
+                    <f:selectItem itemLabel="Seçiniz" itemValue=""/>
+                    <f:selectItem itemLabel="65 Yaş Üstü" itemValue="65_YAS_USTU"/>
+                    <f:selectItem itemLabel="Engelli" itemValue="ENGELLI"/>
+                </p:selectOneMenu>
 
-                    <p:column>
-                        <p:outputLabel value="Cinsiyet"/>
-                        <p:outputLabel/>
-                        <p:outputLabel/>
-                    </p:column>
-                    <p:column>
-                        <p:inputText id="cinsiyet" value="#{hastaBasvuruBean.hasta.cinsiyet}" disabled="true"/>
-                    </p:column>
-                </p:row>
+                <p:outputLabel value="Açılmama"/>
+                <p:inputTextarea value="#{hastaBasvuruBean.hastaBasvuru.aciklama}"/>
+                <p:outputLabel value="Birimi"/>
+                <p:selectOneMenu id="birim" value="#{hastaBasvuruBean.birim}" converter="#{listConverter}">
+                    <!--onchange="submit()" valueChangeListener="#{hastaBasvuruBean.selectOneMenuListener}"-->
+                    <f:selectItem itemLabel="Seçiniz-" itemValue="#{null}"/>
+                    <f:selectItems value="#{hastaBasvuruBean.birimList}" var="birim" itemValue="#{birim}"
+                                   itemLabel="#{birim.birimAdi}"/>
+                </p:selectOneMenu>
 
-                <p:row>
-                    <p:column>
-                        <p:outputLabel value="Dogum Tarihi"/>
-                    </p:column>
-                    <p:column>
-                        <p:calendar value="#{hastaBasvuruBean.hasta.dogumTarihi}" locale="tr" navigator="true"
-                                    showButtonPanel="true" pattern="dd.MM.yyyy" disabled="true"/>
-                    </p:column>
-                    <p:column>
-                        <p:outputLabel value="Başvuru Numarası"/>
-                    </p:column>
-                    <p:column>
-                        <p:inputText value="#{hastaBasvuruBean.hastaBasvuru.basvuruNo}"/>
-                    </p:column>
-                </p:row>
+                <p:outputLabel value="Personel"/>
+                <p:selectOneMenu id="personel" value="#{hastaBasvuruBean.personel}"
+                                 converter="#{listConverter}">
+                    <f:selectItem itemLabel="Seçiniz" itemValue="#{null}"/>
+                    <f:selectItems value="#{hastaBasvuruBean.personelList}" var="personel"
+                                   itemValue="#{personel}"
+                                   itemLabel="#{personel.personelAdi} #{personel.personelSoyadi}"/>
+                </p:selectOneMenu>
+                <p:outputLabel/>
+                <p:outputLabel/>
 
-                <p:row>
-                    <p:column>
-                        <p:outputLabel value="Hasta Kurum"/>
-                    </p:column>
-                    <p:column>
-                        <p:column>
-                            <p:selectOneMenu id="hastaKurum" value="#{hastaBasvuruBean.hastaBasvuru.hastaKurum}">
-                                <f:selectItem itemLabel="Seçiniz" itemValue=""/>
-                                <f:selectItem itemLabel="SGK" itemValue="SGK"/>
-                                <f:selectItem itemLabel="Yeşil Kart" itemValue="Yeşil Kart"/>
-                                <f:selectItem itemLabel="Resmi Kurum" itemValue="Resmi Kurum"/>
-                            </p:selectOneMenu>
-                        </p:column>
-                    </p:column>
-                    <p:column>
-                        <p:outputLabel value="Öncelik"/>
-                    </p:column>
-                    <p:column>
-                        <p:selectOneMenu id="oncelik" value="#{hastaBasvuruBean.hastaBasvuru.oncelik}">
-                            <f:selectItem itemLabel="Seçiniz" itemValue=""/>
-                            <f:selectItem itemLabel="65 Yaş Üstü" itemValue="65_YAS_USTU"/>
-                            <f:selectItem itemLabel="Engelli" itemValue="ENGELLI"/>
-                        </p:selectOneMenu>
-                    </p:column>
-                </p:row>
-                <p:row>
-                    <p:column>
-                        <p:outputLabel value="Açılmama"/>
-                    </p:column>
-                    <p:column>
-                        <p:inputTextarea value="#{hastaBasvuruBean.hastaBasvuru.aciklama}"/>
-                    </p:column>
-                </p:row>
-
-                <!--</h:panelGrid>-->
-                <!--<h:panelGrid id="hstBsvDty" columns="4">-->
-                <p:row>
-                    <p:column>
-                        <p:outputLabel value="Birimi"/>
-                    </p:column>
-                    <p:column>
-                        <p:selectOneMenu id="birim" value="#{hastaBasvuruBean.birim}" converter="#{listConverter}">
-                            <f:selectItem itemLabel="Seçiniz-" itemValue="#{null}"/>
-                            <f:selectItems value="#{hastaBasvuruBean.birimList}" var="birim" itemValue="#{birim}"
-                                           itemLabel="#{birim.birimAdi}"/>
-                        </p:selectOneMenu>
-                    </p:column>
-                    <p:column>
-                        <p:outputLabel value="Personel"/>
-                    </p:column>
-                    <p:column>
-                        <p:selectOneMenu id="personel" value="#{hastaBasvuruBean.personel}"
-                                         converter="#{listConverter}">
-                            <f:selectItem itemLabel="Seçiniz" itemValue="#{null}"/>
-                            <f:selectItems value="#{hastaBasvuruBean.personelList}" var="personel"
-                                           itemValue="#{personel}"
-                                           itemLabel="#{personel.personelAdi}+' '+#{personel.personelSoyadi}"/>
-                        </p:selectOneMenu>
-                    </p:column>
-                </p:row>
-                <p:row>
-                    <p:column>
-                        <p:commandButton value="Kaydet" actionListener="#{hastaBasvuruBean.save()}" ajax="false"
-                                         icon="fa fa-save" styleClass="ui-priority-primary" style="left: 125px"/>
-                    </p:column>
-                    <p:column>
-                        <p:commandButton value="Sil" actionListener="#{hastaBasvuruBean.delete()}" ajax="false"
-                                         icon="ui-icon-trash" style="left: 135px"/>
-                    </p:column>
-                </p:row>
-                <!--<h:outputText value="Birimi"/>-->
-                <!--<h:outputText value="*"/>-->
-                <!--<p:selectOneMenu id="birim" value="#{hastaBasvuruBean.birim}" converter="#{listConverter}">-->
-                <!--<f:selectItem itemLabel="Seçiniz-" itemValue="#{null}"/>-->
-                <!--<f:selectItems value="#{hastaBasvuruBean.birimList}" var="birim" itemValue="#{birim}"-->
-                <!--itemLabel="#{birim.birimAdi}"/>-->
-                <!--</p:selectOneMenu>-->
-
-                <!--<h:outputText value="Personel"/>-->
-                <!--<h:outputText value="*"/>-->
-                <!--<p:selectOneMenu id="personel" value="#{hastaBasvuruBean.personel}" converter="#{listConverter}" style="width: 100% !important">-->
-                <!--<f:selectItem itemLabel="Seçiniz" itemValue="#{null}"/>-->
-                <!--<f:selectItems value="#{hastaBasvuruBean.personelList}" var="personel" itemValue="#{personel}"-->
-                <!--itemLabel="#{personel.personelAdi}+' '+#{personel.personelSoyadi}"/>-->
-                <!--</p:selectOneMenu>-->
-            </h:panelGrid>
+                <p:commandButton value="Kaydet" actionListener="#{hastaBasvuruBean.save()}" ajax="false"
+                                 icon="fa fa-save" styleClass="ui-priority-primary" style="left: 125px"/>
+                <p:commandButton value="Sil" actionListener="#{hastaBasvuruBean.delete()}" ajax="false"
+                                 icon="ui-icon-trash" style="left: 135px"/>
+            </p:panelGrid>
         </div>
     </h:form>
 </h:body>
