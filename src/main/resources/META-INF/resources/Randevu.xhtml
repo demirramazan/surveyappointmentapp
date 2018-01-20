@@ -81,32 +81,10 @@
                 <p:outputLabel value="Dogum Tarihi"/>
                 <p:calendar value="#{hastaBasvuruBean.hasta.dogumTarihi}" locale="tr" navigator="true"
                             showButtonPanel="true" pattern="dd.MM.yyyy" disabled="true"/>
-                <p:outputLabel value="Başvuru Numarası"/>
-                <p:inputText value="#{hastaBasvuruBean.hastaBasvuru.basvuruNo}" disabled="true"/>
 
-                <p:outputLabel value="Hasta Kurum"/>
-                <p:selectOneMenu id="hastaKurum" value="#{hastaBasvuruBean.hastaBasvuru.hastaKurum}">
-                    <f:selectItem itemLabel="Seçiniz" itemValue=""/>
-                    <f:selectItem itemLabel="SGK" itemValue="SGK"/>
-                    <f:selectItem itemLabel="Yeşil Kart" itemValue="Yeşil Kart"/>
-                    <f:selectItem itemLabel="Resmi Kurum" itemValue="Resmi Kurum"/>
-                </p:selectOneMenu>
-                <p:outputLabel value="Öncelik"/>
-                <p:selectOneMenu id="oncelik" value="#{hastaBasvuruBean.hastaBasvuru.oncelik}">
-                    <f:selectItem itemLabel="Seçiniz" itemValue=""/>
-                    <f:selectItem itemLabel="65 Yaş Üstü" itemValue="65_YAS_USTU"/>
-                    <f:selectItem itemLabel="Engelli" itemValue="ENGELLI"/>
-                </p:selectOneMenu>
 
-                <p:outputLabel value="Açılmama"/>
+                <p:outputLabel value="Randevu Açılmama"/>
                 <p:inputTextarea value="#{hastaBasvuruBean.hastaBasvuru.aciklama}"/>
-                <p:outputLabel value="Birimi"/>
-                <h:selectOneMenu id="birim" value="#{hastaBasvuruBean.birim}" converter="#{listConverter}">
-                    <!--onchange="submit()" valueChangeListener="#{hastaBasvuruBean.selectOneMenuListener}"-->
-                    <f:selectItem itemLabel="Seçiniz-" itemValue="#{null}"/>
-                    <f:selectItems value="#{hastaBasvuruBean.birimList}" var="birim" itemValue="#{birim}"
-                                   itemLabel="#{birim.birimAdi}"/>
-                </h:selectOneMenu>
 
                 <p:outputLabel value="Personel"/>
                 <h:selectOneMenu id="personel" value="#{hastaBasvuruBean.personel}"
@@ -116,6 +94,34 @@
                                    itemValue="#{personel}"
                                    itemLabel="#{personel.personelAdi} #{personel.personelSoyadi}"/>
                 </h:selectOneMenu>
+
+                <p:outputLabel value="Salon"/>
+                <h:selectOneMenu id="salon" value="#{randevuSablonBean.salon}" converter="#{listConverter}">
+                    <f:selectItem itemLabel="Salon Seçiniz" itemValue="#{null}"/>
+                    <f:selectItems value="#{randevuSablonBean.salonList}" var="salon" itemValue="#{salon}"
+                                   itemLabel="#{salon.salonAdi}"/>
+                </h:selectOneMenu>
+
+                <p:outputLabel value="Cihaz"/>
+                <h:selectOneMenu id="cihaz" value="#{randevuSablonBean.cihaz}" converter="#{listConverter}">
+                    <f:selectItem itemLabel="Cihaz Seçiniz" itemValue="#{null}"/>
+                    <f:selectItems value="#{randevuSablonBean.cihazList}" var="cihaz" itemValue="#{cihaz}"
+                                   itemLabel="#{cihaz.adi}"/>
+                </h:selectOneMenu>
+                <p:outputLabel value="Randevu Seans"/>
+                <h:selectOneMenu id="Seans" value="#{randevuSablonBean.cihaz}" converter="#{listConverter}">
+                    <f:selectItem itemLabel="Seans Seçiniz" itemValue="#{null}"/>
+                    <f:selectItems value="#{randevuSablonBean.cihazList}" var="cihaz" itemValue="#{cihaz}"
+                                   itemLabel="#{cihaz.adi}"/>
+                </h:selectOneMenu>
+                <p:outputLabel value="Tetkik"/>
+                <p:selectOneMenu id="tetkik" value="#{tetkikIstemBean.tetkik}"
+                                 converter="#{listConverter}">
+                    <f:selectItem itemLabel="Seçiniz" itemValue="#{null}"/>
+                    <f:selectItems value="#{tetkikIstemBean.tetkikList}" var="tetkik"
+                                   itemValue="#{tetkik}"
+                                   itemLabel="#{tetkik.tetkikAdi}"/>
+                </p:selectOneMenu>
                 <p:outputLabel/>
                 <p:outputLabel/>
 

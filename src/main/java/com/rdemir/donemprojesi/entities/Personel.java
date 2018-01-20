@@ -31,7 +31,7 @@ public class Personel extends BaseEntity {
     @Column(name = "ADRES", length = 500)
     private String adres;
 
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     @Column(name = "CINSIYET", nullable = false)
     private Cinsiyet cinsiyet;
 

@@ -20,6 +20,7 @@ public class RandevuController {
     private Randevu selectedRandevu;
     private List<Randevu> randevuList;
 
+
     public RandevuController() {
         randevu = new Randevu();
     }

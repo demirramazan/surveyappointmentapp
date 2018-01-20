@@ -41,15 +41,14 @@
 </h:head>
 
 <h:body>
-    <h:form id="FRMHastaBsvr">
+    <h:form id="FRMTtkIstm">
         <div class="leftPanel">
             <h:panelGrid>
-                <p:dataTable id="hstBsvr" var="hasta" value="#{hastaBasvuruBean.hastaList}" selectionMode="single"
-                             selection="#{hastaBasvuruBean.selectedHasta}" rowKey="#{hasta.id}">
+                <p:dataTable id="hstTtk" var="hasta" value="#{tetkikIstemBean.hastaList}" selectionMode="single"
+                             selection="#{tetkikIstemBean.selectedHasta}" rowKey="#{hasta.id}">
                     <p:ajax event="rowDblselect" listener="#{hastaBasvuruBean.onDcRowSelect}"
-                            update=":FRMHastaBsvr:hstBsvrPg"/>
-                    <p:column headerText="Hasta Adı" filterBy="#{hasta.hastaAdi}"
-                              filterMatchMode="contains">
+                            update=":FRMTtkIstm:hstTtkPg"/>
+                    <p:column headerText="Hasta Adı">
                         <h:outputText value="#{hasta.hastaAdi}"/>
                     </p:column>
                     <p:column headerText="Hasta Soyadı">
@@ -68,61 +67,47 @@
             </h:panelGrid>
         </div>
         <div class="rightPanel">
-            <p:panelGrid id="hstBsvrPg" columns="4" layout="grid">
+            <p:panelGrid id="hstTtkPg" columns="4" layout="grid">
                 <p:outputLabel value="Hasta Adı"/>
-                <p:inputText id="ad" value="#{hastaBasvuruBean.hasta.hastaAdi}" disabled="true"/>
+                <p:inputText id="ad" value="#{tetkikIstemBean.hasta.hastaAdi}" disabled="true"/>
                 <p:outputLabel value="Hasta Soyadı"/>
-                <p:inputText id="soyad" value="#{hastaBasvuruBean.hasta.hastaSoyadi}" disabled="true"/>
+                <p:inputText id="soyad" value="#{tetkikIstemBean.hasta.hastaSoyadi}" disabled="true"/>
 
                 <p:outputLabel value="Hasta Kimlik No"/>
-                <p:inputText id="kimlikNo" value="#{hastaBasvuruBean.hasta.hastaKimlikNo}" disabled="true"/>
+                <p:inputText id="kimlikNo" value="#{tetkikIstemBean.hasta.hastaKimlikNo}" disabled="true"/>
                 <p:outputLabel value="Cinsiyet"/>
-                <p:inputText id="cinsiyet" value="#{hastaBasvuruBean.hasta.cinsiyet}" disabled="true"/>
+                <p:inputText id="cinsiyet" value="#{tetkikIstemBean.hasta.cinsiyet}" disabled="true"/>
 
                 <p:outputLabel value="Dogum Tarihi"/>
-                <p:calendar value="#{hastaBasvuruBean.hasta.dogumTarihi}" locale="tr" navigator="true"
+                <p:calendar value="#{tetkikIstemBean.hasta.dogumTarihi}" locale="tr" navigator="true"
                             showButtonPanel="true" pattern="dd.MM.yyyy" disabled="true"/>
                 <p:outputLabel value="Başvuru Numarası"/>
-                <p:inputText value="#{hastaBasvuruBean.hastaBasvuru.basvuruNo}" disabled="true"/>
+                <p:inputText value="#{tetkikIstemBean.hastaBasvuru.basvuruNo}" disabled="true"/>
 
                 <p:outputLabel value="Hasta Kurum"/>
-                <p:selectOneMenu id="hastaKurum" value="#{hastaBasvuruBean.hastaBasvuru.hastaKurum}">
-                    <f:selectItem itemLabel="Seçiniz" itemValue=""/>
-                    <f:selectItem itemLabel="SGK" itemValue="SGK"/>
-                    <f:selectItem itemLabel="Yeşil Kart" itemValue="Yeşil Kart"/>
-                    <f:selectItem itemLabel="Resmi Kurum" itemValue="Resmi Kurum"/>
-                </p:selectOneMenu>
-                <p:outputLabel value="Öncelik"/>
-                <p:selectOneMenu id="oncelik" value="#{hastaBasvuruBean.hastaBasvuru.oncelik}">
-                    <f:selectItem itemLabel="Seçiniz" itemValue=""/>
-                    <f:selectItem itemLabel="65 Yaş Üstü" itemValue="65_YAS_USTU"/>
-                    <f:selectItem itemLabel="Engelli" itemValue="ENGELLI"/>
-                </p:selectOneMenu>
-
-                <p:outputLabel value="Açılmama"/>
-                <p:inputTextarea value="#{hastaBasvuruBean.hastaBasvuru.aciklama}"/>
+                <p:inputText value="#{tetkikIstemBean.hastaBasvuru.hastaKurum}" disabled="true"/>
                 <p:outputLabel value="Birimi"/>
-                <h:selectOneMenu id="birim" value="#{hastaBasvuruBean.birim}" converter="#{listConverter}">
-                    <!--onchange="submit()" valueChangeListener="#{hastaBasvuruBean.selectOneMenuListener}"-->
-                    <f:selectItem itemLabel="Seçiniz-" itemValue="#{null}"/>
-                    <f:selectItems value="#{hastaBasvuruBean.birimList}" var="birim" itemValue="#{birim}"
-                                   itemLabel="#{birim.birimAdi}"/>
-                </h:selectOneMenu>
+                <p:inputText value="#{tetkikIstemBean.hastaBasvuruDetay.birim}" disabled="true"/>
 
                 <p:outputLabel value="Personel"/>
-                <h:selectOneMenu id="personel" value="#{hastaBasvuruBean.personel}"
+                <p:inputText value="#{tetkikIstemBean.hastaBasvuruDetay.personel}" disabled="true"/>
+
+
+
+                <p:outputLabel value="Tetkik"/>
+                <p:selectOneMenu id="tetkik" value="#{tetkikIstemBean.tetkik}"
                                  converter="#{listConverter}">
                     <f:selectItem itemLabel="Seçiniz" itemValue="#{null}"/>
-                    <f:selectItems value="#{hastaBasvuruBean.personelList}" var="personel"
-                                   itemValue="#{personel}"
-                                   itemLabel="#{personel.personelAdi} #{personel.personelSoyadi}"/>
-                </h:selectOneMenu>
+                    <f:selectItems value="#{tetkikIstemBean.tetkikList}" var="tetkik"
+                                   itemValue="#{tetkik}"
+                                   itemLabel="#{tetkik.tetkikAdi}"/>
+                </p:selectOneMenu>
                 <p:outputLabel/>
                 <p:outputLabel/>
 
-                <p:commandButton value="Kaydet" actionListener="#{hastaBasvuruBean.save()}" ajax="false"
+                <p:commandButton value="Kaydet" actionListener="#{tetkikIstemBean.save()}" ajax="false"
                                  icon="fa fa-save" styleClass="ui-priority-primary" style="left: 125px"/>
-                <p:commandButton value="Sil" actionListener="#{hastaBasvuruBean.delete()}" ajax="false"
+                <p:commandButton value="Sil" actionListener="#{tetkikIstemBean.delete()}" ajax="false"
                                  icon="ui-icon-trash" style="left: 135px"/>
             </p:panelGrid>
         </div>

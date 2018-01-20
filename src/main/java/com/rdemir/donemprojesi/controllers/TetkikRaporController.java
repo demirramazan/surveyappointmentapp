@@ -2,9 +2,11 @@ package com.rdemir.donemprojesi.controllers;
 
 import com.rdemir.donemprojesi.config.SessionInitializer;
 import com.rdemir.donemprojesi.entities.*;
+import com.rdemir.donemprojesi.interfaces.services.IHastaService;
 import com.rdemir.donemprojesi.interfaces.services.IHastaTetkikRaporService;
 import com.rdemir.donemprojesi.interfaces.services.ITetkikService;
 import com.rdemir.donemprojesi.scope.ScopeName;
+import org.primefaces.event.SelectEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -23,6 +25,8 @@ public class TetkikRaporController {
 
     @Autowired
     private ITetkikService tetkikService;
+    @Autowired
+    private IHastaService hastaService;
 
     private HastaTetkikIstem hastaTetkikIstem;
     private HastaTetkikRapor hastaTetkikRapor;
@@ -31,19 +35,26 @@ public class TetkikRaporController {
     private List<Tetkik> tetkikList;
     private Tetkik tetkik;
     private Personel personel;
+    private List<Hasta> hastaList;
+    private Hasta selectedHasta;
+    private Hasta hasta;
+
+    public TetkikRaporController() {
+        hastaTetkikIstem = new HastaTetkikIstem();
+        hastaBasvuru = new HastaBasvuru();
+        hastaTetkikRapor = new HastaTetkikRapor();
+        hasta = new Hasta();
+    }
+
     @Inject
     private SessionInitializer sessionInitializer;
 
     @PostConstruct
     public void init() {
         tetkikList = tetkikService.getTetkikList();
+        hastaList = hastaService.findAll();
     }
 
-    public TetkikRaporController() {
-        hastaTetkikIstem = new HastaTetkikIstem();
-        hastaBasvuru = new HastaBasvuru();
-        hastaTetkikRapor = new HastaTetkikRapor();
-    }
 
     public void save() {
         hastaTetkikRapor.setHastaTetkikIstem(hastaTetkikIstem);
@@ -112,5 +123,33 @@ public class TetkikRaporController {
 
     public void setPersonel(Personel personel) {
         this.personel = personel;
+    }
+
+    public List<Hasta> getHastaList() {
+        return hastaList;
+    }
+
+    public void setHastaList(List<Hasta> hastaList) {
+        this.hastaList = hastaList;
+    }
+
+    public Hasta getSelectedHasta() {
+        return selectedHasta;
+    }
+
+    public void setSelectedHasta(Hasta selectedHasta) {
+        this.selectedHasta = selectedHasta;
+    }
+
+    public Hasta getHasta() {
+        return hasta;
+    }
+
+    public void setHasta(Hasta hasta) {
+        this.hasta = hasta;
+    }
+    public void onDcRowSelect(SelectEvent event) {
+        selectedHasta = (Hasta) event.getObject();
+        this.hasta = selectedHasta;
     }
 }

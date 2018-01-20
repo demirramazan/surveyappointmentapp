@@ -19,7 +19,7 @@ public class Hasta extends BaseEntity {
     private String hastaSoyadi;
 
     @Column(name = "CINSIYET")
-    @Enumerated(value = EnumType.STRING)
+    @Enumerated(value = EnumType.ORDINAL)
     private Cinsiyet cinsiyet;
 
     @Column(name = "HASTA_KIMLIK_NO")
