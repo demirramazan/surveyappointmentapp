@@ -39,13 +39,13 @@ public class InitializeCommand implements CommandLineRunner {
             role.setDescription("Admin Rolü");
             roleReporsitory.saveAndFlush(role);
         }
-        User user = userRepository.findByUsername("rdemir");
+        User user = userRepository.findByUsername("admin");
         if (user == null) {
             user = new User();
             user.setName("Ramazan");
             user.setSurname("Demir");
-            user.setUsername("rdemir");
-            user.setPassword("123123");
+            user.setUsername("admin");
+            user.setPassword("123");
             user.setEnabled(true);
             user.setRole(role);
             userRepository.saveAndFlush(user);
@@ -138,12 +138,7 @@ public class InitializeCommand implements CommandLineRunner {
         }
         Permission permissionMenuTanim = permissionRepository.findByMenu(menuMenu);
         if (permissionMenuTanim == null) {
-            permissionMenuTanim = new Permission();
-            permissionMenuTanim.setMenu(menuMenu);
-            permissionMenuTanim.setPermissionAdi("Role Tanım permission");
-            permissionMenuTanim.setRole(role);
-            permissionMenuTanim.setUser(user);
-            permissionRepository.saveAndFlush(permissionMenuTanim);
+            savePermission(role, user, menuMenu);
         } else {
             permissionRepository.save(permissionMenuTanim);
         }
@@ -158,5 +153,15 @@ public class InitializeCommand implements CommandLineRunner {
         } else {
             permissionRepository.save(permissionPersonelTanim);
         }
+    }
+
+    private void savePermission(Role role, User user, Menu menuMenu) {
+        Permission permissionMenuTanim;
+        permissionMenuTanim = new Permission();
+        permissionMenuTanim.setMenu(menuMenu);
+        permissionMenuTanim.setPermissionAdi("Role Tanım permission");
+        permissionMenuTanim.setRole(role);
+        permissionMenuTanim.setUser(user);
+        permissionRepository.saveAndFlush(permissionMenuTanim);
     }
 }

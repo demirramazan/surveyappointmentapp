@@ -3,10 +3,10 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+>
 <h:head>
-    <title>Kullanıcı Tanım</title>
+    <title>Randevu Seans Oluşturma</title>
 
     <link rel="stylesheet" type="text/css" href="./css/style.css"/>
     <h:form>
@@ -24,8 +24,9 @@
                 <p:menuitem value="Cihaz Tanım" url="./CihazTanim.xhtml"/>
             </p:submenu>
             <p:submenu label="Hasta Kabul İşlemleri">
-                <p:menuitem value="Hasta Kabul" url="./HastaBasvuru.xhtml"/>
-                <p:menuitem value="Doktor Kabul" url="./HastaTetkikIstem.xhtml"/>
+                <p:menuitem value="Hasta Kayıt" url="/HastaTanim.xhtml"/>
+                <p:menuitem value="Hasta Kabul" url="/HastaBasvuru.xhtml"/>
+                <p:menuitem value="Tetkik İstem" url="/HastaTetkikIstem.xhtml"/>
                 <p:menuitem value="Tetkik Kabul" url="./TetkikKabul.xhtml" includeViewParams="MR"/>
             </p:submenu>
             <p:submenu label="Randevu İşlemleri" icon="fa-calendar">
@@ -33,11 +34,58 @@
                 <p:menuitem value="Randevu Seans" url="./RandevuSeans.xhtml" icon="fa-calendar"/>
                 <p:menuitem value="Randevu Alma" url="./Randevu.xhtml" icon="fa-calendar"/>
             </p:submenu>
-            <p:menuitem value="Çıkış" style="float: right"  action="#{sessionInitializer.exit}" icon="ui-icon-close"/>
+            <p:menuitem value="Çıkış" style="float: right" action="#{sessionInitializer.exit}" icon="ui-icon-close"/>
 
         </p:menubar>
         <!--<p:menubar model="#{sessionInitializer.menuModel}"/>-->
     </h:form>
 
 </h:head>
+
+<h:body>
+    <h:form id="FRMRandSeans">
+        <div class="leftPanel">
+            <h:panelGrid>
+                <p:dataTable id="rndSeans" var="randevuSablon" value="#{randevuSeans.randevuSablonList}"
+                             selectionMode="single"
+                             selection="#{randevuSablonBean.selectedRandSablon}" rowKey="#{randevuSablon.id}">
+                    <p:ajax event="rowDblselect" listener="#{randevuSablonBean.onDcRowSelect}"
+                            update=":FRMRandSeans:seansPg"/>
+                    <p:column headerText="Şablon Adı">
+                        <h:outputText value="#{randevuSablon.ad}"/>
+                    </p:column>
+                    <p:column headerText="Şablon Başlangıç">
+                        <h:outputText value="#{randevuSablon.saatBaslangic}"/>
+                    </p:column>
+                    <p:column headerText="Şablon Bitiş Saati">
+                        <h:outputText value="#{randevuSablon.saatBitis}"/>
+                    </p:column>
+                </p:dataTable>
+            </h:panelGrid>
+        </div>
+        <div class="rightPanel">
+            <!--<h:panelGrid id="hstBsvrPg" style="margin: 0 auto">-->
+            <p:panelGrid id="seansPg" columns="4" layout="grid">
+
+                <p:outputLabel value="Şablon Adı"/>
+                <p:inputText id="ad" value="#{randevuSeansBean.randevuSablon.ad}" disabled="true"/>
+                <p:outputLabel value="Başlangıç Saati"/>
+                <p:inputText id="basSaat" value="#{randevuSeansBean.randevuSablon.saatBaslangic}" disabled="true"/>
+                <p:outputLabel value="Bitiş Saati"/>
+                <p:inputText id="sblnBts" value="#{randevuSeansBean.randevuSablon.saatBitis}" disabled="true"/>
+
+                <p:outputLabel/>
+                <p:outputLabel/>
+                <p:outputLabel/>
+                <h:commandButton value="Şablona Göre Seans Oluştur" actionListener="#{randevuSeansBean.save()}"
+                                 ajax="false"
+                                 icon="fa fa-save" styleClass="ui-priority-primary" style="left: 125px"/>
+                <p:outputLabel/>
+                <h:commandButton value="Randevu Seanslarını Sil" actionListener="#{randevuSeansBean.deleteAll()}"
+                                 ajax="false"
+                                 icon="ui-icon-trash" style="left: 135px"/>
+            </p:panelGrid>
+        </div>
+    </h:form>
+</h:body>
 </html>

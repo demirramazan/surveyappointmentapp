@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class RandevuSablon extends BaseEntity {
 
     @Column(name = "DURUM")
-    private Integer durum;
+    private Boolean durum;
 
     @Column(name = "AD")
     private String ad;
@@ -42,7 +42,7 @@ public class RandevuSablon extends BaseEntity {
     public RandevuSablon() {
     }
 
-    public RandevuSablon(Integer durum, String ad, String saatBaslangic, String saatBitis, String saatOglenBaslangic, String saatOglenBitis, Integer randevuSuresi, Salon salon, Cihaz cihaz) {
+    public RandevuSablon(Boolean durum, String ad, String saatBaslangic, String saatBitis, String saatOglenBaslangic, String saatOglenBitis, Integer randevuSuresi, Salon salon, Cihaz cihaz) {
         this.durum = durum;
         this.ad = ad;
         this.saatBaslangic = saatBaslangic;
@@ -54,11 +54,11 @@ public class RandevuSablon extends BaseEntity {
         this.cihaz = cihaz;
     }
 
-    public Integer getDurum() {
+    public Boolean getDurum() {
         return durum;
     }
 
-    public void setDurum(Integer durum) {
+    public void setDurum(Boolean durum) {
         this.durum = durum;
     }
 

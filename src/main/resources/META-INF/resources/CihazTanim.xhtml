@@ -24,8 +24,9 @@
                 <p:menuitem value="Cihaz Tanım" url="./CihazTanim.xhtml"/>
             </p:submenu>
             <p:submenu label="Hasta Kabul İşlemleri">
-                <p:menuitem value="Hasta Kabul" url="./HastaBasvuru.xhtml"/>
-                <p:menuitem value="Doktor Kabul" url="./HastaTetkikIstem.xhtml"/>
+                <p:menuitem value="Hasta Kayıt" url="/HastaTanim.xhtml"/>
+                <p:menuitem value="Hasta Kabul" url="/HastaBasvuru.xhtml"/>
+                <p:menuitem value="Tetkik İstem" url="/HastaTetkikIstem.xhtml"/>
                 <p:menuitem value="Tetkik Kabul" url="./TetkikKabul.xhtml" includeViewParams="MR"/>
             </p:submenu>
             <p:submenu label="Randevu İşlemleri" icon="fa-calendar">
@@ -33,6 +34,8 @@
                 <p:menuitem value="Randevu Seans" url="./RandevuSeans.xhtml" icon="fa-calendar"/>
                 <p:menuitem value="Randevu Alma" url="./Randevu.xhtml" icon="fa-calendar"/>
             </p:submenu>
+            <p:menuitem value="Çıkış" style="float: right" action="#{sessionInitializer.exit}" icon="ui-icon-close"/>
+
         </p:menubar>
         <!--<p:menubar model="#{sessionInitializer.menuModel}"/>-->
     </h:form>
@@ -98,8 +101,8 @@
                                  icon="fa fa-save" styleClass="ui-priority-primary" style="left: 125px"/>
                 <p:commandButton value="Sil" actionListener="#{cihazBean.delete()}" ajax="false"
                                  icon="ui-icon-trash" style="left: 150px"/>
-                <p:commandButton value="Yeni" actionListener="#{cihazBean.reset()}" ajax="false"
-                                 icon="ui-icon-trash" style="left: 175px"/>
+                <!--<p:commandButton value="Yeni" actionListener="#{cihazBean.reset()}" ajax="false"-->
+                                 <!--icon="ui-icon-trash" style="left: 175px"/>-->
 
             </h:panelGrid>
         </div>

@@ -1,7 +1,7 @@
 package com.rdemir.donemprojesi;
 
+import com.rdemir.donemprojesi.scope.ScopeName;
 import com.rdemir.donemprojesi.scope.ViewScope;
-import com.rdemir.donemprojesi.util.ScopeUtil;
 import com.sun.faces.config.ConfigureListener;
 import org.springframework.beans.factory.config.CustomScopeConfigurer;
 import org.springframework.boot.SpringApplication;
@@ -47,6 +47,7 @@ public class DonemprojesiApplication extends SpringBootServletInitializer implem
             servletContext.setInitParameter("primefaces.THEME", "bootstrap");
             servletContext.setInitParameter("primefaces.CLIENT_SIDE_VALIDATION", Boolean.TRUE.toString());
             servletContext.setInitParameter("javax.faces.FACELETS_SKIP_COMMENTS", Boolean.TRUE.toString());
+            servletContext.setInitParameter("javax.faces.STATE_SAVING_METHOD", "client");
             servletContext.setInitParameter("primefaces.FONT_AWESOME", Boolean.TRUE.toString());
             servletContext.setInitParameter("primefaces.UPLOADER", "commons");
         };
@@ -62,9 +63,9 @@ public class DonemprojesiApplication extends SpringBootServletInitializer implem
     public static CustomScopeConfigurer customScopeConfigurer() {
         CustomScopeConfigurer configurer = new CustomScopeConfigurer();
         Map<String, Object> scopes = new HashMap<String, Object>();
-        scopes.put(ScopeUtil.VIEW, new ViewScope());
-        scopes.put(ScopeUtil.SESSION, new ViewScope());
-        scopes.put(ScopeUtil.APPLICATION, new ViewScope());
+        scopes.put(ScopeName.VIEW, new ViewScope());
+        scopes.put(ScopeName.SESSION, new ViewScope());
+        scopes.put(ScopeName.APPLICATION, new ViewScope());
         configurer.setScopes(scopes);
         return configurer;
     }

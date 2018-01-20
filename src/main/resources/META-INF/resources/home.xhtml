@@ -25,16 +25,19 @@
                     <p:menuitem value="Cihaz Tanım" url="./CihazTanim.xhtml"/>
             </p:submenu>
             <p:submenu label="Hasta Kabul İşlemleri">
+                <p:menuitem value="Hasta Kayıt" url="/HastaTanim.xhtml"/>
                 <p:menuitem value="Hasta Kabul" url="/HastaBasvuru.xhtml"/>
-                <p:menuitem value="Doktor Kabul" url="/HastaTetkikIstem.xhtml"/>
+                <p:menuitem value="Tetkik İstem" url="/HastaTetkikIstem.xhtml"/>
                 <p:menuitem value="Tetkik Kabul" url="/TetkikKabul.xhtml" includeViewParams="MR"/>
             </p:submenu>
             <p:submenu label="Randevu İşlemleri" icon="ui-icon-calendar">
-                <p:menuitem value="Randevu Şablon" url="pages/RandevuSablon.xhtml" icon="ui-icon-calendar"/>
-                <p:menuitem value="Randevu Seans" url="pages/RandevuSeans.xhtml" icon="ui-icon-calendar"/>
-                <p:menuitem value="Randevu Alma" url="pages/Randevu.xhtml" icon="ui-icon-calendar"/>
+                <p:menuitem value="Randevu Şablon" url="/RandevuSablon.xhtml" icon="ui-icon-calendar"/>
+                <p:menuitem value="Randevu Seans" url="/RandevuSeans.xhtml" icon="ui-icon-calendar"/>
+                <p:menuitem value="Randevu Alma" url="/Randevu.xhtml" icon="ui-icon-calendar"/>
             </p:submenu>
+        <p:menuitem value="Çıkış" style="float: right" action="#{sessionInitializer.exit}" icon="ui-icon-close"/>
         </p:menubar>
+
     </h:form>
 </h:head>
 

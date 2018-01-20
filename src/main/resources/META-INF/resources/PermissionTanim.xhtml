@@ -3,10 +3,10 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
-    <title>Kullanıcı Tanım</title>
+    <title>Menu İzin Tanım</title>
 
     <link rel="stylesheet" type="text/css" href="./css/style.css"/>
     <h:form>
@@ -24,8 +24,9 @@
                 <p:menuitem value="Cihaz Tanım" url="./CihazTanim.xhtml"/>
             </p:submenu>
             <p:submenu label="Hasta Kabul İşlemleri">
-                <p:menuitem value="Hasta Kabul" url="./HastaBasvuru.xhtml"/>
-                <p:menuitem value="Doktor Kabul" url="./HastaTetkikIstem.xhtml"/>
+                <p:menuitem value="Hasta Kayıt" url="/HastaTanim.xhtml"/>
+                <p:menuitem value="Hasta Kabul" url="/HastaBasvuru.xhtml"/>
+                <p:menuitem value="Tetkik İstem" url="/HastaTetkikIstem.xhtml"/>
                 <p:menuitem value="Tetkik Kabul" url="./TetkikKabul.xhtml" includeViewParams="MR"/>
             </p:submenu>
             <p:submenu label="Randevu İşlemleri" icon="fa-calendar">
@@ -33,11 +34,70 @@
                 <p:menuitem value="Randevu Seans" url="./RandevuSeans.xhtml" icon="fa-calendar"/>
                 <p:menuitem value="Randevu Alma" url="./Randevu.xhtml" icon="fa-calendar"/>
             </p:submenu>
-            <p:menuitem value="Çıkış" style="float: right"  action="#{sessionInitializer.exit}" icon="ui-icon-close"/>
+            <p:menuitem value="Çıkış" style="float: right" action="#{sessionInitializer.exit}" icon="ui-icon-close"/>
 
         </p:menubar>
         <!--<p:menubar model="#{sessionInitializer.menuModel}"/>-->
     </h:form>
 
 </h:head>
+
+<h:body>
+    <h:form id="FRMPr">
+        <div class="leftPanel">
+            <h:panelGrid>
+                <p:dataTable id="prDt" var="permission" value="#{permissionBean.permissionList}"
+                             selectionMode="single"
+                             selection="#{permission.selectedPermission}" rowKey="#{permission.id}">
+                    <p:ajax event="rowDblselect" listener="#{permissionBean.onDcRowSelect}"
+                            update=":FRMPr:prPg"/>
+
+                    <p:column headerText="Menu İzin Adı">
+                        <h:outputText value="#{permission.permissionAdi}"/>
+                    </p:column>
+                    <p:column headerText="Menu">
+                        <h:outputText value="#{permission.menu.menuAdi}"/>
+                    </p:column>
+                    <p:column headerText="Kullanıcı">
+                        <h:outputText value="#{permission.user.username}"/>
+                    </p:column>
+                    <p:column headerText="Rolü">
+                        <h:outputText value="#{permission.role.adi}"/>
+                    </p:column>
+                </p:dataTable>
+            </h:panelGrid>
+        </div>
+        <div class="rightPanel">
+            <p:panelGrid id="prPg" columns="4" layout="grid">
+                <p:outputLabel value="Menu İzin Adı"/>
+                <p:inputText id="ad" value="#{permissionBean.permission.permissionAdi}" required="true"
+                             requiredMessage="Menu İzin Adı Giriniz"/>
+                <p:outputLabel value="Menu Adı"/>
+                <h:selectOneMenu id="menu" value="#{permissionBean.menu}" converter="#{listConverter}">
+                    <f:selectItem itemLabel="Seçiniz" itemValue="#{null}"/>
+                    <f:selectItems value="#{permissionBean.menuList}" var="menu" itemValue="#{menu}"
+                                   itemLabel="#{menu.menuAdi}"/>
+                </h:selectOneMenu>
+                <p:outputLabel value="Kullanıcı"/>
+                <p:selectOneMenu id="user" value="#{permissionBean.user}" converter="#{listConverter}">
+                    <f:selectItem itemLabel="Seçiniz" itemValue="#{null}"/>
+                    <f:selectItems value="#{permissionBean.userList}" var="user" itemValue="#{user}"
+                                   itemLabel="#{user.username}"/>
+                </p:selectOneMenu>
+                <p:outputLabel value="Kullanıcı Rol"/>
+                <h:selectOneMenu id="rol" value="#{permissionBean.role}" >
+                    <f:selectItem itemLabel="Seçiniz" itemValue="#{null}"/>
+                    <f:selectItems value="#{permissionBean.roleList}" var="role" itemValue="#{role}"
+                                   itemLabel="#{role.adi}"/>
+                </h:selectOneMenu>
+
+                <p:outputLabel/>
+                <p:outputLabel/>
+                <h:commandButton id="save" value="Kaydet" action="#{permissionBean.save}" icon="fa fa-save"
+                                 styleClass="ui-priority-primary"/>
+                <h:commandButton id="delete" value="Sil" action="#{permissionBean.delete}" icon="ui-icon-trash"/>
+            </p:panelGrid>
+        </div>
+    </h:form>
+</h:body>
 </html>

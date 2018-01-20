@@ -20,12 +20,12 @@ public class Personel extends BaseEntity {
     @Size(max = 11)
     private String kimlikNo;
 
-    @Email(regexp = "[A-Z0-9._%+-]+@[A-Z0-9.-]+\\\\\\\\.[A-Z]{2,6}", message = "Email hatali")
+//    @Email(regexp = "[A-Z0-9._%+-]+@[A-Z0-9.-]+\\\\\\\\.[A-Z]{2,6}", message = "Email hatali")
     @Column(name = "E_MAIL")
     private String email;
 
     @Column(name = "TELEFON_NO")
-    @Size(max = 10)
+    @Size(max = 14)
     private String telefonNo;
 
     @Column(name = "ADRES", length = 500)

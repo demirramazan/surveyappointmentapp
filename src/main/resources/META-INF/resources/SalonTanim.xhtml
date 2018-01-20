@@ -11,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="./css/style.css"/>
     <h:form>
         <p:menubar>
+            <p:menuitem value="Anasayfa" url="./home.xhtml" icon="fa fa-home"/>
             <p:submenu label="Tanımlama İşlemleri" icon="ui-icon-person">
                 <p:menuitem value="Kullanıcı Tanım" url="./UserTanim.xhtml" icon="ui-icon-person"/>
                 <p:menuitem value="Role Tanım" url="./RoleTanim.xhtml" icon="ui-icon-person"/>
@@ -23,8 +24,9 @@
                 <p:menuitem value="Cihaz Tanım" url="./CihazTanim.xhtml"/>
             </p:submenu>
             <p:submenu label="Hasta Kabul İşlemleri">
-                <p:menuitem value="Hasta Kabul" url="./HastaBasvuru.xhtml"/>
-                <p:menuitem value="Doktor Kabul" url="./HastaTetkikIstem.xhtml"/>
+                <p:menuitem value="Hasta Kayıt" url="/HastaTanim.xhtml"/>
+                <p:menuitem value="Hasta Kabul" url="/HastaBasvuru.xhtml"/>
+                <p:menuitem value="Tetkik İstem" url="/HastaTetkikIstem.xhtml"/>
                 <p:menuitem value="Tetkik Kabul" url="./TetkikKabul.xhtml" includeViewParams="MR"/>
             </p:submenu>
             <p:submenu label="Randevu İşlemleri" icon="fa-calendar">
@@ -77,8 +79,8 @@
                                  icon="fa fa-save" styleClass="ui-priority-primary" style="left: 125px"/>
                 <p:commandButton value="Sil" actionListener="#{salonBean.delete()}" ajax="false"
                                  icon="ui-icon-trash" style="left: 150px"/>
-                <p:commandButton value="Yeni" actionListener="#{salonBean.reset()}" ajax="false"
-                                 icon="ui-icon-trash" style="left: 175px"/>
+                <!--<p:commandButton value="Yeni" actionListener="#{salonBean.reset()}" ajax="false"-->
+                                 <!--icon="ui-icon-trash" style="left: 175px"/>-->
 
             </h:panelGrid>
         </div>

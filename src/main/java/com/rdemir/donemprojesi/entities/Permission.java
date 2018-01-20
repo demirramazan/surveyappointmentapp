@@ -8,9 +8,6 @@ public class Permission extends BaseEntity {
     @Column(name = "PERMISSION_ADI")
     private String permissionAdi;
 
-    @Column(name = "PATH")
-    private String path;
-
     @OneToOne
     @JoinColumn(name = "ROLE_ID",
             foreignKey = @ForeignKey(name = "FK_PERMISSION_ROLE"))
@@ -29,14 +26,12 @@ public class Permission extends BaseEntity {
     public Permission() {
     }
 
-    public Permission(String permissionAdi, String path, Role role, Menu menu, User user) {
+    public Permission(String permissionAdi, Role role, Menu menu, User user) {
         this.permissionAdi = permissionAdi;
-        this.path = path;
         this.role = role;
         this.menu = menu;
         this.user = user;
     }
-
 
     public String getPermissionAdi() {
         return permissionAdi;
@@ -70,12 +65,4 @@ public class Permission extends BaseEntity {
         this.menu = menu;
     }
 
-
-    public String getPath() {
-        return path;
-    }
-
-    public void setPath(String path) {
-        this.path = path;
-    }
 }

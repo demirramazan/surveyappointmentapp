@@ -5,4 +5,12 @@
     <application>
         <el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
     </application>
+    <converter>
+        <converter-for-class>java.lang.Enum</converter-for-class>
+        <converter-class>javax.faces.convert.EnumConverter</converter-class>
+    </converter>
+    <converter>
+        <converter-id>enumConverter</converter-id>
+        <converter-class>com.rdemir.donemprojesi.config.EnumConventer</converter-class>
+    </converter>
 </faces-config>

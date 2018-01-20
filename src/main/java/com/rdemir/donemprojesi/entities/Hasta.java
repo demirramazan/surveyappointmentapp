@@ -2,6 +2,7 @@ package com.rdemir.donemprojesi.entities;
 
 
 import com.rdemir.donemprojesi.util.Cinsiyet;
+import com.rdemir.donemprojesi.util.KanGrubu;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -39,11 +40,11 @@ public class Hasta extends BaseEntity {
     private String babaAdi;
 
     @Column(name = "HASTA_CEP_TELEFON")
-    @Size(max = 10)
+    @Size(max = 14)
     private String hastaCepTelefonu;
 
     @Column(name = "HASTA_EV_TELEFON")
-    @Size(max = 10)
+    @Size(max = 14)
     private String hastaEvTelefonu;
 
     @Column(name = "HASTA_YAKINI_TELEFON")
@@ -55,8 +56,9 @@ public class Hasta extends BaseEntity {
     @Column(name = "ADRES", length = 1000)
     private String adres;
 
+    @Enumerated(EnumType.ORDINAL)
     @Column(name = "KAN_GRUBU")
-    private String kanGrubu;
+    private KanGrubu kanGrubu;
 
     @Column(name = "HASTA_EMAIL")
     private String hastaEmail;
@@ -68,7 +70,7 @@ public class Hasta extends BaseEntity {
     }
 
     public Hasta(String hastaAdi, String hastaSoyadi, String hastaKimlikNo, Cinsiyet cinsiyet, Date dogumTarihi, String anneAdi, String babaAdi,
-                 String hastaCepTelefonu, String hastaEvTelefonu, String kanGrubu, String hastaYakiniTelefon, String hastaYakinlikDerecesi, String adres, String hastaMedeniHali) {
+                 String hastaCepTelefonu, String hastaEvTelefonu, KanGrubu kanGrubu, String hastaYakiniTelefon, String hastaYakinlikDerecesi, String adres, String hastaMedeniHali) {
         this.hastaAdi = hastaAdi;
         this.hastaSoyadi = hastaSoyadi;
         this.hastaKimlikNo = hastaKimlikNo;
@@ -197,11 +199,19 @@ public class Hasta extends BaseEntity {
         this.adres = adres;
     }
 
-    public String getKanGrubu() {
+    public KanGrubu getKanGrubu() {
         return kanGrubu;
     }
 
-    public void setKanGrubu(String kanGrubu) {
+    public void setKanGrubu(KanGrubu kanGrubu) {
         this.kanGrubu = kanGrubu;
+    }
+
+    public String getHastaMedeniHali() {
+        return hastaMedeniHali;
+    }
+
+    public void setHastaMedeniHali(String hastaMedeniHali) {
+        this.hastaMedeniHali = hastaMedeniHali;
     }
 }

@@ -22,8 +22,9 @@
                 <p:menuitem value="Cihaz Tanım" url="./CihazTanim.xhtml"/>
             </p:submenu>
             <p:submenu label="Hasta Kabul İşlemleri">
-                <p:menuitem value="Hasta Kabul" url="./HastaBasvuru.xhtml"/>
-                <p:menuitem value="Doktor Kabul" url="./HastaTetkikIstem.xhtml"/>
+                <p:menuitem value="Hasta Kayıt" url="/HastaTanim.xhtml"/>
+                <p:menuitem value="Hasta Kabul" url="/HastaBasvuru.xhtml"/>
+                <p:menuitem value="Tetkik İstem" url="/HastaTetkikIstem.xhtml"/>
                 <p:menuitem value="Tetkik Kabul" url="./TetkikKabul.xhtml" includeViewParams="MR"/>
             </p:submenu>
             <p:submenu label="Randevu İşlemleri" icon="fa-calendar">
@@ -42,7 +43,7 @@
     <h:form id="FRMPrsnl">
         <div class="leftPanel">
             <h:panelGrid>
-                <p:dataTable id="slnDT" var="cihaz" value="#{personelBean.personelList}" selectionMode="single"
+                <p:dataTable id="prsnl" var="personel" value="#{personelBean.personelList}" selectionMode="single"
                              selection="#{personelBean.selectedPersonel}" rowKey="#{personel.id}">
 
                     <p:ajax event="rowDblselect" listener="#{personelBean.onDcRowSelect}" update=":FRMPrsnl:psnlPg"/>
@@ -86,14 +87,15 @@
 
                 <h:outputText value="Personel Email"/>
                 <h:outputText/>
-                <p:inputText id="email" value="#{personelBean.personel.email}">
-                    <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]"/>
+                <p:inputText id="email" value="#{personelBean.personel.email}" validatorMessage="Email hatalıdır!">
+                    <f:validateRegex
+                            pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/>
                 </p:inputText>
                 <p:message for="email"/>
 
                 <h:outputText value="Personel Telefon"/>
                 <h:outputText/>
-                <p:inputText id="tel" value="#{personelBean.personel.telefonNo}"/>
+                <p:inputMask id="tel" value="#{personelBean.personel.telefonNo}" mask="(999) 999-9999"/>
                 <p:message for="tel"/>
 
                 <h:outputText value="Personel Adres"/>
@@ -104,10 +106,9 @@
 
                 <h:outputText value="Cinsiyet"/>
                 <h:outputText value="*"/>
-                <p:selectOneMenu id="cinsiyet" value="#{personelBean.personel.cinsiyet}">
-                    <f:selectItem itemLabel="Erkek" itemValue="1"/>
-                    <f:selectItem itemLabel="Kadın" itemValue="2"/>
-                    <f:selectItem itemLabel="Belirsiz" itemValue="3"/>
+                <p:selectOneMenu id="cinsiyet" value="#{personelBean.cinsiyet}"  converter="#{cinsiyetConverter}" style="width: 100% !important">
+                    <f:selectItem itemLabel="Seçiniz" itemValue=""/>
+                    <f:selectItems var="cinsiyet" value="#{personelBean.cinsiyetList}" itemValue="#{cinsiyet.kodu}" itemLabel="#{cinsiyet.adi}"/>
                 </p:selectOneMenu>
                 <p:message for="cinsiyet"/>
 
@@ -118,19 +119,19 @@
 
                 <h:outputText value="Personel Birimi"/>
                 <h:outputText value="*"/>
-                <p:selectOneMenu id="birim" value="#{personelBean.birim}" converter="#{listConverter}">
-                    <f:selectItem itemLabel="Birim Seçiniz" itemValue="#{null}"/>
+                <p:selectOneMenu id="birim" value="#{personelBean.birim}" converter="#{listConverter}" style="width: 100% !important">
+                    <f:selectItem itemLabel="Seçiniz" itemValue="#{null}"/>
                     <f:selectItems value="#{birimBean.birimList}" var="birim" itemValue="#{birim}"
                                    itemLabel="#{birim.birimAdi}"/>
-                    <p:ajax update=":FRMPrsnl:psnlPg" listener="#{personelBean.birim}"/>
                 </p:selectOneMenu>
 
-                <p:commandButton value="Kaydet" actionListener="#{personelBean.save()}" ajax="false"
+                <p:outputLabel/>
+                <p:commandButton value="Kaydet" actionListener="#{personelBean.savePersonel()}" ajax="false"
                                  icon="fa fa-save" styleClass="ui-priority-primary" style="left: 125px"/>
                 <p:commandButton value="Sil" actionListener="#{personelBean.delete()}" ajax="false"
-                                 icon="ui-icon-trash" style="left: 150px"/>
-                <p:commandButton value="Yeni" actionListener="#{personelBean.reset()}" ajax="false"
-                                 icon="ui-icon-trash" style="left: 175px"/>
+                                 icon="ui-icon-trash" style="left: 135px"/>
+                <!--<p:commandButton value="Yeni" actionListener="#{personelBean.reset()}" ajax="false"-->
+                                 <!--icon="ui-icon-plus"/>-->
 
             </h:panelGrid>
         </div>

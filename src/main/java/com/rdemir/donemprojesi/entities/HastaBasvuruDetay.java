@@ -32,9 +32,6 @@ public class HastaBasvuruDetay extends BaseEntity {
     @Column(name = "MUAYENE_YAPILDI_MI")
     private Integer muayeneYapildiMi;
 
-    @Column(name = "BASVURU_NUMARASI")
-    private String basvuruNumarasi;
-
     @Column(name = "SIRA_NUMARASI")
     private Integer siraNumarasi;
 
@@ -49,12 +46,12 @@ public class HastaBasvuruDetay extends BaseEntity {
     public HastaBasvuruDetay() {
     }
 
-    public HastaBasvuruDetay(HastaBasvuru hastaBasvuru, Birim birim, Personel personel, Integer muayeneYapildiMi, String basvuruNumarasi, Integer siraNumarasi, Date gelisTarihi, Date cikisTarih) {
+    public HastaBasvuruDetay(HastaBasvuru hastaBasvuru, Birim birim, Personel personel, Integer muayeneYapildiMi,
+                             Integer siraNumarasi, Date gelisTarihi, Date cikisTarih) {
         this.hastaBasvuru = hastaBasvuru;
         this.birim = birim;
         this.personel = personel;
         this.muayeneYapildiMi = muayeneYapildiMi;
-        this.basvuruNumarasi = basvuruNumarasi;
         this.siraNumarasi = siraNumarasi;
         this.gelisTarihi = gelisTarihi;
         this.cikisTarih = cikisTarih;
@@ -90,14 +87,6 @@ public class HastaBasvuruDetay extends BaseEntity {
 
     public void setMuayeneYapildiMi(Integer muayeneYapildiMi) {
         this.muayeneYapildiMi = muayeneYapildiMi;
-    }
-
-    public String getBasvuruNumarasi() {
-        return basvuruNumarasi;
-    }
-
-    public void setBasvuruNumarasi(String basvuruNumarasi) {
-        this.basvuruNumarasi = basvuruNumarasi;
     }
 
     public Integer getSiraNumarasi() {

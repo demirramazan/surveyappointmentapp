@@ -7,7 +7,6 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
 <h:head>
     <title>Kullanıcı Tanım</title>
-
     <link rel="stylesheet" type="text/css" href="./css/style.css"/>
     <h:form>
         <p:menubar>
@@ -24,8 +23,9 @@
                 <p:menuitem value="Cihaz Tanım" url="./CihazTanim.xhtml"/>
             </p:submenu>
             <p:submenu label="Hasta Kabul İşlemleri">
-                <p:menuitem value="Hasta Kabul" url="./HastaBasvuru.xhtml"/>
-                <p:menuitem value="Doktor Kabul" url="./HastaTetkikIstem.xhtml"/>
+                <p:menuitem value="Hasta Kayıt" url="/HastaTanim.xhtml"/>
+                <p:menuitem value="Hasta Kabul" url="/HastaBasvuru.xhtml"/>
+                <p:menuitem value="Tetkik İstem" url="/HastaTetkikIstem.xhtml"/>
                 <p:menuitem value="Tetkik Kabul" url="./TetkikKabul.xhtml" includeViewParams="MR"/>
             </p:submenu>
             <p:submenu label="Randevu İşlemleri" icon="fa-calendar">
@@ -33,9 +33,99 @@
                 <p:menuitem value="Randevu Seans" url="./RandevuSeans.xhtml" icon="fa-calendar"/>
                 <p:menuitem value="Randevu Alma" url="./Randevu.xhtml" icon="fa-calendar"/>
             </p:submenu>
+            <p:menuitem value="Çıkış" style="float: right" action="#{sessionInitializer.exit}" icon="ui-icon-close"/>
         </p:menubar>
         <!--<p:menubar model="#{sessionInitializer.menuModel}"/>-->
     </h:form>
 
 </h:head>
+
+<h:body>
+    <h:form id="FRMHastaBsvr">
+        <div class="leftPanel">
+            <h:panelGrid>
+                <p:dataTable id="hstBsvr" var="hasta" value="#{hastaBasvuruBean.hastaList}" selectionMode="single"
+                             selection="#{hastaBasvuruBean.selectedHasta}" rowKey="#{hasta.id}">
+                    <p:ajax event="rowDblselect" listener="#{hastaBasvuruBean.onDcRowSelect}"
+                            update=":FRMHastaBsvr:hstBsvrPg"/>
+                    <p:column headerText="Hasta Adı" filterBy="#{hasta.hastaAdi}"
+                              filterMatchMode="contains">
+                        <h:outputText value="#{hasta.hastaAdi}"/>
+                    </p:column>
+                    <p:column headerText="Hasta Soyadı">
+                        <h:outputText value="#{hasta.hastaSoyadi}"/>
+                    </p:column>
+                    <p:column headerText="Kimlik Numarası">
+                        <h:outputText value="#{hasta.hastaKimlikNo}"/>
+                    </p:column>
+                    <p:column headerText="Hasta Cep Telefon">
+                        <h:outputText value="#{hasta.hastaCepTelefonu}"/>
+                    </p:column>
+                    <p:column headerText="Hasta Dogum Tarihi">
+                        <p:calendar value="#{hasta.dogumTarihi}" pattern="dd.MM.yyyy"/>
+                    </p:column>
+                </p:dataTable>
+            </h:panelGrid>
+        </div>
+        <div class="rightPanel">
+            <p:panelGrid id="hstBsvrPg" columns="4" layout="grid">
+                <p:outputLabel value="Hasta Adı"/>
+                <p:inputText id="ad" value="#{hastaBasvuruBean.hasta.hastaAdi}" disabled="true"/>
+                <p:outputLabel value="Hasta Soyadı"/>
+                <p:inputText id="soyad" value="#{hastaBasvuruBean.hasta.hastaSoyadi}" disabled="true"/>
+
+                <p:outputLabel value="Hasta Kimlik No"/>
+                <p:inputText id="kimlikNo" value="#{hastaBasvuruBean.hasta.hastaKimlikNo}" disabled="true"/>
+                <p:outputLabel value="Cinsiyet"/>
+                <p:inputText id="cinsiyet" value="#{hastaBasvuruBean.hasta.cinsiyet}" disabled="true"/>
+
+                <p:outputLabel value="Dogum Tarihi"/>
+                <p:calendar value="#{hastaBasvuruBean.hasta.dogumTarihi}" locale="tr" navigator="true"
+                            showButtonPanel="true" pattern="dd.MM.yyyy" disabled="true"/>
+                <p:outputLabel value="Başvuru Numarası"/>
+                <p:inputText value="#{hastaBasvuruBean.hastaBasvuru.basvuruNo}" disabled="true"/>
+
+                <p:outputLabel value="Hasta Kurum"/>
+                <p:selectOneMenu id="hastaKurum" value="#{hastaBasvuruBean.hastaBasvuru.hastaKurum}">
+                    <f:selectItem itemLabel="Seçiniz" itemValue=""/>
+                    <f:selectItem itemLabel="SGK" itemValue="SGK"/>
+                    <f:selectItem itemLabel="Yeşil Kart" itemValue="Yeşil Kart"/>
+                    <f:selectItem itemLabel="Resmi Kurum" itemValue="Resmi Kurum"/>
+                </p:selectOneMenu>
+                <p:outputLabel value="Öncelik"/>
+                <p:selectOneMenu id="oncelik" value="#{hastaBasvuruBean.hastaBasvuru.oncelik}">
+                    <f:selectItem itemLabel="Seçiniz" itemValue=""/>
+                    <f:selectItem itemLabel="65 Yaş Üstü" itemValue="65_YAS_USTU"/>
+                    <f:selectItem itemLabel="Engelli" itemValue="ENGELLI"/>
+                </p:selectOneMenu>
+
+                <p:outputLabel value="Açılmama"/>
+                <p:inputTextarea value="#{hastaBasvuruBean.hastaBasvuru.aciklama}"/>
+                <p:outputLabel value="Birimi"/>
+                <h:selectOneMenu id="birim" value="#{hastaBasvuruBean.birim}" converter="#{listConverter}">
+                    <!--onchange="submit()" valueChangeListener="#{hastaBasvuruBean.selectOneMenuListener}"-->
+                    <f:selectItem itemLabel="Seçiniz-" itemValue="#{null}"/>
+                    <f:selectItems value="#{hastaBasvuruBean.birimList}" var="birim" itemValue="#{birim}"
+                                   itemLabel="#{birim.birimAdi}"/>
+                </h:selectOneMenu>
+
+                <p:outputLabel value="Personel"/>
+                <h:selectOneMenu id="personel" value="#{hastaBasvuruBean.personel}"
+                                 converter="#{listConverter}">
+                    <f:selectItem itemLabel="Seçiniz" itemValue="#{null}"/>
+                    <f:selectItems value="#{hastaBasvuruBean.personelList}" var="personel"
+                                   itemValue="#{personel}"
+                                   itemLabel="#{personel.personelAdi} #{personel.personelSoyadi}"/>
+                </h:selectOneMenu>
+                <p:outputLabel/>
+                <p:outputLabel/>
+
+                <p:commandButton value="Kaydet" actionListener="#{hastaBasvuruBean.save()}" ajax="false"
+                                 icon="fa fa-save" styleClass="ui-priority-primary" style="left: 125px"/>
+                <p:commandButton value="Sil" actionListener="#{hastaBasvuruBean.delete()}" ajax="false"
+                                 icon="ui-icon-trash" style="left: 135px"/>
+            </p:panelGrid>
+        </div>
+    </h:form>
+</h:body>
 </html>

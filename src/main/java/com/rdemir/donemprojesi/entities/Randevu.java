@@ -33,15 +33,27 @@ public class Randevu extends BaseEntity {
             @ForeignKey(name = "FK_RANDEVU_CIHAZ_ID"))
     private Cihaz cihaz;
 
+    @Column(name = "RANDEVU_DURUMU")
+    private String randevuDurumu;
+
     public Randevu() {
     }
 
-    public Randevu(Date baslangicTarihi, Date bitisTarihi, HastaTetkikIstem istem, Salon salon, Cihaz cihaz) {
+    public Randevu(Date baslangicTarihi, Date bitisTarihi, HastaTetkikIstem istem, Salon salon, Cihaz cihaz, String randevuDurumu) {
         this.baslangicTarihi = baslangicTarihi;
         this.bitisTarihi = bitisTarihi;
         this.istem = istem;
         this.salon = salon;
         this.cihaz = cihaz;
+        this.randevuDurumu = randevuDurumu;
+    }
+
+    public String getRandevuDurumu() {
+        return randevuDurumu;
+    }
+
+    public void setRandevuDurumu(String randevuDurumu) {
+        this.randevuDurumu = randevuDurumu;
     }
 
     public Date getBaslangicTarihi() {

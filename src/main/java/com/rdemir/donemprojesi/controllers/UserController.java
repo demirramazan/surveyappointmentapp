@@ -142,6 +142,7 @@ public class UserController {
     public void onRowSelect(SelectEvent event) {
         selectedUser = (User) event.getObject();
         this.user = selectedUser;
+        this.role = selectedUser.getRole();
     }
 
     public void clearGrid() {

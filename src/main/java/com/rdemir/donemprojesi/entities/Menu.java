@@ -20,26 +20,49 @@ public class Menu extends BaseEntity<String> {
     @JoinColumn(name = "PARENT_ID", foreignKey = @ForeignKey(name = "FK_PARENT_MENU_ID"))
     private Menu parentMenu;
 
-
     @Column(length = 50)
     private String module;
 
     @Column(length = 30)
     private String icon;
+
+    @Column(name = "PATH")
+    private String path;
+
+    @Column(name = "MENU_PARAM")
+    private String menuParam;
     @Transient
     private List<Menu> items;
 
     public Menu() {
     }
 
-    public Menu(String menuAdi, int menuIndex, Menu childMenu, Menu parentMenu, String module, String icon, List<Menu> items) {
+    public Menu(String menuAdi, int menuIndex, Menu childMenu, Menu parentMenu, String module, String icon, String path, String menuParam, List<Menu> items) {
         this.menuAdi = menuAdi;
         this.menuIndex = menuIndex;
         this.childMenu = childMenu;
         this.parentMenu = parentMenu;
         this.module = module;
         this.icon = icon;
+        this.path = path;
+        this.menuParam = menuParam;
         this.items = items;
+    }
+
+    public String getMenuParam() {
+        return menuParam;
+    }
+
+    public void setMenuParam(String menuParam) {
+        this.menuParam = menuParam;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
     }
 
     public String getMenuAdi() {

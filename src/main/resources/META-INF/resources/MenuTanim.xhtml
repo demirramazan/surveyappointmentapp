@@ -3,10 +3,9 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
 <h:head>
-    <title>Kullanıcı Tanım</title>
+    <title>Menu Tanım</title>
 
     <link rel="stylesheet" type="text/css" href="./css/style.css"/>
     <h:form>
@@ -24,8 +23,9 @@
                 <p:menuitem value="Cihaz Tanım" url="./CihazTanim.xhtml"/>
             </p:submenu>
             <p:submenu label="Hasta Kabul İşlemleri">
-                <p:menuitem value="Hasta Kabul" url="./HastaBasvuru.xhtml"/>
-                <p:menuitem value="Doktor Kabul" url="./HastaTetkikIstem.xhtml"/>
+                <p:menuitem value="Hasta Kayıt" url="/HastaTanim.xhtml"/>
+                <p:menuitem value="Hasta Kabul" url="/HastaBasvuru.xhtml"/>
+                <p:menuitem value="Tetkik İstem" url="/HastaTetkikIstem.xhtml"/>
                 <p:menuitem value="Tetkik Kabul" url="./TetkikKabul.xhtml" includeViewParams="MR"/>
             </p:submenu>
             <p:submenu label="Randevu İşlemleri" icon="fa-calendar">
@@ -33,11 +33,80 @@
                 <p:menuitem value="Randevu Seans" url="./RandevuSeans.xhtml" icon="fa-calendar"/>
                 <p:menuitem value="Randevu Alma" url="./Randevu.xhtml" icon="fa-calendar"/>
             </p:submenu>
-            <p:menuitem value="Çıkış" style="float: right"  action="#{sessionInitializer.exit}" icon="ui-icon-close"/>
+            <p:menuitem value="Çıkış" style="float: right" action="#{sessionInitializer.exit}" icon="ui-icon-close"/>
 
         </p:menubar>
         <!--<p:menubar model="#{sessionInitializer.menuModel}"/>-->
     </h:form>
 
 </h:head>
+
+<h:body>
+    <h:form id="FRMMn">
+        <div class="leftPanel">
+            <h:panelGrid>
+                <p:dataTable id="mnDt" var="menu" value="#{menuBean.menuList}"
+                             selectionMode="single"
+                             selection="#{menuBean.selectedMenu}" rowKey="#{menu.id}">
+                    <p:ajax event="rowDblselect" listener="#{menuBean.onDcRowSelect}"
+                            update=":FRMMn:mnPg"/>
+
+                    <p:column headerText="Menu Adı">
+                        <h:outputText value="#{menu.menuAdi}"/>
+                    </p:column>
+                    <p:column headerText="Alt Menu">
+                        <h:outputText value="#{menu.childMenu.menuAdi}"/>
+                    </p:column>
+                    <p:column headerText="Üst Menü">
+                        <h:outputText value="#{menu.parentMenu.menuAdi}"/>
+                    </p:column>
+                    <p:column headerText="Menu Yolu">
+                        <h:outputText value="#{menu.path}"/>
+                    </p:column>
+                    <p:column headerText="Menü Modül">
+                        <p:inputText value="#{menu.module}"/>
+                    </p:column>
+                </p:dataTable>
+            </h:panelGrid>
+        </div>
+        <div class="rightPanel">
+            <!--<h:panelGrid id="hstBsvrPg" style="margin: 0 auto">-->
+            <p:panelGrid id="mnPg" columns="4" layout="grid">
+                <p:outputLabel value="Menu Adı"/>
+                <p:inputText id="ad" value="#{menuBean.menu.menuAdi}" required="true"
+                             requiredMessage="Menu Adı Giriniz"/>
+                <p:outputLabel value="Menü Modülü"/>
+                <p:inputText id="mdl" value="#{menuBean.menu.module}" required="true"
+                             requiredMessage="Modul İsmi Giriniz"/>
+                <p:outputLabel value="İkon"/>
+                <p:inputText id="icn" value="#{menuBean.menu.icon}"/>
+                <p:outputLabel value="Menu İndex"/>
+                <p:inputText id="indx" value="#{menuBean.menu.menuIndex}"/>
+
+                <p:outputLabel value="Dosya Yolu"/>
+                <p:inputText value="#{menuBean.menu.path}" required="true"
+                             requiredMessage="Dosya Yolunu Giriniz!"/>
+                <p:outputLabel value="Alt Menu"/>
+                <h:selectOneMenu id="menuAlt" value="#{menuBean.menu.childMenu}" converter="#{listConverter}">
+                    <f:selectItem itemLabel="Seçiniz" itemValue="#{null}"/>
+                    <f:selectItems value="#{menuBean.menuList}" var="menuAlt" itemValue="#{menuAlt}"
+                                   itemLabel="#{menuAlt.menuAdi}"/>
+                </h:selectOneMenu>
+                <p:outputLabel value="Üst Menu"/>
+                <h:selectOneMenu id="menu" value="#{menuBean.menu.parentMenu}" converter="#{listConverter}">
+                    <f:selectItem itemLabel="Seçiniz" itemValue="#{null}"/>
+                    <f:selectItems value="#{menuBean.menuList}" var="menuUst" itemValue="#{menuUst}"
+                                   itemLabel="#{menuUst.menuAdi}"/>
+                </h:selectOneMenu>
+
+                <p:outputLabel/>
+                <p:outputLabel/>
+                <p:commandButton value="Kaydet" actionListener="#{menuBean.save}" ajax="false"
+                                 icon="fa fa-save" styleClass="ui-priority-primary" style="left: 125px"/>
+                <p:commandButton value="Sil" actionListener="#{menuBean.delete}" ajax="false"
+                                 icon="ui-icon-trash" style="left: 135px"/>
+            </p:panelGrid>
+        </div>
+    </h:form>
+</h:body>
 </html>
