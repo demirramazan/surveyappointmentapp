@@ -10,4 +10,5 @@ public interface IRandevuSeansService<T> {
     void save(T t);
 
     void delete(Long id);
+    void deleteAll();
 }

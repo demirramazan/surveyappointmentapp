@@ -7,7 +7,6 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
 <h:head>
     <title>Kullanıcı Tanım</title>
-
     <link rel="stylesheet" type="text/css" href="./css/style.css"/>
     <h:form>
         <p:menubar>
@@ -40,6 +39,7 @@
     </h:form>
 
 </h:head>
+
 <h:body>
     <h:form id="FRMHastaBsvr">
         <div class="leftPanel">
@@ -68,7 +68,6 @@
             </h:panelGrid>
         </div>
         <div class="rightPanel">
-            <!--<h:panelGrid id="hstBsvrPg" style="margin: 0 auto">-->
             <p:panelGrid id="hstBsvrPg" columns="4" layout="grid">
                 <p:outputLabel value="Hasta Adı"/>
                 <p:inputText id="ad" value="#{hastaBasvuruBean.hasta.hastaAdi}" disabled="true"/>
