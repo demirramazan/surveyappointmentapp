@@ -10,32 +10,33 @@
 
     <link rel="stylesheet" type="text/css" href="./css/style.css"/>
     <h:form>
-        <p:menubar>
-            <p:menuitem value="Anasayfa" url="./home.xhtml" icon="fa fa-home"/>
-            <p:submenu label="Tanımlama İşlemleri" icon="ui-icon-person">
-                <p:menuitem value="Kullanıcı Tanım" url="./UserTanim.xhtml" icon="ui-icon-person"/>
-                <p:menuitem value="Role Tanım" url="./RoleTanim.xhtml" icon="ui-icon-person"/>
-                <p:menuitem value="Menu Tanım" url="./MenuTanim.xhtml" icon="ui-icon-person"/>
-                <p:menuitem value="Permission Tanım" url="./PermissionTanim.xhtml" icon="ui-icon-person"/>
-                <p:menuitem value="Personel Tanım" url="./PersonelTanim.xhtml" icon="ui-icon-person"/>
-                <p:menuitem value="Tetkik Tanım" url="./TetkikTanim.xhtml"/>
-                <p:menuitem value="Birim Tanım" url="./BirimTanim.xhtml"/>
-                <p:menuitem value="Salon Tanım" url="./SalonTanim.xhtml"/>
-                <p:menuitem value="Cihaz Tanım" url="./CihazTanim.xhtml"/>
-            </p:submenu>
-            <p:submenu label="Hasta Kabul İşlemleri">
-                <p:menuitem value="Hasta Kayıt" url="/HastaTanim.xhtml"/>
-                <p:menuitem value="Hasta Kabul" url="/HastaBasvuru.xhtml"/>
-                <p:menuitem value="Tetkik İstem" url="/HastaTetkikIstem.xhtml"/>
-                <p:menuitem value="Tetkik Kabul" url="./TetkikKabul.xhtml" includeViewParams="MR"/>
-            </p:submenu>
-            <p:submenu label="Randevu İşlemleri" icon="fa-calendar">
-                <p:menuitem value="Randevu Şablon" url="./RandevuSablon.xhtml" icon="fa-calendar"/>
-                <p:menuitem value="Randevu Seans" url="./RandevuSeans.xhtml" icon="fa-calendar"/>
-                <p:menuitem value="Randevu Alma" url="./Randevu.xhtml" icon="fa-calendar"/>
-            </p:submenu>
-            <p:menuitem value="Çıkış" style="float: right" action="#{sessionInitializer.exit}" icon="ui-icon-close"/>
-        </p:menubar>
+        <!--<p:menubar>-->
+            <!--<p:menuitem value="Anasayfa" url="./home.xhtml" icon="fa fa-home"/>-->
+            <!--<p:submenu label="Tanımlama İşlemleri" icon="ui-icon-person">-->
+                <!--<p:menuitem value="Kullanıcı Tanım" url="./UserTanim.xhtml" icon="ui-icon-person"/>-->
+                <!--<p:menuitem value="Role Tanım" url="./RoleTanim.xhtml" icon="ui-icon-person"/>-->
+                <!--<p:menuitem value="Menu Tanım" url="./MenuTanim.xhtml" icon="ui-icon-person"/>-->
+                <!--<p:menuitem value="Permission Tanım" url="./PermissionTanim.xhtml" icon="ui-icon-person"/>-->
+                <!--<p:menuitem value="Personel Tanım" url="./PersonelTanim.xhtml" icon="ui-icon-person"/>-->
+                <!--<p:menuitem value="Tetkik Tanım" url="./TetkikTanim.xhtml"/>-->
+                <!--<p:menuitem value="Birim Tanım" url="./BirimTanim.xhtml"/>-->
+                <!--<p:menuitem value="Salon Tanım" url="./SalonTanim.xhtml"/>-->
+                <!--<p:menuitem value="Cihaz Tanım" url="./CihazTanim.xhtml"/>-->
+            <!--</p:submenu>-->
+            <!--<p:submenu label="Hasta Kabul İşlemleri">-->
+                <!--<p:menuitem value="Hasta Kayıt" url="/HastaTanim.xhtml"/>-->
+                <!--<p:menuitem value="Hasta Kabul" url="/HastaBasvuru.xhtml"/>-->
+                <!--<p:menuitem value="Tetkik İstem" url="/HastaTetkikIstem.xhtml"/>-->
+                <!--<p:menuitem value="Tetkik Kabul" url="./TetkikKabul.xhtml" includeViewParams="MR"/>-->
+            <!--</p:submenu>-->
+            <!--<p:submenu label="Randevu İşlemleri" icon="fa-calendar">-->
+                <!--<p:menuitem value="Randevu Şablon" url="./RandevuSablon.xhtml" icon="fa-calendar"/>-->
+                <!--<p:menuitem value="Randevu Seans" url="./RandevuSeans.xhtml" icon="fa-calendar"/>-->
+                <!--<p:menuitem value="Randevu Alma" url="./Randevu.xhtml" icon="fa-calendar"/>-->
+            <!--</p:submenu>-->
+            <!--<p:menuitem value="Çıkış" style="float: right" action="#{sessionInitializer.exit}" icon="ui-icon-close"/>-->
+        <!--</p:menubar>-->
+        <p:menubar model="#{sessionInitializer.menuModel}"/>
     </h:form>
 </h:head>
 <h:body>
