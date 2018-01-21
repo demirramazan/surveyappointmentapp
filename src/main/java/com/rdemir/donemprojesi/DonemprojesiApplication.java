@@ -64,6 +64,7 @@ public class DonemprojesiApplication extends SpringBootServletInitializer implem
         CustomScopeConfigurer configurer = new CustomScopeConfigurer();
         Map<String, Object> scopes = new HashMap<String, Object>();
         scopes.put(ScopeName.VIEW, new ViewScope());
+        scopes.put(ScopeName.REQUEST, new ViewScope());
         scopes.put(ScopeName.SESSION, new ViewScope());
         scopes.put(ScopeName.APPLICATION, new ViewScope());
         configurer.setScopes(scopes);

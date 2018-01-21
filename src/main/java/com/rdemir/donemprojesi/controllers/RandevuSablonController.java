@@ -16,7 +16,7 @@ import javax.annotation.PostConstruct;
 import java.util.List;
 
 @Component("randevuSablonBean")
-@Scope(ScopeName.SESSION)
+@Scope(ScopeName.REQUEST)
 public class RandevuSablonController {
     @Autowired
     private IRandevuSablonService randevuSablonService;

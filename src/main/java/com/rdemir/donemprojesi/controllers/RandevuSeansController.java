@@ -24,6 +24,7 @@ public class RandevuSeansController {
     private RandevuSeans randevuSeans;
     private RandevuSeans selectedRandevuSeans;
     private RandevuSablon randevuSablon;
+    private RandevuSablon selectedRandSablon;
     private List<RandevuSablon> randevuSablonList;
     private List<RandevuSeans> randevuSeansList;
 
@@ -91,9 +92,16 @@ public class RandevuSeansController {
         this.randevuSeansList = randevuSeansList;
     }
 
+    public RandevuSablon getSelectedRandSablon() {
+        return selectedRandSablon;
+    }
+
+    public void setSelectedRandSablon(RandevuSablon selectedRandSablon) {
+        this.selectedRandSablon = selectedRandSablon;
+    }
 
     public void onDcRowSelect(SelectEvent event) {
-        selectedRandevuSeans = (RandevuSeans) event.getObject();
-        this.randevuSeans = selectedRandevuSeans;
+        selectedRandSablon = (RandevuSablon) event.getObject();
+        this.randevuSablon = selectedRandSablon;
     }
 }
