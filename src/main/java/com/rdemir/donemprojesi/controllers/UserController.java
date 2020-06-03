@@ -1,50 +1,42 @@
 package com.rdemir.donemprojesi.controllers;
 
-import com.rdemir.donemprojesi.entities.UserImp;
+import com.rdemir.donemprojesi.entities.User;
 import com.rdemir.donemprojesi.interfaces.services.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import java.util.List;
 
-@ManagedBean
-@SessionScoped
+@RequestMapping("/user")
+@RestController
 public class UserController {
 
     @Autowired
     private IUserService userService;
 
-    private String deneme="RAMAZANN";
-
-    public UserImp userImp ;
+    public User user ;
 
     public UserController() {
-        this.userImp  = new UserImp();
-        userImp.setSurname("ramazan");
-        userImp.setUsername("demir");
+        this.user  = new User();
+        user.setSurname("ramazan");
+        user.setUsername("demir");
     }
 
-    public UserImp findById(Long id) {
+    @GetMapping("/findAll")
+    public List<User> getUsers(){
+        return userService.getAllUsers();
+    }
+    @GetMapping("/find/{id}")
+    public User findById(@PathVariable Long id) {
         return userService.getUserById(id);
     }
 
-    public UserImp save(UserImp userImp) {
-        return userService.save(userImp);
+    @PostMapping("/save")
+    public User save(@RequestBody User user) {
+        return userService.save(user);
     }
 
-    public UserImp getUserImp() {
-        return userImp;
-    }
 
-    public void setUserImp(UserImp userImp) {
-        this.userImp = userImp;
-    }
 
-    public String getDeneme() {
-        return deneme;
-    }
 
-    public void setDeneme(String deneme) {
-        this.deneme = deneme;
-    }
 }
