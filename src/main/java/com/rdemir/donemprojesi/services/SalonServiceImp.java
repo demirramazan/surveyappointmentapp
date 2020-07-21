@@ -1,7 +1,7 @@
 package com.rdemir.donemprojesi.services;
 
 import com.rdemir.donemprojesi.entities.Salon;
-import com.rdemir.donemprojesi.interfaces.services.ISalonService;
+import com.rdemir.donemprojesi.services.interfaces.ISalonService;
 import com.rdemir.donemprojesi.repositories.SalonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,6 +30,6 @@ public class SalonServiceImp implements ISalonService {
 
     @Override
     public void delete(Long id) {
-         salonRepository.delete(id);
+         salonRepository.deleteById(id);
     }
 }

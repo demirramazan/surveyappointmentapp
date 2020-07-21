@@ -1,7 +1,7 @@
 package com.rdemir.donemprojesi.services;
 
 import com.rdemir.donemprojesi.entities.RandevuSablon;
-import com.rdemir.donemprojesi.interfaces.services.IRandevuSablonService;
+import com.rdemir.donemprojesi.services.interfaces.IRandevuSablonService;
 import com.rdemir.donemprojesi.repositories.RandevuSablonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +21,7 @@ public class RandevuSablonServiceImp implements IRandevuSablonService<RandevuSab
 
     @Override
     public RandevuSablon findOne(Long id) {
-        return sablonRepository.findOne(id);
+        return sablonRepository.getOne(id);
     }
 
     @Override
@@ -31,6 +31,6 @@ public class RandevuSablonServiceImp implements IRandevuSablonService<RandevuSab
 
     @Override
     public void delete(Long id) {
-        sablonRepository.delete(id);
+        sablonRepository.deleteById(id);
     }
 }

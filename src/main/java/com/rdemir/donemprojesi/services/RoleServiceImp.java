@@ -1,7 +1,7 @@
 package com.rdemir.donemprojesi.services;
 
 import com.rdemir.donemprojesi.entities.Role;
-import com.rdemir.donemprojesi.interfaces.services.IRoleService;
+import com.rdemir.donemprojesi.services.interfaces.IRoleService;
 import com.rdemir.donemprojesi.repositories.RoleReporsitory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,6 +30,6 @@ public class RoleServiceImp implements IRoleService<Role> {
 
     @Override
     public void delete(Long id) {
-        roleReporsitory.delete(id);
+        roleReporsitory.deleteById(id);
     }
 }

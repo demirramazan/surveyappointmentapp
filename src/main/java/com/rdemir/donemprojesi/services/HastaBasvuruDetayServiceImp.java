@@ -1,7 +1,7 @@
 package com.rdemir.donemprojesi.services;
 
 import com.rdemir.donemprojesi.entities.HastaBasvuruDetay;
-import com.rdemir.donemprojesi.interfaces.services.IHastaBasvuruDetayService;
+import com.rdemir.donemprojesi.services.interfaces.IHastaBasvuruDetayService;
 import com.rdemir.donemprojesi.repositories.HastaBasvuruDetayRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +20,7 @@ public class HastaBasvuruDetayServiceImp implements IHastaBasvuruDetayService<Ha
 
     @Override
     public HastaBasvuruDetay findOne(Long id) {
-        return basvuruDetayRepository.findOne(id);
+        return basvuruDetayRepository.getOne(id);
     }
 
     @Override
@@ -31,6 +31,6 @@ public class HastaBasvuruDetayServiceImp implements IHastaBasvuruDetayService<Ha
 
     @Override
     public void delete(Long id) {
-        basvuruDetayRepository.delete(id);
+        basvuruDetayRepository.deleteById(id);
     }
 }

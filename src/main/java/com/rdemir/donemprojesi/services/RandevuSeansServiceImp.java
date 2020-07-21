@@ -2,7 +2,7 @@ package com.rdemir.donemprojesi.services;
 
 import com.rdemir.donemprojesi.entities.RandevuSablon;
 import com.rdemir.donemprojesi.entities.RandevuSeans;
-import com.rdemir.donemprojesi.interfaces.services.IRandevuSeansService;
+import com.rdemir.donemprojesi.services.interfaces.IRandevuSeansService;
 import com.rdemir.donemprojesi.repositories.RandevuSeansRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +23,7 @@ public class RandevuSeansServiceImp implements IRandevuSeansService<RandevuSeans
 
     @Override
     public RandevuSeans findOne(Long id) {
-        return seansRepository.findOne(id);
+        return seansRepository.getOne(id);
     }
 
     @Override
@@ -81,7 +81,7 @@ public class RandevuSeansServiceImp implements IRandevuSeansService<RandevuSeans
 
     @Override
     public void delete(Long id) {
-        seansRepository.delete(id);
+        seansRepository.deleteById(id);
     }
 
     @Override

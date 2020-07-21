@@ -1,7 +1,7 @@
 package com.rdemir.donemprojesi.services;
 
 import com.rdemir.donemprojesi.entities.Birim;
-import com.rdemir.donemprojesi.interfaces.services.IBirimService;
+import com.rdemir.donemprojesi.services.interfaces.IBirimService;
 import com.rdemir.donemprojesi.repositories.BirimRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,6 +31,6 @@ public class BirimServiceImp implements IBirimService<Birim> {
 
     @Override
     public void delete(Long id) {
-        birimRepository.delete(id);
+        birimRepository.deleteById(id);
     }
 }

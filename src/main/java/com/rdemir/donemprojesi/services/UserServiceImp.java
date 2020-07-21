@@ -1,7 +1,7 @@
 package com.rdemir.donemprojesi.services;
 
 import com.rdemir.donemprojesi.entities.User;
-import com.rdemir.donemprojesi.interfaces.services.IUserService;
+import com.rdemir.donemprojesi.services.interfaces.IUserService;
 import com.rdemir.donemprojesi.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +19,7 @@ public class UserServiceImp implements IUserService<User> {
 
     @Override
     public User getUserById(Long id) {
-        return userRepository.findOne(id);
+        return userRepository.getOne(id);
     }
 
     @Override
@@ -39,7 +39,7 @@ public class UserServiceImp implements IUserService<User> {
 
     @Override
     public void delete(Long id) {
-        userRepository.delete(id);
+        userRepository.deleteById(id);
     }
 
     @Override

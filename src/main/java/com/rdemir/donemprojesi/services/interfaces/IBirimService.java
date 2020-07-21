@@ -1,4 +1,4 @@
-package com.rdemir.donemprojesi.interfaces.services;
+package com.rdemir.donemprojesi.services.interfaces;
 
 import java.util.List;
 

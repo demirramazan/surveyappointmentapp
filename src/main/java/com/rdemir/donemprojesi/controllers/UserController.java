@@ -1,7 +1,7 @@
 package com.rdemir.donemprojesi.controllers;
 
 import com.rdemir.donemprojesi.entities.User;
-import com.rdemir.donemprojesi.interfaces.services.IUserService;
+import com.rdemir.donemprojesi.services.interfaces.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,7 +1,7 @@
 package com.rdemir.donemprojesi.services;
 
 import com.rdemir.donemprojesi.entities.Cihaz;
-import com.rdemir.donemprojesi.interfaces.services.ICihazService;
+import com.rdemir.donemprojesi.services.interfaces.ICihazService;
 import com.rdemir.donemprojesi.repositories.CihazRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,6 +30,6 @@ public class CihazServiceImp implements ICihazService {
 
     @Override
     public void delete(Long id) {
-        cihazRepository.delete(id);
+        cihazRepository.deleteById(id);
     }
 }

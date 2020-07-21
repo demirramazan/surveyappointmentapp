@@ -1,7 +1,6 @@
 package com.rdemir.donemprojesi.entities;
 
 import com.rdemir.donemprojesi.util.Cinsiyet;
-import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;

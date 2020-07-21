@@ -1,7 +1,7 @@
 package com.rdemir.donemprojesi.services;
 
 import com.rdemir.donemprojesi.entities.HastaTetkikRapor;
-import com.rdemir.donemprojesi.interfaces.services.IHastaTetkikRaporService;
+import com.rdemir.donemprojesi.services.interfaces.IHastaTetkikRaporService;
 import com.rdemir.donemprojesi.repositories.TetkikRaporRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +20,7 @@ public class HastaTetkikRaporServiceImp implements IHastaTetkikRaporService<Hast
 
     @Override
     public HastaTetkikRapor findOne(Long id) {
-        return tetkikRaporRepository.findOne(id);
+        return tetkikRaporRepository.getOne(id);
     }
 
     @Override
@@ -30,6 +30,6 @@ public class HastaTetkikRaporServiceImp implements IHastaTetkikRaporService<Hast
 
     @Override
     public void delete(Long id) {
-        tetkikRaporRepository.delete(id);
+        tetkikRaporRepository.deleteById(id);
     }
 }

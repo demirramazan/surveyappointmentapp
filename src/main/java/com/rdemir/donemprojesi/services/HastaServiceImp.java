@@ -1,7 +1,7 @@
 package com.rdemir.donemprojesi.services;
 
 import com.rdemir.donemprojesi.entities.Hasta;
-import com.rdemir.donemprojesi.interfaces.services.IHastaService;
+import com.rdemir.donemprojesi.services.interfaces.IHastaService;
 import com.rdemir.donemprojesi.repositories.HastaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +21,7 @@ public class HastaServiceImp implements IHastaService<Hasta> {
 
     @Override
     public Hasta findOne(Long id) {
-        return hastaRepository.findOne(id);
+        return hastaRepository.getOne(id);
     }
 
     @Override
@@ -31,7 +31,7 @@ public class HastaServiceImp implements IHastaService<Hasta> {
 
     @Override
     public void delete(Long id) {
-        hastaRepository.delete(id);
+        hastaRepository.deleteById(id);
     }
 }
 

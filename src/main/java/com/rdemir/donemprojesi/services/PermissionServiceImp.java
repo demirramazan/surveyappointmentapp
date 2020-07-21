@@ -3,7 +3,7 @@ package com.rdemir.donemprojesi.services;
 import com.rdemir.donemprojesi.entities.Permission;
 import com.rdemir.donemprojesi.entities.Role;
 import com.rdemir.donemprojesi.entities.User;
-import com.rdemir.donemprojesi.interfaces.services.IPermissionService;
+import com.rdemir.donemprojesi.services.interfaces.IPermissionService;
 import com.rdemir.donemprojesi.repositories.PermissionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +22,7 @@ public class PermissionServiceImp implements IPermissionService {
 
     @Override
     public void delete(Long id) {
-        permissionRepository.delete(id);
+        permissionRepository.deleteById(id);
     }
 
     @Override

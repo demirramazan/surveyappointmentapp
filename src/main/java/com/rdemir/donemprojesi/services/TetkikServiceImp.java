@@ -1,7 +1,7 @@
 package com.rdemir.donemprojesi.services;
 
 import com.rdemir.donemprojesi.entities.Tetkik;
-import com.rdemir.donemprojesi.interfaces.services.ITetkikService;
+import com.rdemir.donemprojesi.services.interfaces.ITetkikService;
 import com.rdemir.donemprojesi.repositories.TetkikRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,6 +30,6 @@ public class TetkikServiceImp implements ITetkikService<Tetkik> {
 
     @Override
     public void delete(Long id) {
-        tetkikRepository.delete(id);
+        tetkikRepository.deleteById(id);
     }
 }

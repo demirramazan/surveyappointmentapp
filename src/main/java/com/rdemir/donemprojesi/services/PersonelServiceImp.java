@@ -2,7 +2,7 @@ package com.rdemir.donemprojesi.services;
 
 import com.rdemir.donemprojesi.entities.Birim;
 import com.rdemir.donemprojesi.entities.Personel;
-import com.rdemir.donemprojesi.interfaces.services.IPersonelService;
+import com.rdemir.donemprojesi.services.interfaces.IPersonelService;
 import com.rdemir.donemprojesi.repositories.PersonelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,6 +37,6 @@ public class PersonelServiceImp implements IPersonelService<Personel> {
 
     @Override
     public void delete(Long id) {
-        personelRepository.delete(id);
+        personelRepository.deleteById(id);
     }
 }
